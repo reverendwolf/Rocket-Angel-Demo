@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/PlayerControl.gd" id="1_pbwnp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_koi13"]
-radius = 1.0
+radius = 0.75
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_effko"]
-points = PackedVector3Array(-0.395407, -0.91239, -0.0607879, 0.183129, 0.976434, 0.0913734, 0.243754, 0.944476, 0.213213, 0.85217, -0.182485, -0.486818, 0.424401, -0.303198, 0.848993, -0.911144, 0.36442, -0.182115, -0.12217, 0.152808, -0.978122, -0.547318, 0.152022, 0.820881, 0.333381, -0.879328, -0.333381, 0.84978, 0.515877, -0.0908916, -0.542807, -0.512578, -0.663347, -0.758285, -0.515596, 0.394346, 0.121401, 0.759234, -0.637832, 0.36501, 0.486807, 0.791013, 0.911736, -0.182233, 0.364656, 0.121401, -0.759234, 0.637832, -0.45305, 0.845731, 0.271754, 0.364656, -0.182233, -0.911736, -0.602466, 0.482048, -0.632665, 0.726806, -0.666096, 0.151394, 0.543048, 0.361969, -0.75418, -0.879843, -0.333648, -0.333648, -0.212566, -0.243014, 0.941609, -0.911736, 0.182233, 0.364656, -0.395521, 0.882345, -0.243412, -0.121378, -0.63771, -0.759088, -0.121378, 0.63771, 0.759088, 0.75418, 0.361969, 0.543048, 0.183129, -0.976435, 0.0913736, -0.607417, -0.0302567, -0.789718, -0.362476, -0.755238, 0.543809, 0.061151, 0.183453, 0.979182)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wdp3g"]
+points = PackedVector3Array(0.720378, 0.422204, -0.0944229, -0.728441, -0.392399, -0.0944387, -0.695311, -0.420776, -0.214268, 0.328918, -0.877457, 0.238006, -0.12465, 0.51298, 0.690064, -0.124862, 0.483765, -0.699221, 0.26623, -0.600504, -0.604354, -0.398071, 0.879393, -0.0645108, 0.0866412, -0.423034, 0.721334, 0.565903, 0.509872, 0.415988, -0.60552, -0.391046, 0.417007, -0.27749, -0.942303, 0.056723, 0.720389, -0.392336, 0.146745, 0.269264, 0.941118, -0.0949803, -0.698746, 0.513535, 0.0563552, -0.303635, -0.509636, -0.63347, 0.505556, 0.329543, -0.543383, -0.60213, 0.388843, -0.422572, 0.656742, -0.480363, -0.274155, -0.0949704, 0.880353, 0.390487, 0.177823, -0.908814, -0.306847, -0.543792, 0.509849, 0.445843, 0.446264, -0.299967, 0.596224, -0.244552, -0.511322, 0.657718, -0.0341121, 0.816918, -0.488024, 0.236564, 0.420519, 0.687408, 0.147276, -0.302772, -0.730593, -0.245232, -0.814417, -0.426167, -0.094704, -0.817096, 0.480193, 0.325894, 0.719562, -0.48366, 0.416898, 0.811415, 0.266435, -0.515837, -0.722671, 0.26691)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_pbwnp")
@@ -18,7 +18,7 @@ mesh = SubResource("CapsuleMesh_koi13")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("ConvexPolygonShape3D_effko")
+shape = SubResource("ConvexPolygonShape3D_wdp3g")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -35,17 +35,61 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Fuel Bar" type="ProgressBar" parent="Player Hud"]
-layout_mode = 0
-offset_left = 478.0
-offset_top = 323.0
-offset_right = 633.0
-offset_bottom = 350.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -165.0
+offset_top = -38.0
+offset_right = -10.0
+offset_bottom = -11.0
 max_value = 4.0
 
 [node name="Boost Bar" type="ProgressBar" parent="Player Hud"]
-layout_mode = 0
-offset_left = 478.0
-offset_top = 289.0
-offset_right = 633.0
-offset_bottom = 316.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -165.0
+offset_top = -72.0
+offset_right = -10.0
+offset_bottom = -45.0
+grow_horizontal = 0
+grow_vertical = 0
 max_value = 4.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Player Hud"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -209.0
+offset_top = -37.0
+offset_right = -169.0
+offset_bottom = 3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Fuel"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Player Hud"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -215.0
+offset_top = -72.0
+offset_right = -170.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Boost"
+fit_content = true
+autowrap_mode = 0

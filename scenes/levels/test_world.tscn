@@ -29,3 +29,12 @@ environment = SubResource("Environment_87egi")
 [node name="concrete" parent="." instance=ExtResource("2_bgaei")]
 
 [node name="Player" parent="." instance=ExtResource("1_abciy")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.26669, 3.13916, 3.44866)
+light_color = Color(0, 1, 1, 1)
+light_energy = 8.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+omni_range = 6.22956
+omni_attenuation = 0.31864

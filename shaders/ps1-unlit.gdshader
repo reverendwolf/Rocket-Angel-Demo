@@ -1,5 +1,5 @@
 //*** *** *** *** *** *** *** *** *** *** ***    ***//
-//*** ===  PSX lit surface shader effect     === ***//
+//*** === PSX unlit surface shader effect    === ***//
 //*** ===          For Godot 4.0             === ***//
 //*** ===         By Analog Feelings         === ***//
 //*** === https://github.com/AnalogFeelings  === ***//
@@ -14,7 +14,7 @@
 /*****************************************************************************
 MIT License
 
-Copyright (c) 2022 AnalogFeelings
+Copyright (c) 2022 Analog Feelings
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,11 +36,9 @@ SOFTWARE.
 *****************************************************************************/
 
 shader_type spatial;
-render_mode vertex_lighting, skip_vertex_transform, 
-			specular_schlick_ggx, diffuse_lambert_wrap;
+render_mode unshaded, skip_vertex_transform, diffuse_lambert_wrap;
 
 uniform sampler2D albedo: hint_default_black, filter_nearest;
-uniform sampler2D specular: hint_default_black, filter_nearest;
 uniform sampler2D emission: hint_default_black, filter_nearest;
 
 // The "jumpiness" of vertices.
@@ -107,5 +105,4 @@ void fragment() {
 	ALPHA_SCISSOR_THRESHOLD = alpha_scissor;
 	
 	EMISSION = emission_color.rgb * texture(emission, uv).rgb;
-	SPECULAR = texture(specular, uv).r;
 }
