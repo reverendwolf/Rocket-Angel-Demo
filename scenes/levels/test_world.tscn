@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cv2al5i8kpcca"]
+[gd_scene load_steps=6 format=3 uid="uid://cv2al5i8kpcca"]
 
 [ext_resource type="PackedScene" uid="uid://dnxmcvv30c5xt" path="res://scenes/actors/player.tscn" id="1_abciy"]
+[ext_resource type="PackedScene" uid="uid://dg3xguyc55u67" path="res://assets/concrete.gltf" id="2_bgaei"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l1ybq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -12,131 +13,19 @@ sky_material = SubResource("ProceduralSkyMaterial_l1ybq")
 [sub_resource type="Environment" id="Environment_87egi"]
 background_mode = 2
 sky = SubResource("Sky_716ar")
+ambient_light_source = 2
+ambient_light_color = Color(0.752941, 0.752941, 0.752941, 1)
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_sky_affect = 0.0
 
 [node name="Test World" type="Node3D"]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_87egi")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-use_collision = true
-size = Vector3(16, 1, 16)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -6)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D9" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.5, -6)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D11" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4.5, 2)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D12" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.5, 6)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D13" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 8)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D14" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7.5, 8)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D15" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 8.5, 8)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D16" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9.5, 4)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D17" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 10.5, 0)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D18" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 11.5, -4)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D19" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 12.5, -4)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D20" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 13.5, -8)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D21" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 14.5, -12)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D22" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 15.5, -16)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D23" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 16.5, -16)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D10" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3.5, -2.18949)
-use_collision = true
-size = Vector3(4, 1, 12.262)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -6)
-use_collision = true
-size = Vector3(4, 1, 4)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.537, 8.30831, -10.4267)
-use_collision = true
-size = Vector3(10.6631, 18.5226, 11.6363)
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1376, 8.30831, -3.61572)
-use_collision = true
-size = Vector3(10.6631, 18.5226, 11.6363)
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20781, 5.18176, 13.4893)
-use_collision = true
-size = Vector3(10.6631, 11.9673, 11.6363)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9257, 5.18176, 13.4712)
-use_collision = true
-size = Vector3(19.5776, 33.7101, 23.6426)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5273, 8.30831, 4.94923)
-use_collision = true
-size = Vector3(10.6631, 18.5226, 20.1242)
+[node name="concrete" parent="." instance=ExtResource("2_bgaei")]
 
 [node name="Player" parent="." instance=ExtResource("1_abciy")]
