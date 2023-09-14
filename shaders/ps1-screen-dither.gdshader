@@ -40,6 +40,7 @@ shader_type canvas_item;
 uniform int color_depth : hint_range(1, 8) = 5;
 uniform bool dithering = true;
 uniform int resolution_scale = 4;
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 
 int dithering_pattern(ivec2 fragcoord) {
 	const int pattern[] = {
@@ -57,7 +58,7 @@ int dithering_pattern(ivec2 fragcoord) {
 
 void fragment() {
 	ivec2 uv = ivec2(FRAGCOORD.xy / float(resolution_scale));
-	vec3 color = texelFetch(TEXTURE, uv * resolution_scale, 0).rgb;
+	vec3 color = texelFetch(screen_texture, uv * resolution_scale, 0).rgb;
 	
 	// Convert from 0 to 1 to 0 to 255.
 	ivec3 c = ivec3(round(color * 255.0));
@@ -72,4 +73,5 @@ void fragment() {
 
 	// Convert back to 0 to 1.
 	COLOR.rgb = vec3(c) / float(1 << color_depth);
+	//COLOR.rgb = color;
 }

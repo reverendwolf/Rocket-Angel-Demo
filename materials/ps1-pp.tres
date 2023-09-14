@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ohu8idcbtbu8"]
+
+[ext_resource type="Shader" path="res://shaders/ps1-screen-dither.gdshader" id="1_du5ox"]
+
+[resource]
+shader = ExtResource("1_du5ox")
+shader_parameter/color_depth = 6
+shader_parameter/dithering = true
+shader_parameter/resolution_scale = 1

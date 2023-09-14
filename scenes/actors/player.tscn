@@ -1,6 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnxmcvv30c5xt"]
+[gd_scene load_steps=12 format=3 uid="uid://dnxmcvv30c5xt"]
 
 [ext_resource type="Script" path="res://scripts/PlayerControl.gd" id="1_pbwnp"]
+[ext_resource type="PackedScene" uid="uid://yanqbc7bpnat" path="res://assets/kenney/blaster kit/blasterG.glb" id="2_61dwy"]
+[ext_resource type="Script" path="res://scripts/PlayerGun.gd" id="2_ha0aj"]
+[ext_resource type="Texture2D" uid="uid://dy41o55yu3rco" path="res://assets/kenney/crosshair kit/crosshair053.png" id="3_7617b"]
+[ext_resource type="PackedScene" uid="uid://cmboswaegysjb" path="res://scenes/actors/normal_rocket.tscn" id="4_8ux6f"]
+[ext_resource type="PackedScene" uid="uid://bjs776mbyhs8u" path="res://scenes/actors/super_rocket.tscn" id="4_148x0"]
+[ext_resource type="Texture2D" uid="uid://cpd171t55tn43" path="res://assets/textures/ui-fuel-bar.png" id="6_dr3lp"]
+[ext_resource type="Texture2D" uid="uid://x5gyqdtdyds2" path="res://assets/game icons/artificial-hive.png" id="8_8jrvg"]
+[ext_resource type="Texture2D" uid="uid://dbp3xco6g7ktm" path="res://assets/game icons/striking-splinter.png" id="8_yqews"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_koi13"]
 radius = 0.75
@@ -9,6 +17,7 @@ radius = 0.75
 points = PackedVector3Array(0.720378, 0.422204, -0.0944229, -0.728441, -0.392399, -0.0944387, -0.695311, -0.420776, -0.214268, 0.328918, -0.877457, 0.238006, -0.12465, 0.51298, 0.690064, -0.124862, 0.483765, -0.699221, 0.26623, -0.600504, -0.604354, -0.398071, 0.879393, -0.0645108, 0.0866412, -0.423034, 0.721334, 0.565903, 0.509872, 0.415988, -0.60552, -0.391046, 0.417007, -0.27749, -0.942303, 0.056723, 0.720389, -0.392336, 0.146745, 0.269264, 0.941118, -0.0949803, -0.698746, 0.513535, 0.0563552, -0.303635, -0.509636, -0.63347, 0.505556, 0.329543, -0.543383, -0.60213, 0.388843, -0.422572, 0.656742, -0.480363, -0.274155, -0.0949704, 0.880353, 0.390487, 0.177823, -0.908814, -0.306847, -0.543792, 0.509849, 0.445843, 0.446264, -0.299967, 0.596224, -0.244552, -0.511322, 0.657718, -0.0341121, 0.816918, -0.488024, 0.236564, 0.420519, 0.687408, 0.147276, -0.302772, -0.730593, -0.245232, -0.814417, -0.426167, -0.094704, -0.817096, 0.480193, 0.325894, 0.719562, -0.48366, 0.416898, 0.811415, 0.266435, -0.515837, -0.722671, 0.26691)
 
 [node name="Player" type="CharacterBody3D"]
+floor_max_angle = 0.837758
 script = ExtResource("1_pbwnp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -24,7 +33,19 @@ shape = SubResource("ConvexPolygonShape3D_wdp3g")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-fov = 40.0
+fov = 60.0
+far = 80.0
+
+[node name="Gun" type="Node3D" parent="Head/Camera3D"]
+script = ExtResource("2_ha0aj")
+normal_rocket = ExtResource("4_8ux6f")
+super_rocket = ExtResource("4_148x0")
+
+[node name="blasterG" parent="Head/Camera3D/Gun" instance=ExtResource("2_61dwy")]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0.0409847, -0.114805, -0.237097)
+
+[node name="Shoot Point" type="Node3D" parent="Head/Camera3D/Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.853607)
 
 [node name="Player Hud" type="Control" parent="."]
 layout_mode = 3
@@ -34,62 +55,70 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Fuel Bar" type="ProgressBar" parent="Player Hud"]
+[node name="Crosshair" type="TextureRect" parent="Player Hud"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(36, 36)
+texture = ExtResource("3_7617b")
+
+[node name="Super Rocket" type="TextureProgressBar" parent="Player Hud"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -133.0
+offset_right = 69.0
+offset_bottom = -69.0
+grow_vertical = 0
+max_value = 4.0
+step = 0.01
+value = 4.0
+fill_mode = 4
+texture_progress = ExtResource("8_yqews")
+
+[node name="Magazine Reload" type="TextureProgressBar" parent="Player Hud"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -61.0
+offset_right = 74.0
+offset_bottom = 3.0
+grow_vertical = 0
+max_value = 6.0
+step = 0.01
+value = 6.0
+fill_mode = 4
+texture_progress = ExtResource("8_8jrvg")
+
+[node name="Fuel Gauge" type="TextureProgressBar" parent="Player Hud"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -165.0
-offset_top = -38.0
-offset_right = -10.0
-offset_bottom = -11.0
-max_value = 4.0
-
-[node name="Boost Bar" type="ProgressBar" parent="Player Hud"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -165.0
-offset_top = -72.0
-offset_right = -10.0
-offset_bottom = -45.0
-grow_horizontal = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 90.0
+offset_top = -31.0
+offset_right = 154.0
+offset_bottom = 33.0
 grow_vertical = 0
 max_value = 4.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Player Hud"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -209.0
-offset_top = -37.0
-offset_right = -169.0
-offset_bottom = 3.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Fuel"
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Player Hud"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -215.0
-offset_top = -72.0
-offset_right = -170.0
-offset_bottom = -32.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Boost"
-fit_content = true
-autowrap_mode = 0
+step = 0.01
+value = 4.0
+fill_mode = 3
+texture_progress = ExtResource("6_dr3lp")
+radial_fill_degrees = 180.0

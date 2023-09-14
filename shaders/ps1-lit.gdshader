@@ -44,7 +44,7 @@ uniform sampler2D specular: hint_default_black, filter_nearest;
 uniform sampler2D emission: hint_default_black, filter_nearest;
 
 // The "jumpiness" of vertices.
-uniform float jitter: hint_range(0.0, 1.0) = 0.5;
+uniform float jitter: hint_range(0.0, 1.0) = 0.15;
 
 // If disabled, jitter will not affect the Z coordinate
 // of the vertex.
@@ -58,7 +58,7 @@ uniform bool jitter_depth_independent = true;
 uniform bool affine_texture_mapping = true;
 
 // Any alpha value below this will not be rendered.
-uniform float alpha_scissor: hint_range(0.0, 1.0) = 1.0;
+uniform float alpha_scissor: hint_range(0.0, 1.0) = 0.2;
 
 // Color to overlay on top of the albedo texture.
 uniform vec4 albedo_color: source_color = vec4(1.0);

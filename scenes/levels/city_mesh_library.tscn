@@ -1,0 +1,214 @@
+[gd_scene load_steps=71 format=3 uid="uid://bmhgta7ctpj7l"]
+
+[ext_resource type="PackedScene" uid="uid://b4jnb1h1uid3f" path="res://assets/city tiles/Building-Apartment-Foot-Corner-01-col.glb" id="1_qbx68"]
+[ext_resource type="PackedScene" uid="uid://bu2n7l7joc2ke" path="res://assets/city tiles/Building-Apartment-Foot-Corner-02-col.glb" id="2_kxrfm"]
+[ext_resource type="PackedScene" uid="uid://c6pcnhorhqsb4" path="res://assets/city tiles/Building-Apartment-Foot-Edge-01-col.glb" id="3_3og8f"]
+[ext_resource type="PackedScene" uid="uid://ce1jmb0syc2lw" path="res://assets/city tiles/Building-Apartment-Foot-Edge-02-col.glb" id="4_b00u5"]
+[ext_resource type="PackedScene" uid="uid://c8c08mlkridw7" path="res://assets/city tiles/Building-Apartment-Head-Corner-01-col.glb" id="5_0y5aa"]
+[ext_resource type="PackedScene" uid="uid://boehdeumb7o2k" path="res://assets/city tiles/Building-Apartment-Head-Corner-02-col.glb" id="6_8sb4r"]
+[ext_resource type="PackedScene" uid="uid://baupa5dd66e4a" path="res://assets/city tiles/Building-Apartment-Head-Edge-01-col.glb" id="7_ggw03"]
+[ext_resource type="PackedScene" uid="uid://bjxls7coxqfba" path="res://assets/city tiles/Building-Apartment-Head-Edge-02-col.glb" id="8_pdkww"]
+[ext_resource type="PackedScene" uid="uid://17850rf7hi06" path="res://assets/city tiles/Building-Apartment-Middle-Corner-01-col.glb" id="9_ayb7w"]
+[ext_resource type="PackedScene" uid="uid://c8ogyf3wmjf0k" path="res://assets/city tiles/Building-Apartment-Middle-Corner-02-col.glb" id="10_rfu7v"]
+[ext_resource type="PackedScene" uid="uid://bwj8nr62rpj45" path="res://assets/city tiles/Building-Apartment-Middle-Edge-01-col.glb" id="11_6i3tp"]
+[ext_resource type="PackedScene" uid="uid://b2v47swgyso4s" path="res://assets/city tiles/Building-Apartment-Middle-Edge-02-col.glb" id="12_iourx"]
+[ext_resource type="PackedScene" uid="uid://5qbrc4mh8wh1" path="res://assets/city tiles/Building-Apartment-Short-Corner-01-col.glb" id="13_cjp1d"]
+[ext_resource type="PackedScene" uid="uid://cbxu6cwsd1cqo" path="res://assets/city tiles/Building-Apartment-Short-Corner-02-col.glb" id="14_pety5"]
+[ext_resource type="PackedScene" uid="uid://d4njvl0y01q8i" path="res://assets/city tiles/Building-Apartment-Short-Edge-01-col.glb" id="15_y6bkg"]
+[ext_resource type="PackedScene" uid="uid://4q03k6kokow1" path="res://assets/city tiles/Building-Apartment-Short-Edge-02-col.glb" id="16_6hf44"]
+[ext_resource type="PackedScene" uid="uid://djh0m0cunyr0k" path="res://assets/city tiles/Building-Corrugated-Foot-Corner-col.glb" id="17_ysv5m"]
+[ext_resource type="PackedScene" uid="uid://btsrg5jmst8k3" path="res://assets/city tiles/Building-Corrugated-Foot-Edge-col.glb" id="18_88hsq"]
+[ext_resource type="PackedScene" uid="uid://iyhajlgwbm8d" path="res://assets/city tiles/Building-Corrugated-Head-Corner-col.glb" id="19_r743o"]
+[ext_resource type="PackedScene" uid="uid://cfain3vi3hsqf" path="res://assets/city tiles/Building-Corrugated-Head-Edge-col.glb" id="20_5iub8"]
+[ext_resource type="PackedScene" uid="uid://3xumdr0j1v00" path="res://assets/city tiles/Building-Glass-Foot-Corner-01-col.glb" id="25_xid4c"]
+[ext_resource type="PackedScene" uid="uid://bnf3isv1y1wk3" path="res://assets/city tiles/Building-Glass-Foot-Corner-02-col.glb" id="26_2hxku"]
+[ext_resource type="PackedScene" uid="uid://bvoy560t0pffa" path="res://assets/city tiles/Building-Glass-Foot-Edge-01-col.glb" id="27_dfdyn"]
+[ext_resource type="PackedScene" uid="uid://cqbsumqrksqtg" path="res://assets/city tiles/Building-Glass-Foot-Edge-02-col.glb" id="28_dy7gk"]
+[ext_resource type="PackedScene" uid="uid://bub4gij6jnmsl" path="res://assets/city tiles/Building-Glass-Head-Corner-01-col.glb" id="29_l2k23"]
+[ext_resource type="PackedScene" uid="uid://cs0e71ux6otmt" path="res://assets/city tiles/Building-Glass-Head-Corner-02-col.glb" id="30_7i5q6"]
+[ext_resource type="PackedScene" uid="uid://duxvvwasqkgep" path="res://assets/city tiles/Building-Glass-Head-Edge-01-col.glb" id="31_26p30"]
+[ext_resource type="PackedScene" uid="uid://7jhdk531mi2w" path="res://assets/city tiles/Building-Glass-Head-Edge-02-col.glb" id="32_dv2et"]
+[ext_resource type="PackedScene" uid="uid://c14k37i1s175a" path="res://assets/city tiles/Building-Glass-Middle-Corner-01-col.glb" id="33_hgtf2"]
+[ext_resource type="PackedScene" uid="uid://mhb28746mj6v" path="res://assets/city tiles/Building-Glass-Middle-Corner-02-col.glb" id="34_h0egj"]
+[ext_resource type="PackedScene" uid="uid://brsy826bkkkau" path="res://assets/city tiles/Building-Glass-Middle-Edge-01-col.glb" id="35_ycr4r"]
+[ext_resource type="PackedScene" uid="uid://bqldoklfanvcu" path="res://assets/city tiles/Building-Glass-Middle-Edge-02-col.glb" id="36_hapga"]
+[ext_resource type="PackedScene" uid="uid://dxiipmuhiwwrb" path="res://assets/city tiles/Building-Glass-Short-Corner-01-col.glb" id="37_35qcd"]
+[ext_resource type="PackedScene" uid="uid://bkbe6pktsbtve" path="res://assets/city tiles/Road-Edge-01-col.glb" id="37_ho3m4"]
+[ext_resource type="PackedScene" uid="uid://bu44hie5lt7cu" path="res://assets/city tiles/Road-Edge-02-col.glb" id="38_r8gh5"]
+[ext_resource type="PackedScene" uid="uid://bv65p5xbr3rm4" path="res://assets/city tiles/Building-Glass-Short-Corner-02-col.glb" id="38_s2y1w"]
+[ext_resource type="PackedScene" uid="uid://cdgn2r5mvsot0" path="res://assets/city tiles/Building-Glass-Short-Edge-01-col.glb" id="39_vjrnn"]
+[ext_resource type="PackedScene" uid="uid://kql2qa544x7n" path="res://assets/city tiles/Road-Edge-03-col.glb" id="39_x6ppe"]
+[ext_resource type="PackedScene" uid="uid://d1nwsu7iq8xu3" path="res://assets/city tiles/Building-Glass-Short-Edge-02-col.glb" id="40_yo6mr"]
+[ext_resource type="PackedScene" uid="uid://cj3achnfcr7ih" path="res://assets/city tiles/Building-Metal-Foot-Corner-col.glb" id="41_ym6om"]
+[ext_resource type="PackedScene" uid="uid://pqjr7lk4m7k" path="res://assets/city tiles/Building-Metal-Foot-Edge-col.glb" id="42_wrgui"]
+[ext_resource type="PackedScene" uid="uid://c2govyujavfg" path="res://assets/city tiles/Building-Metal-Head-Corner-col.glb" id="43_1qge8"]
+[ext_resource type="PackedScene" uid="uid://bxsbvlgfhoet0" path="res://assets/city tiles/Building-Metal-Head-Edge-col.glb" id="44_gfgsv"]
+[ext_resource type="PackedScene" uid="uid://co8i4bqu0heqe" path="res://assets/city tiles/Building-Roof-Full--col.glb" id="45_l8mqp"]
+[ext_resource type="PackedScene" uid="uid://6dljb13s8t24" path="res://assets/city tiles/Fence-Corner-col.glb" id="46_h5pi3"]
+[ext_resource type="PackedScene" uid="uid://cmhbdamo8kumn" path="res://assets/city tiles/Fence-Edge-col.glb" id="47_ap6hc"]
+[ext_resource type="PackedScene" uid="uid://k1rllgo3f838" path="res://assets/city tiles/Road-Inner-01-col.glb" id="48_7utyr"]
+[ext_resource type="PackedScene" uid="uid://d1svdlupc7xqj" path="res://assets/city tiles/Railing-Corner-col.glb" id="48_xbsvm"]
+[ext_resource type="PackedScene" uid="uid://je3076fpv3v3" path="res://assets/city tiles/Building-Red-Foot-Corner-col.glb" id="49_7fg6u"]
+[ext_resource type="PackedScene" uid="uid://cxv5f6ig4pwx7" path="res://assets/city tiles/Railing-Edge-col.glb" id="49_7j436"]
+[ext_resource type="PackedScene" uid="uid://bd0a3r0bihjcy" path="res://assets/city tiles/Building-Red-Foot-Edge-col.glb" id="50_3vk8y"]
+[ext_resource type="PackedScene" uid="uid://c00i71gw4ibv5" path="res://assets/city tiles/Building-Red-Head-Corner-col.glb" id="51_42h6k"]
+[ext_resource type="PackedScene" uid="uid://6dyohod2y5qk" path="res://assets/city tiles/Road-Blank-Full-02-col.glb" id="51_htu2r"]
+[ext_resource type="PackedScene" uid="uid://dhbxout6mlknb" path="res://assets/city tiles/Road-Outer-01-col.glb" id="51_u07a5"]
+[ext_resource type="PackedScene" uid="uid://c74lu1br75l2q" path="res://assets/city tiles/Building-Red-Head-Edge-col.glb" id="52_7ndbb"]
+[ext_resource type="PackedScene" uid="uid://bmlufiwc8du74" path="res://assets/city tiles/Road-Blank-Full-01-col.glb" id="58_1eped"]
+[ext_resource type="PackedScene" uid="uid://cso36ol5v7ros" path="res://assets/city tiles/Road-Blank-Full-03-col.glb" id="59_0p5yl"]
+[ext_resource type="PackedScene" uid="uid://cimn21k40yvjl" path="res://assets/city tiles/Road-Crosswalk-Edge-col.glb" id="60_exaaq"]
+[ext_resource type="PackedScene" uid="uid://c2ll7qf4de6lt" path="res://assets/city tiles/Road-Crosswalk-Full-col.glb" id="61_41fmk"]
+[ext_resource type="PackedScene" uid="uid://dkcryiuq3jydh" path="res://assets/city tiles/Wall-Corner-col.glb" id="62_la4kp"]
+[ext_resource type="PackedScene" uid="uid://d3kra5wmbk8bu" path="res://assets/city tiles/Wall-Edge-col.glb" id="63_fgnuh"]
+[ext_resource type="PackedScene" uid="uid://dm33tw7g5jxsq" path="res://assets/city tiles/Wall-Gate-col.glb" id="64_ys0mp"]
+[ext_resource type="PackedScene" uid="uid://cqdp6ojka53qd" path="res://assets/city tiles/Wall-Cross-col.glb" id="66_dwmv3"]
+[ext_resource type="PackedScene" uid="uid://d078yhrdcns8m" path="res://assets/city tiles/Road-Lined-Full-01-col.glb" id="68_1cm4e"]
+[ext_resource type="PackedScene" uid="uid://dknxvipuk12fb" path="res://assets/city tiles/Wall-Tee-col.glb" id="69_rnykf"]
+[ext_resource type="PackedScene" uid="uid://c2ghc6llbiodi" path="res://assets/city tiles/Road-Lined-Full-02-col.glb" id="69_v1rel"]
+[ext_resource type="PackedScene" uid="uid://bpebmnfr2ylqm" path="res://assets/city tiles/Road-Lined-Full-03-col.glb" id="70_x57if"]
+[ext_resource type="PackedScene" uid="uid://cqfacenlvjs3d" path="res://assets/city tiles/Road-Sidewalk-Full-02-col.glb" id="75_dgnfg"]
+[ext_resource type="PackedScene" uid="uid://btd5cmp0x31jd" path="res://assets/city tiles/Road-Sidewalk-Full-03-col.glb" id="76_djexb"]
+[ext_resource type="PackedScene" uid="uid://ddmcapuwlqv3p" path="res://assets/city tiles/Road-Sidewalk-Full-04-col.glb" id="77_p51ir"]
+
+[node name="City Mesh Library" type="Node3D"]
+
+[node name="Building-Apartment-Foot-Corner-01-col" parent="." instance=ExtResource("1_qbx68")]
+
+[node name="Building-Apartment-Foot-Corner-02-col" parent="." instance=ExtResource("2_kxrfm")]
+
+[node name="Building-Apartment-Foot-Edge-01-col" parent="." instance=ExtResource("3_3og8f")]
+
+[node name="Building-Apartment-Foot-Edge-02-col" parent="." instance=ExtResource("4_b00u5")]
+
+[node name="Building-Apartment-Head-Corner-01-col" parent="." instance=ExtResource("5_0y5aa")]
+
+[node name="Building-Apartment-Head-Corner-02-col" parent="." instance=ExtResource("6_8sb4r")]
+
+[node name="Building-Apartment-Head-Edge-01-col" parent="." instance=ExtResource("7_ggw03")]
+
+[node name="Building-Apartment-Head-Edge-02-col" parent="." instance=ExtResource("8_pdkww")]
+
+[node name="Building-Apartment-Middle-Corner-01-col" parent="." instance=ExtResource("9_ayb7w")]
+
+[node name="Building-Apartment-Middle-Corner-02-col" parent="." instance=ExtResource("10_rfu7v")]
+
+[node name="Building-Apartment-Middle-Edge-01-col" parent="." instance=ExtResource("11_6i3tp")]
+
+[node name="Building-Apartment-Middle-Edge-02-col" parent="." instance=ExtResource("12_iourx")]
+
+[node name="Building-Apartment-Short-Corner-01-col" parent="." instance=ExtResource("13_cjp1d")]
+
+[node name="Building-Apartment-Short-Corner-02-col" parent="." instance=ExtResource("14_pety5")]
+
+[node name="Building-Apartment-Short-Edge-01-col" parent="." instance=ExtResource("15_y6bkg")]
+
+[node name="Building-Apartment-Short-Edge-02-col" parent="." instance=ExtResource("16_6hf44")]
+
+[node name="Building-Corrugated-Foot-Corner-col" parent="." instance=ExtResource("17_ysv5m")]
+
+[node name="Building-Corrugated-Foot-Edge-col" parent="." instance=ExtResource("18_88hsq")]
+
+[node name="Building-Corrugated-Head-Corner-col" parent="." instance=ExtResource("19_r743o")]
+
+[node name="Building-Corrugated-Head-Edge-col" parent="." instance=ExtResource("20_5iub8")]
+
+[node name="Building-Glass-Foot-Corner-01-col" parent="." instance=ExtResource("25_xid4c")]
+
+[node name="Building-Glass-Foot-Corner-02-col" parent="." instance=ExtResource("26_2hxku")]
+
+[node name="Building-Glass-Foot-Edge-01-col" parent="." instance=ExtResource("27_dfdyn")]
+
+[node name="Building-Glass-Foot-Edge-02-col" parent="." instance=ExtResource("28_dy7gk")]
+
+[node name="Building-Glass-Head-Corner-01-col" parent="." instance=ExtResource("29_l2k23")]
+
+[node name="Building-Glass-Head-Corner-02-col" parent="." instance=ExtResource("30_7i5q6")]
+
+[node name="Building-Glass-Head-Edge-01-col" parent="." instance=ExtResource("31_26p30")]
+
+[node name="Building-Glass-Head-Edge-02-col" parent="." instance=ExtResource("32_dv2et")]
+
+[node name="Building-Glass-Middle-Corner-01-col" parent="." instance=ExtResource("33_hgtf2")]
+
+[node name="Building-Glass-Middle-Corner-02-col" parent="." instance=ExtResource("34_h0egj")]
+
+[node name="Building-Glass-Middle-Edge-01-col" parent="." instance=ExtResource("35_ycr4r")]
+
+[node name="Building-Glass-Middle-Edge-02-col" parent="." instance=ExtResource("36_hapga")]
+
+[node name="Building-Glass-Short-Corner-01-col" parent="." instance=ExtResource("37_35qcd")]
+
+[node name="Building-Glass-Short-Corner-02-col" parent="." instance=ExtResource("38_s2y1w")]
+
+[node name="Building-Glass-Short-Edge-01-col" parent="." instance=ExtResource("39_vjrnn")]
+
+[node name="Building-Glass-Short-Edge-02-col" parent="." instance=ExtResource("40_yo6mr")]
+
+[node name="Building-Metal-Foot-Corner-col" parent="." instance=ExtResource("41_ym6om")]
+
+[node name="Building-Metal-Foot-Edge-col" parent="." instance=ExtResource("42_wrgui")]
+
+[node name="Building-Metal-Head-Corner-col" parent="." instance=ExtResource("43_1qge8")]
+
+[node name="Building-Metal-Head-Edge-col" parent="." instance=ExtResource("44_gfgsv")]
+
+[node name="Building-Red-Foot-Corner-col" parent="." instance=ExtResource("49_7fg6u")]
+
+[node name="Building-Red-Foot-Edge-col" parent="." instance=ExtResource("50_3vk8y")]
+
+[node name="Building-Red-Head-Corner-col" parent="." instance=ExtResource("51_42h6k")]
+
+[node name="Building-Red-Head-Edge-col" parent="." instance=ExtResource("52_7ndbb")]
+
+[node name="Building-Roof-Full--col" parent="." instance=ExtResource("45_l8mqp")]
+
+[node name="Fence-Corner-col" parent="." instance=ExtResource("46_h5pi3")]
+
+[node name="Fence-Edge-col" parent="." instance=ExtResource("47_ap6hc")]
+
+[node name="Railing-Corner-col" parent="." instance=ExtResource("48_xbsvm")]
+
+[node name="Railing-Edge-col" parent="." instance=ExtResource("49_7j436")]
+
+[node name="Road-Blank-Full-01-col" parent="." instance=ExtResource("58_1eped")]
+
+[node name="Road-Blank-Full-02-col" parent="." instance=ExtResource("51_htu2r")]
+
+[node name="Road-Blank-Full-03-col" parent="." instance=ExtResource("59_0p5yl")]
+
+[node name="Road-Crosswalk-Edge-col" parent="." instance=ExtResource("60_exaaq")]
+
+[node name="Road-Crosswalk-Full-col" parent="." instance=ExtResource("61_41fmk")]
+
+[node name="Road-Edge-01-col" parent="." instance=ExtResource("37_ho3m4")]
+
+[node name="Road-Edge-02-col" parent="." instance=ExtResource("38_r8gh5")]
+
+[node name="Road-Edge-03-col" parent="." instance=ExtResource("39_x6ppe")]
+
+[node name="Road-Inner-01-col" parent="." instance=ExtResource("48_7utyr")]
+
+[node name="Road-Lined-Full-01-col" parent="." instance=ExtResource("68_1cm4e")]
+
+[node name="Road-Lined-Full-02-col" parent="." instance=ExtResource("69_v1rel")]
+
+[node name="Road-Lined-Full-03-col" parent="." instance=ExtResource("70_x57if")]
+
+[node name="Road-Outer-01-col" parent="." instance=ExtResource("51_u07a5")]
+
+[node name="Road-Sidewalk-Full-02-col" parent="." instance=ExtResource("75_dgnfg")]
+
+[node name="Road-Sidewalk-Full-03-col" parent="." instance=ExtResource("76_djexb")]
+
+[node name="Road-Sidewalk-Full-04-col" parent="." instance=ExtResource("77_p51ir")]
+
+[node name="Wall-Cross-col" parent="." instance=ExtResource("66_dwmv3")]
+
+[node name="Wall-Edge-col" parent="." instance=ExtResource("63_fgnuh")]
+
+[node name="Wall-Gate-col" parent="." instance=ExtResource("64_ys0mp")]
+
+[node name="Wall-Tee-col" parent="." instance=ExtResource("69_rnykf")]
+
+[node name="Wall-Corner-col" parent="." instance=ExtResource("62_la4kp")]

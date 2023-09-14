@@ -1,17 +1,16 @@
 extends CharacterBody3D
 
-const SPEED = 3.5
-const SPRINT_SPEED = 7.0
+const SPEED = 4.5
+const SPRINT_SPEED = 6.0
 const JUMP_VELOCITY = 4.5
 const BOOST_VELOCITY = 8.0
-const GLIDE_FORCE = 0.2
-const LOOK_SPEED = 1.85
+const GLIDE_FORCE = 1.5
+const LOOK_SPEED = 1.65
 const AIR_CONTROL = 3.0
 const STOP_SPEED = 8.5
 
-const GLIDE_FUEL_MAX = 4.0
+const GLIDE_FUEL_MAX = 3.5
 const GLIDE_REFUEL_DELAY = 0.25
-const BOOST_COOLDOWN_TIME = 10.0
 
 const VIEW_BOB_FREQ = 3.5
 const VIEW_BOB_AMP = 0.07
@@ -22,13 +21,11 @@ var crouching = false
 var sprinting = false
 
 var glide_fuel = 0.0
-var boost_timer = 0.0
 var glide_refuel_timer = 0.0
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var fuel_bar = $"Player Hud/Fuel Bar"
-@onready var boost_bar = $"Player Hud/Boost Bar"
+@onready var fuel_bar = $"Player Hud/Fuel Gauge"
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.81
@@ -37,8 +34,6 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	fuel_bar.max_value = GLIDE_FUEL_MAX
 	glide_fuel = GLIDE_FUEL_MAX
-	boost_bar.max_value = BOOST_COOLDOWN_TIME
-	boost_bar.value = boost_bar.max_value
 
 func _unhandled_input(event):
 	if(event is InputEventKey):
@@ -59,15 +54,22 @@ func _physics_process(delta):
 	
 	if gliding and (Input.is_action_just_released("jump") or is_on_floor() or glide_fuel <= 0):
 		gliding = false
-		glide_refuel_timer = GLIDE_REFUEL_DELAY
+		glide_refuel_timer += GLIDE_REFUEL_DELAY
 		
+#	if gliding and glide_fuel > 0:
+#		if(velocity.y < BOOST_VELOCITY):
+#			velocity.y += GLIDE_FORCE
+#		glide_fuel -= delta
+
 	if gliding and glide_fuel > 0:
-		velocity.y += GLIDE_FORCE
+		if(velocity.y < GLIDE_FORCE):
+			velocity.y = lerp(velocity.y, 0.0, 0.5)
 		glide_fuel -= delta
 		
-	if Input.is_action_just_pressed("boost") and boost_timer <= 0:
+	if Input.is_action_just_pressed("boost") and glide_fuel >= (GLIDE_FUEL_MAX * 0.75):
 		velocity.y = BOOST_VELOCITY
-		boost_timer = BOOST_COOLDOWN_TIME
+		glide_fuel -= (GLIDE_FUEL_MAX * 0.65)
+		glide_refuel_timer = (GLIDE_REFUEL_DELAY * 3)
 
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -82,7 +84,11 @@ func _physics_process(delta):
 	if input_dir.y > -0.75 and sprinting:
 		sprinting = false
 	
-	var speed = SPRINT_SPEED if sprinting else SPEED
+	var speed = SPEED
+	
+	if sprinting:
+		speed = SPRINT_SPEED
+		glide_fuel -= (delta * 0.25);
 	
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if is_on_floor():
@@ -115,16 +121,12 @@ func _headbob(time) -> Vector3:
 	return pos
 	
 func _handle_cooldowns(time):
-	if boost_timer > 0.0:
-		boost_timer -= time
-		boost_timer = clamp(boost_timer, 0.0, BOOST_COOLDOWN_TIME)
-		boost_bar.value = BOOST_COOLDOWN_TIME - boost_timer
 		
 	if glide_refuel_timer > 0:
 		glide_refuel_timer -= time
-		glide_refuel_timer = clamp (glide_refuel_timer, 0, GLIDE_REFUEL_DELAY)
+		glide_refuel_timer = clamp (glide_refuel_timer, 0.0, 1.5)
 	
-	if !gliding and glide_fuel < GLIDE_FUEL_MAX and glide_refuel_timer <= 0.0:
+	if !gliding and glide_fuel < GLIDE_FUEL_MAX and glide_refuel_timer <= 0.0 and !sprinting:
 		glide_fuel += time 
 		glide_fuel = clamp(glide_fuel, 0.0, GLIDE_FUEL_MAX)
 		

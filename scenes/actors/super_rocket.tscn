@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjs776mbyhs8u"]
+
+[ext_resource type="Script" path="res://scripts/projectile-forward.gd" id="1_32nn6"]
+[ext_resource type="PackedScene" uid="uid://bn8i1qlwgcicj" path="res://scenes/actors/rocket_explosion.tscn" id="2_yu35e"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_eavxb"]
+size = Vector3(0.2, 0.2, 0.5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uctjh"]
+radius = 0.2
+height = 1.5
+
+[node name="Normal Rocket" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_32nn6")
+SPEED = 18.0
+EXPLOSION = ExtResource("2_yu35e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
+mesh = SubResource("PrismMesh_eavxb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.398935)
+shape = SubResource("CapsuleShape3D_uctjh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
