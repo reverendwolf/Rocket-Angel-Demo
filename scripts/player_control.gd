@@ -31,7 +31,7 @@ var glide_refuel_timer = 0.0
 var gravity = 9.81
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	fuel_bar.max_value = GLIDE_FUEL_MAX
 	glide_fuel = GLIDE_FUEL_MAX
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjs776mbyhs8u"]
+[gd_scene load_steps=6 format=3 uid="uid://bjs776mbyhs8u"]
 
-[ext_resource type="Script" path="res://scripts/projectile-forward.gd" id="1_32nn6"]
+[ext_resource type="Script" path="res://scripts/projectile_forward.gd" id="1_32nn6"]
 [ext_resource type="PackedScene" uid="uid://bn8i1qlwgcicj" path="res://scenes/actors/rocket_explosion.tscn" id="2_yu35e"]
+[ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="3_y25q4"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_eavxb"]
 size = Vector3(0.2, 0.2, 0.5)
@@ -24,5 +25,11 @@ mesh = SubResource("PrismMesh_eavxb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.398935)
 shape = SubResource("CapsuleShape3D_uctjh")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Damage Dealer" type="Node" parent="."]
+script = ExtResource("3_y25q4")
+damage = 12
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

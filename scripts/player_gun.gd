@@ -65,9 +65,6 @@ func _process_cooldowns(time):
 	if(shot_cooldown >= 0.0):
 		shot_cooldown -= time
 		
-	if(secondary_cooldown >= 0.0):
-		secondary_cooldown -= time
-		
 	if(reload_delay >= 0.0):
 		reload_delay -= time
 		if reload_delay < 0.0:

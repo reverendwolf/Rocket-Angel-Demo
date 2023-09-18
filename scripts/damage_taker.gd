@@ -1,6 +1,10 @@
-extends Node3D
+extends Node
 
-var time = 1.0
+class_name DamageTaker
+
+signal damage_taken(value : int)
+signal any_damage_received
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -8,8 +12,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	scale = lerp(Vector3.ONE, Vector3.ONE * 2, 1.0 - time)
-	global_scale(scale)
-	time -= delta
-	if time <= 0.0:
-		queue_free()
+	pass
+	
+func damage(value : int):
+	emit_signal("any_damage_received")
+	emit_signal("damage_taken", value)

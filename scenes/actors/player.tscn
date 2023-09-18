@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://dnxmcvv30c5xt"]
 
-[ext_resource type="Script" path="res://scripts/PlayerControl.gd" id="1_pbwnp"]
+[ext_resource type="Script" path="res://scripts/player_control.gd" id="1_se3li"]
 [ext_resource type="PackedScene" uid="uid://yanqbc7bpnat" path="res://assets/kenney/blaster kit/blasterG.glb" id="2_61dwy"]
-[ext_resource type="Script" path="res://scripts/PlayerGun.gd" id="2_ha0aj"]
+[ext_resource type="Script" path="res://scripts/player_gun.gd" id="2_eqdhm"]
 [ext_resource type="Texture2D" uid="uid://dy41o55yu3rco" path="res://assets/kenney/crosshair kit/crosshair053.png" id="3_7617b"]
 [ext_resource type="PackedScene" uid="uid://cmboswaegysjb" path="res://scenes/actors/normal_rocket.tscn" id="4_8ux6f"]
 [ext_resource type="PackedScene" uid="uid://bjs776mbyhs8u" path="res://scenes/actors/super_rocket.tscn" id="4_148x0"]
@@ -18,7 +18,7 @@ points = PackedVector3Array(0.720378, 0.422204, -0.0944229, -0.728441, -0.392399
 
 [node name="Player" type="CharacterBody3D"]
 floor_max_angle = 0.837758
-script = ExtResource("1_pbwnp")
+script = ExtResource("1_se3li")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -37,7 +37,7 @@ fov = 60.0
 far = 80.0
 
 [node name="Gun" type="Node3D" parent="Head/Camera3D"]
-script = ExtResource("2_ha0aj")
+script = ExtResource("2_eqdhm")
 normal_rocket = ExtResource("4_8ux6f")
 super_rocket = ExtResource("4_148x0")
 

@@ -4,7 +4,6 @@ extends Area3D
 @export var EXPLOSION : PackedScene
 
 var speed = 0.0
-var lifetime = 3.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,9 +14,6 @@ func _ready():
 func _process(delta):
 	position += -global_transform.basis.z * delta * speed
 	speed = lerp(speed, SPEED, delta)
-	lifetime -= delta
-	if lifetime < 0.0:
-		explode()
 	
 func explode():
 	if EXPLOSION != null:
@@ -29,4 +25,7 @@ func explode():
 
 
 func _on_body_entered(_body):
+	explode()
+
+func _on_timer_timeout():
 	explode()
