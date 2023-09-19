@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1imyliwgnqcj"]
+
+[ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="1_8jo67"]
+[ext_resource type="Script" path="res://scripts/projectile_forward.gd" id="1_j8rcb"]
+[ext_resource type="PackedScene" uid="uid://bn8i1qlwgcicj" path="res://scenes/actors/rocket_explosion.tscn" id="2_56wtp"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oeebh"]
+radius = 0.06
+height = 0.3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u05ix"]
+radius = 0.15
+height = 0.5
+
+[node name="New Normal Rocket" type="Area3D" node_paths=PackedStringArray("damage_dealer")]
+script = ExtResource("1_j8rcb")
+EXPLOSION = ExtResource("2_56wtp")
+damage_dealer = NodePath("Damage Dealer")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_oeebh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_u05ix")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.75
+one_shot = true
+autostart = true
+
+[node name="Damage Dealer" type="Node" parent="."]
+script = ExtResource("1_8jo67")
+damage = 4
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

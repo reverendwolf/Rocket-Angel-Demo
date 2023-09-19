@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var shoot_point = $"Shoot Point"
 
+@export var player_parent : Node3D
 @export var normal_rocket : PackedScene
 @export var super_rocket : PackedScene
 
@@ -43,9 +44,10 @@ func _process(delta):
 func _shoot_primary():
 	magazine -= 1
 	shot_cooldown = SHOT_COOLDOWN
-	var r = normal_rocket.instantiate()
+	var r = normal_rocket.instantiate() as Projectile
 	r.position = shoot_point.global_position
 	r.basis = shoot_point.global_transform.basis
+	r.assign_owner(player_parent)
 	get_tree().root.add_child(r)
 
 func _shoot_secondary():

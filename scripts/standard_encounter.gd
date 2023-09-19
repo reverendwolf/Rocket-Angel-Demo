@@ -9,11 +9,6 @@ func _ready():
 	for child in get_children():
 		child.tree_exited.connect(_child_removed)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _child_removed():
 	child_count -= 1
 	if child_count == 0:

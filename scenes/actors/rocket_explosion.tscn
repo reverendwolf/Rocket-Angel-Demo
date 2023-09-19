@@ -25,5 +25,5 @@ autostart = true
 script = ExtResource("2_tl7v4")
 damage = 3
 
-[connection signal="body_entered" from="." to="Damage Dealer" method="_on_body_entered"]
+[connection signal="body_entered" from="." to="Damage Dealer" method="deal_damage"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

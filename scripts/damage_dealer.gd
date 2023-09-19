@@ -7,18 +7,8 @@ class_name DamageDealer
 func _ready():
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
-
-
-
-func _on_body_entered(body):
+func deal_damage(body):
 	for child in body.get_children():
 		if is_instance_of(child, DamageTaker):
-			print("damaging " + child.get_parent().name)
+			print("damaging " + child.get_parent().name + " for " + damage)
 			child.damage(damage)
-			
-			

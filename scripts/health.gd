@@ -2,31 +2,26 @@ extends Node
 
 class_name Health
 
-@export var max = 10
-@export var cur = 1
+@export var maxHealth = 10
+@export var curHealth = 1
 
 signal healthDepleted
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	cur = max
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	curHealth = maxHealth
 	
 func damage(dmg : int):
-	cur -= dmg
+	curHealth -= dmg
 	health_check()
 	
 func restore(dmg : int):
-	cur += dmg
+	curHealth += dmg
 	health_check()
 	
 func health_check():
-	cur = clamp(cur, 0, max)
-	if cur == 0:
+	curHealth = clamp(curHealth, 0, maxHealth)
+	if curHealth == 0:
 		emit_signal("healthDepleted")
 
 
