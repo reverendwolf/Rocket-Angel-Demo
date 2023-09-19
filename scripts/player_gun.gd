@@ -53,9 +53,10 @@ func _shoot_primary():
 func _shoot_secondary():
 	shot_cooldown = SHOT_COOLDOWN * 2
 	secondary -= 1
-	var r = super_rocket.instantiate()
+	var r = super_rocket.instantiate() as Projectile
 	r.position = shoot_point.global_position
 	r.basis = shoot_point.global_transform.basis
+	r.assign_owner(player_parent)
 	get_tree().root.add_child(r)
 	
 func _reload():

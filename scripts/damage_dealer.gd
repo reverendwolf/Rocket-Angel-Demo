@@ -10,5 +10,5 @@ func _ready():
 func deal_damage(body):
 	for child in body.get_children():
 		if is_instance_of(child, DamageTaker):
-			print("damaging " + child.get_parent().name + " for " + damage)
+			print("damaging " + child.get_parent().name)
 			child.damage(damage)

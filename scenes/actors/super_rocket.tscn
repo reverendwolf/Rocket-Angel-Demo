@@ -27,9 +27,12 @@ shape = SubResource("CapsuleShape3D_uctjh")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
+one_shot = true
+autostart = true
 
 [node name="Damage Dealer" type="Node" parent="."]
 script = ExtResource("3_y25q4")
 damage = 12
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

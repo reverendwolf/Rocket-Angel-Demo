@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://yanqbc7bpnat" path="res://assets/kenney/blaster kit/blasterG.glb" id="2_61dwy"]
 [ext_resource type="Script" path="res://scripts/player_gun.gd" id="2_eqdhm"]
 [ext_resource type="Texture2D" uid="uid://dy41o55yu3rco" path="res://assets/kenney/crosshair kit/crosshair053.png" id="3_7617b"]
-[ext_resource type="PackedScene" uid="uid://b1imyliwgnqcj" path="res://scenes/actors/new_normal_rocket.tscn" id="3_tbw18"]
+[ext_resource type="PackedScene" uid="uid://cmboswaegysjb" path="res://scenes/actors/normal_rocket.tscn" id="4_8ux6f"]
 [ext_resource type="PackedScene" uid="uid://bjs776mbyhs8u" path="res://scenes/actors/super_rocket.tscn" id="4_148x0"]
 [ext_resource type="Texture2D" uid="uid://cpd171t55tn43" path="res://assets/textures/ui-fuel-bar.png" id="6_dr3lp"]
 [ext_resource type="Texture2D" uid="uid://x5gyqdtdyds2" path="res://assets/game icons/artificial-hive.png" id="8_8jrvg"]
@@ -39,7 +39,7 @@ far = 80.0
 [node name="Gun" type="Node3D" parent="Head/Camera3D" node_paths=PackedStringArray("player_parent")]
 script = ExtResource("2_eqdhm")
 player_parent = NodePath("../../..")
-normal_rocket = ExtResource("3_tbw18")
+normal_rocket = ExtResource("4_8ux6f")
 super_rocket = ExtResource("4_148x0")
 
 [node name="blasterG" parent="Head/Camera3D/Gun" instance=ExtResource("2_61dwy")]
