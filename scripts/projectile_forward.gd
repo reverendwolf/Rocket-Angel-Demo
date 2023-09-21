@@ -32,11 +32,12 @@ func explode():
 	queue_free()
 
 func _on_body_entered(body):
-	print("Hit: " + body.get_name())
+	
 	if body == projectile_owner:
 		return
 	
 	if damage_dealer:
+		print("Hit: " + body.get_name())
 		damage_dealer.deal_damage(body)
 	
 	explode()

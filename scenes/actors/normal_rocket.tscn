@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmboswaegysjb"]
+[gd_scene load_steps=5 format=3 uid="uid://cmboswaegysjb"]
 
 [ext_resource type="Script" path="res://scripts/projectile_forward.gd" id="1_7kews"]
 [ext_resource type="PackedScene" uid="uid://bn8i1qlwgcicj" path="res://scenes/actors/rocket_explosion.tscn" id="2_5hbxj"]
-[ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="3_563sm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oj1pj"]
 radius = 0.06
@@ -13,10 +12,11 @@ radius = 0.15
 height = 0.5
 
 [node name="Normal Rocket" type="Area3D" node_paths=PackedStringArray("damage_dealer")]
+collision_mask = 257
 script = ExtResource("1_7kews")
 SPEED = 35.0
 EXPLOSION = ExtResource("2_5hbxj")
-damage_dealer = NodePath("Damage Dealer")
+damage_dealer = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -30,9 +30,5 @@ shape = SubResource("CapsuleShape3D_t4d6c")
 wait_time = 1.75
 one_shot = true
 autostart = true
-
-[node name="Damage Dealer" type="Node" parent="."]
-script = ExtResource("3_563sm")
-damage = 4
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

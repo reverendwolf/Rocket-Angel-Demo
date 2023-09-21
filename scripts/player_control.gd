@@ -47,7 +47,7 @@ func _physics_process(delta):
 
 	# Handle Jump and Glide
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		jump(JUMP_VELOCITY)
 	
 	if Input.is_action_just_pressed("jump") and !is_on_floor():
 		gliding = true
@@ -67,9 +67,9 @@ func _physics_process(delta):
 		glide_fuel -= delta
 		
 	if Input.is_action_just_pressed("boost") and glide_fuel >= (GLIDE_FUEL_MAX * 0.75):
-		velocity.y = BOOST_VELOCITY
+		jump(BOOST_VELOCITY)
 		glide_fuel -= (GLIDE_FUEL_MAX * 0.65)
-		glide_refuel_timer = (GLIDE_REFUEL_DELAY * 3)
+		glide_refuel_timer = (GLIDE_REFUEL_DELAY * 4)
 
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -113,6 +113,9 @@ func _physics_process(delta):
 
 	move_and_slide()
 	_handle_cooldowns(delta)
+
+func jump(jump_velocity : float):
+	velocity.y = jump_velocity
 
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO

@@ -23,7 +23,3 @@ func health_check():
 	curHealth = clamp(curHealth, 0, maxHealth)
 	if curHealth == 0:
 		emit_signal("healthDepleted")
-
-
-func _on_damage_taker_damage_taken(value):
-	damage(value)

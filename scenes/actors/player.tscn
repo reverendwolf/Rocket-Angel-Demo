@@ -20,6 +20,14 @@ points = PackedVector3Array(0.720378, 0.422204, -0.0944229, -0.728441, -0.392399
 floor_max_angle = 0.837758
 script = ExtResource("1_se3li")
 
+[node name="Gun" type="Node3D" parent="." node_paths=PackedStringArray("shoot_point", "player_parent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("2_eqdhm")
+shoot_point = NodePath("../Head/Camera3D/Shoot Point")
+player_parent = NodePath("..")
+normal_rocket = ExtResource("4_8ux6f")
+super_rocket = ExtResource("4_148x0")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
@@ -34,19 +42,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 fov = 60.0
-far = 80.0
+far = 50.0
 
-[node name="Gun" type="Node3D" parent="Head/Camera3D" node_paths=PackedStringArray("player_parent")]
-script = ExtResource("2_eqdhm")
-player_parent = NodePath("../../..")
-normal_rocket = ExtResource("4_8ux6f")
-super_rocket = ExtResource("4_148x0")
+[node name="blasterG" parent="Head/Camera3D" instance=ExtResource("2_61dwy")]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0.0409847, -0.102837, -0.245849)
 
-[node name="blasterG" parent="Head/Camera3D/Gun" instance=ExtResource("2_61dwy")]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0.0409847, -0.114805, -0.237097)
-
-[node name="Shoot Point" type="Node3D" parent="Head/Camera3D/Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.853607)
+[node name="Shoot Point" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.11182)
 
 [node name="Player Hud" type="Control" parent="."]
 layout_mode = 3

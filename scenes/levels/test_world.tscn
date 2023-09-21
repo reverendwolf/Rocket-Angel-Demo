@@ -28,7 +28,7 @@ tonemap_exposure = 2.0
 fog_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
 fog_light_energy = 0.0
-fog_density = 0.06
+fog_density = 0.08
 fog_sky_affect = 0.0
 volumetric_fog_density = 0.0
 adjustment_enabled = true
@@ -1524,7 +1524,7 @@ metadata/_editor_source_scene = "res://scenes/levels/graybox_tile_library.tscn"
 environment = SubResource("Environment_87egi")
 
 [node name="Player" parent="." instance=ExtResource("1_abciy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9116, 9.67044, -26.7866)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9116, 9.27044, -26.7866)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.28786, 5.3322, -1.42301)

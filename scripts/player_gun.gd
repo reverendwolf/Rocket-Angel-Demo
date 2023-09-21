@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var shoot_point = $"Shoot Point"
+@export var shoot_point : Node3D
 
 @export var player_parent : Node3D
 @export var normal_rocket : PackedScene

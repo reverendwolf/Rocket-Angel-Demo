@@ -28,4 +28,4 @@ script = ExtResource("1_10os3")
 script = ExtResource("2_j1oke")
 
 [connection signal="healthDepleted" from="Health" to="." method="_on_health_depleted"]
-[connection signal="damage_taken" from="Damage Taker" to="Health" method="_on_damage_taker_damage_taken"]
+[connection signal="damage_taken" from="Damage Taker" to="Health" method="damage"]
