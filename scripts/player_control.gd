@@ -20,12 +20,21 @@ var gliding = false
 var crouching = false
 var sprinting = false
 
+var canStep = false
+
 var glide_fuel = 0.0
 var glide_refuel_timer = 0.0
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var fuel_bar = $"Player Hud/Fuel Gauge"
+@onready var footstep_cast = $FootstepShapeCast
+@onready var footstepSound = $FootstepSound
+
+@export var worldGrid : GridMap
+@export var detailGrid : GridMap
+
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.81
@@ -117,8 +126,27 @@ func _physics_process(delta):
 func jump(jump_velocity : float):
 	velocity.y = jump_velocity
 
+func _footstep():
+	#print("Step")
+	if velocity.length() < SPEED:
+		return
+	
+	footstepSound.pitch_scale = randf_range(0.9,1.1) * velocity.length() / SPEED
+	footstepSound.play(0)
+	
+	pass
+
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO
+	
+	if canStep:
+		if cos(time * VIEW_BOB_FREQ) > 0:
+			_footstep()
+			canStep = false
+	else:
+		if cos(time * VIEW_BOB_FREQ) < 0:
+			canStep = true
+	
 	pos.y = sin(time * VIEW_BOB_FREQ) * VIEW_BOB_AMP
 	pos.x = cos(time * VIEW_BOB_FREQ / 2) * VIEW_BOB_AMP 
 	return pos

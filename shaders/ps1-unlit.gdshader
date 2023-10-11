@@ -36,9 +36,9 @@ SOFTWARE.
 *****************************************************************************/
 
 shader_type spatial;
-render_mode unshaded, skip_vertex_transform, diffuse_lambert_wrap;
+render_mode unshaded, skip_vertex_transform, diffuse_lambert_wrap, blend_add, cull_disabled;
 
-uniform sampler2D albedo: hint_default_black, filter_nearest;
+uniform sampler2D albedo: source_color, filter_nearest;
 uniform sampler2D emission: hint_default_black, filter_nearest;
 
 // The "jumpiness" of vertices.

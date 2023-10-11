@@ -9,8 +9,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	grow += delta
-	scale = Vector3.ONE * grow
+	grow += delta * 1.5
+	scale = Vector3.ONE * grow * grow
 	global_scale(scale)
 
 

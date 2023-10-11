@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d16lok82rqkfv"]
+
+[ext_resource type="PackedScene" uid="uid://brplm784cg4hj" path="res://scenes/prefabs/simple_explosion.tscn" id="1_7l7w4"]
+[ext_resource type="PackedScene" uid="uid://bn8i1qlwgcicj" path="res://scenes/actors/rocket_explosion.tscn" id="2_rriii"]
+
+[node name="new_rocket_explosion" type="Node3D"]
+
+[node name="SimpleExplosion" parent="." instance=ExtResource("1_7l7w4")]
+
+[node name="Rocket Explosion" parent="." instance=ExtResource("2_rriii")]

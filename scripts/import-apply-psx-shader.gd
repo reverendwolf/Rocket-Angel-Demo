@@ -21,7 +21,7 @@ func replace_shader(node: Node):
 					new_mat.shader = load("res://shaders/ps1-lit.gdshader")
 					new_mat.set_shader_parameter("albedo", mat.albedo_texture)
 				else:
-					new_mat.shader = load("res://shaders/ps1-model-flat.gdshader")
+					new_mat.shader = load("res://shaders/ps1-unlit.gdshader")
 				new_mat.set_shader_parameter("albedo_color", mat.albedo_color)
 				child.mesh.surface_set_material(mat_idx, new_mat)
 		

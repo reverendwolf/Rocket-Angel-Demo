@@ -7,6 +7,12 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@export var death_animation : AnimationPlayer
+@export var destroy_spawn : PackedScene
+
+func _ready():
+	if death_animation:
+		death_animation.stop(false)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -29,4 +35,15 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_health_depleted():
-	queue_free()
+	if death_animation:
+		death_animation.play("fire_barrel_death")
+	else:
+		spawn_death()
+		queue_free()
+
+func spawn_death():
+	if destroy_spawn:
+		var obj = destroy_spawn.instantiate()
+		obj.position = position
+		obj.basis = transform.basis
+		get_tree().root.add_child(obj)

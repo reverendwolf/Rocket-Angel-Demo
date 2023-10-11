@@ -12,12 +12,14 @@ points = PackedVector3Array(0.457871, 0.198079, 0.0157824, -0.48874, -0.0916874,
 script = ExtResource("1_lks41")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_gge4w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_pfkuw")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.35
 one_shot = true
 autostart = true
 

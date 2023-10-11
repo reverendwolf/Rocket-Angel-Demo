@@ -1,0 +1,70 @@
+[gd_scene load_steps=23 format=3 uid="uid://dw4gxnuwcl7aa"]
+
+[ext_resource type="PackedScene" uid="uid://bcidh0u8c6ivu" path="res://assets/tiles-detail/Fence-Brick-Short-Corner.glb" id="1_sd8ap"]
+[ext_resource type="PackedScene" uid="uid://we4lh7udqdts" path="res://assets/tiles-detail/Fence-Brick-Short-Edge.glb" id="2_51ui8"]
+[ext_resource type="PackedScene" uid="uid://cu02kwdm6sfsb" path="res://assets/tiles-detail/Fence-Brick-Tall-Corner.glb" id="3_5pgt5"]
+[ext_resource type="PackedScene" uid="uid://cbqeh3wujlhh8" path="res://assets/tiles-detail/Fence-Brick-Tall-Edge.glb" id="4_c44e2"]
+[ext_resource type="PackedScene" uid="uid://dg4x6lv2hefdb" path="res://assets/tiles-detail/Fence-Corner.glb" id="5_2tefu"]
+[ext_resource type="PackedScene" uid="uid://ccf8gp8cpm117" path="res://assets/tiles-detail/Fence-Edge.glb" id="6_n2765"]
+[ext_resource type="PackedScene" uid="uid://67owfdp3hx8x" path="res://assets/tiles-detail/Fence-Short-Corner.glb" id="7_1s7mn"]
+[ext_resource type="PackedScene" uid="uid://djik33v7cg7rp" path="res://assets/tiles-detail/Fence-Short-Edge.glb" id="8_al8qw"]
+[ext_resource type="PackedScene" uid="uid://brob0yytcmyyo" path="res://assets/tiles-detail/Fence-Tall-Corner.glb" id="9_i3igv"]
+[ext_resource type="PackedScene" uid="uid://ixayoohon07m" path="res://assets/tiles-detail/Fence-Tall-Edge.glb" id="10_a8qtp"]
+[ext_resource type="PackedScene" uid="uid://doq1hjthp7d1m" path="res://assets/tiles-detail/Grating-Full.glb" id="11_7rv8a"]
+[ext_resource type="PackedScene" uid="uid://d0355mefkdb80" path="res://assets/tiles-detail/Scaffold-Metal-Horizontal.glb" id="12_nn4i2"]
+[ext_resource type="PackedScene" uid="uid://cldfnr7gaqqsl" path="res://assets/tiles-detail/Scaffold-Metal-Topper.glb" id="13_v5il6"]
+[ext_resource type="PackedScene" uid="uid://yihndg5whkug" path="res://assets/tiles-detail/Scaffold-Metal-Vertical.glb" id="14_mll6d"]
+[ext_resource type="PackedScene" uid="uid://0joqynoeym8q" path="res://assets/tiles-detail/Scaffold-Painted-Horizontal.glb" id="15_3rork"]
+[ext_resource type="PackedScene" uid="uid://0b5gw18j1jwy" path="res://assets/tiles-detail/Scaffold-Painted-Topper.glb" id="16_1ampt"]
+[ext_resource type="PackedScene" uid="uid://dqxdggubbt3cu" path="res://assets/tiles-detail/Scaffold-Painted-Vertical.glb" id="17_s7co8"]
+[ext_resource type="PackedScene" uid="uid://doudv0edsf487" path="res://assets/tiles-detail/Scaffold-Path-Straight.glb" id="18_07axc"]
+[ext_resource type="PackedScene" uid="uid://cdybp4sq338ao" path="res://assets/tiles-detail/Scaffold-Pipe-HBend.glb" id="19_ispqd"]
+[ext_resource type="PackedScene" uid="uid://bvtofnjdqy1fd" path="res://assets/tiles-detail/Scaffold-Pipe-HStraight.glb" id="20_jfu22"]
+[ext_resource type="PackedScene" uid="uid://6lk6ke34lm0p" path="res://assets/tiles-detail/Scaffold-Pipe-VBend.glb" id="21_ii8ns"]
+[ext_resource type="PackedScene" uid="uid://ccwconyauk0d4" path="res://assets/tiles-detail/Scaffold-Pipe-VStraight.glb" id="22_w8ma8"]
+
+[node name="tiles-detail" type="Node3D"]
+
+[node name="Fence-Brick-Short-Corner" parent="." instance=ExtResource("1_sd8ap")]
+
+[node name="Fence-Brick-Short-Edge" parent="." instance=ExtResource("2_51ui8")]
+
+[node name="Fence-Brick-Tall-Corner" parent="." instance=ExtResource("3_5pgt5")]
+
+[node name="Fence-Brick-Tall-Edge" parent="." instance=ExtResource("4_c44e2")]
+
+[node name="Fence-Corner" parent="." instance=ExtResource("5_2tefu")]
+
+[node name="Fence-Edge" parent="." instance=ExtResource("6_n2765")]
+
+[node name="Fence-Short-Corner" parent="." instance=ExtResource("7_1s7mn")]
+
+[node name="Fence-Short-Edge" parent="." instance=ExtResource("8_al8qw")]
+
+[node name="Fence-Tall-Corner" parent="." instance=ExtResource("9_i3igv")]
+
+[node name="Fence-Tall-Edge" parent="." instance=ExtResource("10_a8qtp")]
+
+[node name="Grating-Full" parent="." instance=ExtResource("11_7rv8a")]
+
+[node name="Scaffold-Metal-Horizontal" parent="." instance=ExtResource("12_nn4i2")]
+
+[node name="Scaffold-Metal-Topper" parent="." instance=ExtResource("13_v5il6")]
+
+[node name="Scaffold-Metal-Vertical" parent="." instance=ExtResource("14_mll6d")]
+
+[node name="Scaffold-Painted-Horizontal" parent="." instance=ExtResource("15_3rork")]
+
+[node name="Scaffold-Painted-Topper" parent="." instance=ExtResource("16_1ampt")]
+
+[node name="Scaffold-Painted-Vertical" parent="." instance=ExtResource("17_s7co8")]
+
+[node name="Scaffold-Path-Straight" parent="." instance=ExtResource("18_07axc")]
+
+[node name="Scaffold-Pipe-HBend" parent="." instance=ExtResource("19_ispqd")]
+
+[node name="Scaffold-Pipe-HStraight" parent="." instance=ExtResource("20_jfu22")]
+
+[node name="Scaffold-Pipe-VBend" parent="." instance=ExtResource("21_ii8ns")]
+
+[node name="Scaffold-Pipe-VStraight" parent="." instance=ExtResource("22_w8ma8")]

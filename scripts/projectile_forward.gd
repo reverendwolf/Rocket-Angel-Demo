@@ -7,6 +7,8 @@ class_name Projectile
 
 @export var damage_dealer : DamageDealer
 
+@export var tail : Node3D
+
 var projectile_owner : Node
 
 var speed = 0.0
@@ -29,6 +31,11 @@ func explode():
 		e.position = global_position
 		e.basis = basis
 		get_tree().root.add_child(e)
+	
+	if tail:
+		remove_child(tail)
+		get_tree().root.add_child(tail)
+		
 	queue_free()
 
 func _on_body_entered(body):

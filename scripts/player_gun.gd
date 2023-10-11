@@ -1,10 +1,14 @@
 extends Node3D
 
+class_name PlayerGun
+
 @export var shoot_point : Node3D
 
 @export var player_parent : Node3D
 @export var normal_rocket : PackedScene
 @export var super_rocket : PackedScene
+
+@onready var ammoLabel : RichTextLabel = $"../Player Hud/AmmoLabel"
 
 const MAX_MAGAZINE = 6
 const MAX_SECONDARY = 9
@@ -12,7 +16,7 @@ const SHOT_COOLDOWN = 0.55
 const RELOAD_DELAY = 1.25
 
 var magazine = MAX_MAGAZINE
-var secondary = MAX_SECONDARY
+var secondary = 1
 var shot_cooldown = 0.0
 var reload_delay = 0.0
 
@@ -34,16 +38,21 @@ func _process(delta):
 		else:
 			_reload()
 			
-	if Input.is_action_just_pressed("shoot_a") and secondary > 0:
+	if Input.is_action_just_pressed("shoot_a") and (secondary > 0 || true):
 		_shoot_secondary()
 		
 	if Input.is_action_just_pressed("reload") and magazine < MAX_MAGAZINE:
 		_reload()
 	
 	
+func _update_ammo_label():
+	ammoLabel.text = str(magazine) + "/" + str(MAX_MAGAZINE) + "\n" + \
+					str(secondary) + "/" + str(MAX_SECONDARY)
+	
 func _shoot_primary():
 	magazine -= 1
 	shot_cooldown = SHOT_COOLDOWN
+	_update_ammo_label()
 	var r = normal_rocket.instantiate() as Projectile
 	r.position = shoot_point.global_position
 	r.basis = shoot_point.global_transform.basis
@@ -53,6 +62,7 @@ func _shoot_primary():
 func _shoot_secondary():
 	shot_cooldown = SHOT_COOLDOWN * 2
 	secondary -= 1
+	_update_ammo_label()
 	var r = super_rocket.instantiate() as Projectile
 	r.position = shoot_point.global_position
 	r.basis = shoot_point.global_transform.basis
@@ -63,6 +73,7 @@ func _reload():
 	print("reload")
 	reload_delay = RELOAD_DELAY
 	magazine = MAX_MAGAZINE
+	_update_ammo_label()
 	
 func _process_cooldowns(time):
 	if(shot_cooldown >= 0.0):
@@ -72,3 +83,8 @@ func _process_cooldowns(time):
 		reload_delay -= time
 		if reload_delay < 0.0:
 			print("reload complete")
+			
+func add_ammo(value : int):
+	secondary = clamp(secondary + value, 0, MAX_SECONDARY)
+	print("secondary ammo: " + str(secondary))
+	_update_ammo_label()
