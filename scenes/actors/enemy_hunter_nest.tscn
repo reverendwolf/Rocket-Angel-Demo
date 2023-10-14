@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkrjbjinga0xv"]
+
+[ext_resource type="Script" path="res://scripts/destructible_object.gd" id="1_0y5x1"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="3_vapi5"]
+[ext_resource type="Script" path="res://scripts/damage_taker.gd" id="4_6cp7c"]
+[ext_resource type="PackedScene" uid="uid://bk8p0af26c4au" path="res://assets/characters/hunter-nest.block.glb" id="6_76t6e"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_unp23"]
+radius = 1.5
+height = 5.0
+
+[node name="Enemy-Hunter-Nest" type="CharacterBody3D"]
+script = ExtResource("1_0y5x1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.3)
+shape = SubResource("CapsuleShape3D_unp23")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_vapi5")
+
+[node name="Damage Taker" type="Node" parent="."]
+script = ExtResource("4_6cp7c")
+
+[node name="hunter-nest_block" parent="." instance=ExtResource("6_76t6e")]
+
+[connection signal="healthDepleted" from="Health" to="." method="_on_health_depleted"]
+[connection signal="damage_taken" from="Damage Taker" to="Health" method="damage"]

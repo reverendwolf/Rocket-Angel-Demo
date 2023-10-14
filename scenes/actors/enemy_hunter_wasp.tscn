@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cd6y4g5cksn2b"]
+
+[ext_resource type="Script" path="res://scripts/destructible_object.gd" id="1_xaqla"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="3_yh374"]
+[ext_resource type="Script" path="res://scripts/damage_taker.gd" id="4_jlt64"]
+[ext_resource type="PackedScene" uid="uid://dvs4jnvguqucj" path="res://assets/characters/hunter-wasp.block.glb" id="4_mqbjn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2j05"]
+radius = 0.7
+
+[node name="Enemy-HunterWasp" type="CharacterBody3D"]
+motion_mode = 1
+script = ExtResource("1_xaqla")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.4, 0)
+shape = SubResource("CapsuleShape3D_h2j05")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_yh374")
+
+[node name="DamageTaker" type="Node" parent="."]
+script = ExtResource("4_jlt64")
+
+[node name="hunter-wasp_block" parent="." instance=ExtResource("4_mqbjn")]
+
+[connection signal="healthDepleted" from="Health" to="." method="_on_health_depleted"]
+[connection signal="damage_taken" from="DamageTaker" to="Health" method="damage"]

@@ -93,6 +93,12 @@ _data = {
 }
 
 [node name="barrel_red" type="CharacterBody3D" node_paths=PackedStringArray("death_animation")]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 script = ExtResource("1_od0j3")
 death_animation = NodePath("DeathAnimation")
 destroy_spawn = ExtResource("2_rq0bf")
