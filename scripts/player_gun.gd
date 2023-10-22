@@ -70,7 +70,6 @@ func _shoot_secondary():
 	get_tree().root.add_child(r)
 	
 func _reload():
-	print("reload")
 	reload_delay = RELOAD_DELAY
 	magazine = MAX_MAGAZINE
 	_update_ammo_label()
@@ -81,10 +80,7 @@ func _process_cooldowns(time):
 		
 	if(reload_delay >= 0.0):
 		reload_delay -= time
-		if reload_delay < 0.0:
-			print("reload complete")
 			
 func add_ammo(value : int):
 	secondary = clamp(secondary + value, 0, MAX_SECONDARY)
-	print("secondary ammo: " + str(secondary))
 	_update_ammo_label()

@@ -5,7 +5,8 @@ extends Node
 
 func _ready():
 	call_deferred("initialize_state")
-		
+	pass
+
 func initialize_state():
 	if current_state:
 		change_state(current_state)

@@ -12,5 +12,4 @@ func _ready():
 func _child_removed():
 	child_count -= 1
 	if child_count == 0:
-		print("encounter complete")
 		emit_signal("encounter_complete")

@@ -15,6 +15,8 @@ const GLIDE_REFUEL_DELAY = 0.25
 const VIEW_BOB_FREQ = 3.5
 const VIEW_BOB_AMP = 0.07
 
+const GUN_BOB_AMP = 0.01
+
 var bob_time = 0.0
 var gliding = false
 var crouching = false
@@ -30,11 +32,9 @@ var glide_refuel_timer = 0.0
 @onready var fuel_bar = $"Player Hud/Fuel Gauge"
 @onready var footstep_cast = $FootstepShapeCast
 @onready var footstepSound = $FootstepSound
+@onready var interactionRaycast = $Head/Camera3D/InteractionRayCast
 
-@export var worldGrid : GridMap
-@export var detailGrid : GridMap
-
-
+@export var gun_holder : Node3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.81
@@ -65,6 +65,11 @@ func _physics_process(delta):
 		gliding = false
 		glide_refuel_timer += GLIDE_REFUEL_DELAY
 		
+	if Input.is_action_just_pressed("interact") and interactionRaycast.is_colliding():
+		var interaction = interactionRaycast.get_collider()
+		if interaction is Interactable:
+			interaction.call_interaction()
+
 #	if gliding and glide_fuel > 0:
 #		if(velocity.y < BOOST_VELOCITY):
 #			velocity.y += GLIDE_FORCE
@@ -119,6 +124,7 @@ func _physics_process(delta):
 
 	bob_time += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(bob_time)
+	gun_holder.transform.origin = _gunbob(bob_time + 0.5)
 
 	move_and_slide()
 	_handle_cooldowns(delta)
@@ -149,6 +155,13 @@ func _headbob(time) -> Vector3:
 	
 	pos.y = sin(time * VIEW_BOB_FREQ) * VIEW_BOB_AMP
 	pos.x = cos(time * VIEW_BOB_FREQ / 2) * VIEW_BOB_AMP 
+	return pos
+
+func _gunbob(time) -> Vector3:
+	var pos = Vector3.ZERO
+	
+	pos.y = sin(time * VIEW_BOB_FREQ) * GUN_BOB_AMP
+	pos.x = cos(time * VIEW_BOB_FREQ / 2) * GUN_BOB_AMP 
 	return pos
 	
 func _handle_cooldowns(time):

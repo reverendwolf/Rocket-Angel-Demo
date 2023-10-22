@@ -6,6 +6,8 @@ class_name Health
 @export var curHealth = 1
 
 signal healthDepleted
+signal healthLowered
+signal healthRaised
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,13 +15,17 @@ func _ready():
 	
 func damage(dmg : int):
 	curHealth -= dmg
-	health_check()
+	health_check(false)
 	
 func restore(dmg : int):
 	curHealth += dmg
-	health_check()
+	health_check(true)
 	
-func health_check():
+func health_check(health_raised):
 	curHealth = clamp(curHealth, 0, maxHealth)
 	if curHealth == 0:
-		emit_signal("healthDepleted")
+		healthDepleted.emit()
+	elif health_raised:
+		healthRaised.emit()
+	else:
+		healthLowered.emit()

@@ -1,65 +1,72 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgts36gx0iuad"]
+[gd_scene load_steps=12 format=3 uid="uid://bgts36gx0iuad"]
 
-[ext_resource type="PackedScene" uid="uid://butc3kduwiktx" path="res://assets/characters/formic-soldier.block.glb" id="1_727v6"]
 [ext_resource type="Script" path="res://scripts/state machine/enemy_formic_soldier.gd" id="1_g2rv5"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_87gic"]
+[ext_resource type="Script" path="res://scripts/state machine/fsmcore.gd" id="2_pl7hg"]
+[ext_resource type="PackedScene" uid="uid://butc3kduwiktx" path="res://assets/characters/formic-soldier.block.glb" id="2_q4bxl"]
+[ext_resource type="Script" path="res://scripts/state machine/enemystate_wander.gd" id="3_sbtt0"]
 [ext_resource type="Script" path="res://scripts/damage_taker.gd" id="3_t1y7p"]
-[ext_resource type="Script" path="res://scripts/state machine/fsmcore.gd" id="5_ux06c"]
-[ext_resource type="Script" path="res://scripts/state machine/enemystate_wander.gd" id="6_nv1j6"]
-[ext_resource type="Script" path="res://scripts/state machine/enemystate_chase.gd" id="7_i51ry"]
-[ext_resource type="Script" path="res://scripts/player_sensor.gd" id="7_odjy3"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_4vs3w"]
-radius = 8.0
+[ext_resource type="Script" path="res://scripts/state machine/enemystate_chase.gd" id="4_67rl0"]
+[ext_resource type="Script" path="res://scripts/state machine/enemystate_pain.gd" id="5_sup6o"]
+[ext_resource type="Script" path="res://scripts/state machine/enemystate_death.gd" id="6_xx62h"]
+[ext_resource type="PackedScene" uid="uid://c3ahbd251yt34" path="res://scenes/components/senses.tscn" id="10_p52ho"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2j05"]
 radius = 1.0
 height = 3.5
 
-[node name="Enemy-FormicSoldier" type="CharacterBody3D"]
+[node name="Enemy-FormicSoldier" type="CharacterBody3D" node_paths=PackedStringArray("idleState", "activeState", "painState", "deathState")]
+slide_on_ceiling = false
 script = ExtResource("1_g2rv5")
-
-[node name="formic-soldier_block" parent="." instance=ExtResource("1_727v6")]
-
-[node name="Health" type="Node" parent="."]
-script = ExtResource("2_87gic")
-
-[node name="DamageTaker" type="Node" parent="."]
-script = ExtResource("3_t1y7p")
-
-[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
-script = ExtResource("5_ux06c")
-current_state = NodePath("EnemyWanderState")
-
-[node name="EnemyWanderState" type="Node" parent="FSM" node_paths=PackedStringArray("character_body", "navAgent")]
-script = ExtResource("6_nv1j6")
-character_body = NodePath("../..")
-navAgent = NodePath("../../NavigationAgent3D")
-movement_speed = 0.1
-
-[node name="EnemyChaseState" type="Node" parent="FSM"]
-script = ExtResource("7_i51ry")
-
-[node name="Senses" type="Node3D" parent="."]
-script = ExtResource("7_odjy3")
-
-[node name="SightArea" type="Area3D" parent="Senses"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Senses/SightArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-shape = SubResource("SphereShape3D_4vs3w")
-
-[node name="RaycastPoint" type="Node3D" parent="Senses"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9597, 2.00774)
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
-debug_path_custom_color = Color(1, 0, 0, 1)
+idleState = NodePath("FSM/EnemyWanderState")
+activeState = NodePath("FSM/EnemyChaseState")
+painState = NodePath("FSM/EnemyPainState")
+deathState = NodePath("FSM/EnemyDeathState")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_h2j05")
 
+[node name="formic-soldier_block" parent="." instance=ExtResource("2_q4bxl")]
+
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_pl7hg")
+current_state = NodePath("EnemyWanderState")
+
+[node name="EnemyWanderState" type="Node" parent="FSM" node_paths=PackedStringArray("character_body", "navAgent")]
+script = ExtResource("3_sbtt0")
+character_body = NodePath("../..")
+navAgent = NodePath("../../NavigationAgent3D")
+
+[node name="EnemyChaseState" type="Node" parent="FSM" node_paths=PackedStringArray("player_sensor", "nav_agent", "character_body")]
+script = ExtResource("4_67rl0")
+player_sensor = NodePath("../../Senses")
+nav_agent = NodePath("../../NavigationAgent3D")
+character_body = NodePath("../..")
+attack_range = 5.0
+chase_speed = 5.0
+rotation_speed = 270.0
+
+[node name="EnemyPainState" type="Node" parent="FSM" node_paths=PackedStringArray("player_sensor")]
+script = ExtResource("5_sup6o")
+player_sensor = NodePath("../../Senses")
+
+[node name="EnemyDeathState" type="Node" parent="FSM" node_paths=PackedStringArray("character_body")]
+script = ExtResource("6_xx62h")
+character_body = NodePath("../..")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_87gic")
+maxHealth = 20
+
+[node name="DamageTaker" type="Node" parent="."]
+script = ExtResource("3_t1y7p")
+
+[node name="Senses" parent="." instance=ExtResource("10_p52ho")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[connection signal="healthDepleted" from="Health" to="." method="health_depleted"]
+[connection signal="healthLowered" from="Health" to="." method="damage_taken"]
 [connection signal="damage_taken" from="DamageTaker" to="Health" method="damage"]
-[connection signal="body_entered" from="Senses/SightArea" to="Senses" method="_on_sight_area_body_entered"]
-[connection signal="body_exited" from="Senses/SightArea" to="Senses" method="_on_sight_area_body_exited"]

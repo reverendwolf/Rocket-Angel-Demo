@@ -25,7 +25,6 @@ func enter_state():
 	navAgent.set_target_position(startPosition + \
 	Vector3(randomDir.x, character_body.global_position.y, randomDir.y))
 	
-	#character_body.velocity = Vector3(randomDir.x, 0, randomDir.y)
 	timer.wait_time = randf_range(3.5, 7.5)
 	timer.start()
 	await timer.timeout
@@ -40,8 +39,8 @@ func _physics_process(delta):
 		return
 	
 	var nextPoint : Vector3 = navAgent.get_next_path_position()
-	var direction : Vector3 = (nextPoint - character_body.global_position).normalized()
-	character_body.velocity = direction * movement_speed
+	var direction : Vector3 = (nextPoint - character_body.global_position).normalized() * movement_speed
+	direction += Vector3.DOWN * 9.81
+	character_body.velocity = direction
 	character_body.rotation.y = lerp_angle(character_body.rotation.y, atan2(direction.x, direction.z), delta * deg_to_rad(rotation_speed))
 	character_body.move_and_slide()
-	

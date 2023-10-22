@@ -43,7 +43,6 @@ func _physics_process(_delta):
 			
 			if raycastHit:
 				if raycastHit.collider == player_ref and not player_seen:
-					print("Player Seen")
 					player_seen = true
 					PlayerSeen.emit()
 			
@@ -60,9 +59,23 @@ func _on_sight_area_body_entered(body):
 
 func _on_sight_area_body_exited(body):
 	if body.is_in_group("PlayerOnly"):
-		print("Player Lost")
 		if player_seen:
 			PlayerLost.emit()
 		player_ref = null
 		player_seen = false
 		
+func get_player_position() -> Vector3:
+	if player_ref:
+		return player_ref.global_position
+	else:
+		return Vector3.ZERO
+
+func get_player_distance() -> float:
+	if player_ref:
+		return global_position.distance_to(player_ref.global_position)
+	else:
+		return -1
+		
+func force_player_reference():
+	player_ref = get_tree().get_first_node_in_group("PlayerOnly")
+	#don't emit a signal here, it's a special case

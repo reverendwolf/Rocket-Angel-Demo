@@ -48,7 +48,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.7
 shape = SubResource("CapsuleShape3D_t4d6c")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 1.75
 one_shot = true
 autostart = true
 
@@ -80,3 +79,4 @@ scale_amount_curve = SubResource("Curve_pudti")
 color_ramp = SubResource("Gradient_1u12a")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

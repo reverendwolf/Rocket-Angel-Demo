@@ -29,10 +29,12 @@ default_font_size = 24
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_itt28"]
 height = 0.5
 
-[node name="Player" type="CharacterBody3D" groups=["PlayerOnly"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("gun_holder") groups=["PlayerOnly"]]
+collision_layer = 3
 floor_max_angle = 0.837758
 safe_margin = 0.005
 script = ExtResource("1_se3li")
+gun_holder = NodePath("Head/Camera3D/GunHolder")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -74,11 +76,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 fov = 60.0
 far = 40.0
 
+[node name="InteractionRayCast" type="RayCast3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0878913, 0)
+target_position = Vector3(0, 0, -1.25)
+collision_mask = 16
+collide_with_areas = true
+debug_shape_custom_color = Color(0.572549, 0, 0, 1)
+
 [node name="GunHolder" type="Node3D" parent="Head/Camera3D"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 
 [node name="rocket-redeemer" parent="Head/Camera3D/GunHolder" instance=ExtResource("8_u78yc")]
-transform = Transform3D(0.48723, 0, 0, 0, 0.48723, 0, 0, 0, 0.48723, -0.118915, -0.14086, 0.239825)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.4, -0.12421, -0.121041, 0.241867)
 
 [node name="blasterG" parent="Head/Camera3D/GunHolder" instance=ExtResource("2_61dwy")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00802468, -0.134201, 0.245849)

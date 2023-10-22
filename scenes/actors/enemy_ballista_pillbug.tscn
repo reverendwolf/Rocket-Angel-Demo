@@ -1,20 +1,52 @@
-[gd_scene load_steps=6 format=3 uid="uid://d33xosq4vkl53"]
+[gd_scene load_steps=12 format=3 uid="uid://d33xosq4vkl53"]
 
-[ext_resource type="Script" path="res://scripts/destructible_object.gd" id="1_wsjy1"]
+[ext_resource type="Script" path="res://scripts/state machine/enemy_formic_soldier.gd" id="1_wiwwc"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_oqpfu"]
 [ext_resource type="Script" path="res://scripts/damage_taker.gd" id="3_5p8x6"]
+[ext_resource type="Script" path="res://scripts/state machine/enemystate_pain.gd" id="3_15xwv"]
+[ext_resource type="Script" path="res://scripts/state machine/fsmcore.gd" id="3_b5yy5"]
+[ext_resource type="Script" path="res://scripts/state machine/pillbugstate_idle.gd" id="4_8d0ab"]
+[ext_resource type="Script" path="res://scripts/state machine/enemystate_death.gd" id="4_hpefw"]
 [ext_resource type="PackedScene" uid="uid://kusgpibdg2e5" path="res://assets/characters/ballista-pillbug.block.glb" id="4_r200x"]
+[ext_resource type="Script" path="res://scripts/state machine/pillbugstate_active.gd" id="5_ojx46"]
+[ext_resource type="PackedScene" uid="uid://c3ahbd251yt34" path="res://scenes/components/senses.tscn" id="5_pnxgy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2j05"]
 radius = 2.0
 height = 5.0
 
-[node name="Enemy-BallistaPillbug" type="CharacterBody3D"]
-script = ExtResource("1_wsjy1")
+[node name="Enemy-BallistaPillbug" type="CharacterBody3D" node_paths=PackedStringArray("idleState", "activeState", "painState", "deathState")]
+script = ExtResource("1_wiwwc")
+idleState = NodePath("FSM/PillbugIdle")
+activeState = NodePath("FSM/PillbugActive")
+painState = NodePath("FSM/EnemyPain")
+deathState = NodePath("FSM/EnemyDeath")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 2.5, 0)
 shape = SubResource("CapsuleShape3D_h2j05")
+
+[node name="ballista-pillbug_block" parent="." instance=ExtResource("4_r200x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
+
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("3_b5yy5")
+current_state = NodePath("PillbugIdle")
+
+[node name="PillbugIdle" type="Node" parent="FSM" node_paths=PackedStringArray("character_body")]
+script = ExtResource("4_8d0ab")
+character_body = NodePath("../..")
+
+[node name="PillbugActive" type="Node" parent="FSM"]
+script = ExtResource("5_ojx46")
+
+[node name="EnemyPain" type="Node" parent="FSM" node_paths=PackedStringArray("player_sensor")]
+script = ExtResource("3_15xwv")
+player_sensor = NodePath("../../Senses")
+
+[node name="EnemyDeath" type="Node" parent="FSM" node_paths=PackedStringArray("character_body")]
+script = ExtResource("4_hpefw")
+character_body = NodePath("../..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_oqpfu")
@@ -22,8 +54,8 @@ script = ExtResource("2_oqpfu")
 [node name="DamageTaker" type="Node" parent="."]
 script = ExtResource("3_5p8x6")
 
-[node name="ballista-pillbug_block" parent="." instance=ExtResource("4_r200x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
+[node name="Senses" parent="." instance=ExtResource("5_pnxgy")]
 
-[connection signal="healthDepleted" from="Health" to="." method="_on_health_depleted"]
+[connection signal="healthDepleted" from="Health" to="." method="health_depleted"]
+[connection signal="healthLowered" from="Health" to="." method="damage_taken"]
 [connection signal="damage_taken" from="DamageTaker" to="Health" method="damage"]
