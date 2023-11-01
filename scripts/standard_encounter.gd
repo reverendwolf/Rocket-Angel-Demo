@@ -7,7 +7,7 @@ var child_count = 0
 func _ready():
 	child_count = get_child_count()
 	for child in get_children():
-		child.tree_exited.connect(_child_removed)
+		child.tree_exiting.connect(_child_removed)
 
 func _child_removed():
 	child_count -= 1

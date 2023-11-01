@@ -19,6 +19,7 @@ func show_monologue(speaker : String, monologue: String):
 	if monologue_working:
 		dialogueText.visible_characters = len(dialogueText.get_parsed_text())
 		monologue_working = false
+		messageTimer.stop()
 		await get_tree().process_frame
 	
 	s_name = "[center]" + speaker + "[/center]"
@@ -41,7 +42,8 @@ func display_text():
 			await get_tree().create_timer(characterTime).timeout
 	
 	if monologue_working:
-		await get_tree().create_timer(4).timeout
+		messageTimer.start()
+		await messageTimer.timeout
 	
 	visible = false
 	monologue_working = false;

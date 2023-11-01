@@ -3,8 +3,10 @@ extends Node3D
 
 signal PlayerSeen
 signal PlayerLost
+signal PlayerInRange
 
 var player_seen : bool = false
+var player_in_range : bool = false
 var player_ref : CharacterBody3D
 
 @onready var look_point : Node3D = $RaycastPoint
@@ -54,6 +56,8 @@ func _on_sight_area_body_entered(body):
 	if body.is_in_group("PlayerOnly"):
 		player_ref = body
 		player_seen = false
+		player_in_range = true
+		PlayerInRange.emit()
 
 
 
@@ -63,6 +67,7 @@ func _on_sight_area_body_exited(body):
 			PlayerLost.emit()
 		player_ref = null
 		player_seen = false
+		player_in_range = false
 		
 func get_player_position() -> Vector3:
 	if player_ref:

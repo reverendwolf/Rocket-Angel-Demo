@@ -1,16 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd6y4g5cksn2b"]
+[gd_scene load_steps=8 format=3 uid="uid://cd6y4g5cksn2b"]
 
-[ext_resource type="Script" path="res://scripts/destructible_object.gd" id="1_xaqla"]
+[ext_resource type="Script" path="res://scripts/state machine/enemy_hunter_wasp.gd" id="1_2wmmo"]
+[ext_resource type="PackedScene" uid="uid://b87fl8oirfoli" path="res://scenes/components/wasp_shot.tscn" id="2_1vk70"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_yh374"]
 [ext_resource type="Script" path="res://scripts/damage_taker.gd" id="4_jlt64"]
 [ext_resource type="PackedScene" uid="uid://dvs4jnvguqucj" path="res://assets/characters/hunter-wasp.block.glb" id="4_mqbjn"]
+[ext_resource type="PackedScene" uid="uid://c3ahbd251yt34" path="res://scenes/components/senses.tscn" id="5_ovmt4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2j05"]
 radius = 0.7
 
-[node name="Enemy-HunterWasp" type="CharacterBody3D"]
+[node name="Enemy-HunterWasp" type="CharacterBody3D" node_paths=PackedStringArray("shootPoint")]
 motion_mode = 1
-script = ExtResource("1_xaqla")
+script = ExtResource("1_2wmmo")
+float_speed = 1.5
+projectile = ExtResource("2_1vk70")
+shootPoint = NodePath("ShootPoint")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.4, 0)
@@ -18,11 +23,18 @@ shape = SubResource("CapsuleShape3D_h2j05")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_yh374")
+maxHealth = 3
 
 [node name="DamageTaker" type="Node" parent="."]
 script = ExtResource("4_jlt64")
 
 [node name="hunter-wasp_block" parent="." instance=ExtResource("4_mqbjn")]
 
+[node name="Senses" parent="." instance=ExtResource("5_ovmt4")]
+
+[node name="ShootPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.586982, 0.768666)
+
 [connection signal="healthDepleted" from="Health" to="." method="_on_health_depleted"]
 [connection signal="damage_taken" from="DamageTaker" to="Health" method="damage"]
+[connection signal="PlayerSeen" from="Senses" to="." method="update_behavior"]

@@ -4,17 +4,32 @@ extends Node
 @export var object_holder : Node
 @export var objective_label : ColorRect
 @export var objective_label_timer : Timer
+@export var boss_remote_transform : RemoteTransform3D
+@export var armor_queen : ArmorQueen
+@export var boss_path : Path3D
 
+var boss_node_parent : Node
 var closest_node : Node3D
 var closest_behind : bool
 var show_closest : bool
 
+@export var boss_point : Node3D
+
 var encountersResolved : int = 0
 var luresActivated : int = 0
 
+var quips : Array = [
+	"Hey! Keep your gross goop off my suit!",
+	"Otis owes me pizza and whiskey after this.",
+	"Oh, I'm so pretty!",
+	"Scratch one bogey. Buggy? Scratch one buggy!",
+	"If you were as strong as you are ugly, I'd be in real trouble",
+	"Your face, your ass, what's the difference?",
+	"Score one more for the Rocket Angel!"
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	call_deferred("starting_message")
 	objective_label.visible = false
 	pass
 
@@ -59,34 +74,35 @@ func show_nearest_objective():
 	show_closest = false
 	pass
 	
-func starting_message():
-	await get_tree().create_timer(0.25).timeout
-	monologue.show_monologue("System Message","Main System engaging combat mode.	")
-	
 func mission_encounter_resolved():
 	encountersResolved += 1
 	encounter_progress()
 
 func encounter_progress():
+	
 	if encountersResolved == 1:
-		monologue.show_monologue("Otis","That's it! Focus on those Heavy Pillbugs, Angel.")
+		monologue.show_monologue("Otis","Elimination confirmed. Several targets remain, get at them, Angel.")
+		#await get_tree().create_timer(6).timeout
+		#activate_boss()
 		
 	if encountersResolved == 4:
-		monologue.show_monologue("Otis","That's most of them gone. Keep it up!")
+		monologue.show_monologue("Otis","Half of the targets remain. Keep it going!")
 		
 	if encountersResolved == 7:
-		monologue.show_monologue("Otis","They're almost clear, Angel.")
+		monologue.show_monologue("Otis","One target remains, Angel. You're almost home.")
 		
 	if encountersResolved == 8:
 		if luresActivated < 4:
-			monologue.show_monologue("Otis","That's all of them in that sector. Pack it up and return to base.")
-			await get_tree().create_timer(8).timeout
-			monologue.show_monologue("System Message","Objective Achieved. System switched to Normal Mode")
+			monologue.show_monologue("Otis","Objective achieved. Pack it up and return to base.")
 		else:
-			monologue.show_monologue("Otis","That's all of them in that sector... Wait...")
-			await get_tree().create_timer(6).timeout
-			monologue.show_monologue("Otis","Heads up, Angel! That massive enemy is closing in! It's a Formic Queen!")
+			activate_boss()
 
+func activate_boss():
+	monologue.show_monologue("Otis","Objective achieved. Pack it up and... Wait...")
+	await get_tree().create_timer(7).timeout
+	armor_queen.start_following(boss_path.curve.get_point_position(0))
+	monologue.show_monologue("Otis","Angel! That massive enemy is closing in! It's a Formic Queen!")
+	
 func activate_formic_lure():
 	if encountersResolved < 8:
 		luresActivated += 1
@@ -94,13 +110,18 @@ func activate_formic_lure():
 	
 func lure_progress():
 	if luresActivated == 1:
-		monologue.show_monologue("Otis","What is that? It's generating some sort of sub-sonic frequency.")
+		monologue.show_monologue("Otis","That panel is generating some sort of sub-sonic frequency. I'll look into it from here.")
 	
 	if luresActivated == 2:
-		monologue.show_monologue("Otis","The frequency is growing in power. I don't know what it means yet, but exercise caution.")
+		monologue.show_monologue("Otis","Formic activity in the surrounding sectors is shifting. Be careful, Angel")
 
 	if luresActivated == 3:
-		monologue.show_monologue("Otis","Something is happening in the surrounding sectors, Angel. Formic activity is shifting. Mop things up quick!")
+		monologue.show_monologue("Otis","Angel, those terminals are Formic Lures. You're affecting the Formic traffic in the surrounding sectors.")
 		
 	if luresActivated == 4:
-		monologue.show_monologue("Otis","Angel, I don't know what you've done, but a massive heat signature is headed your way. Try to get out of there before it arrives?")
+		monologue.show_monologue("Otis","A massive heat signature is headed your way, Angel. Perhaps you can get out of there before it arrives?")
+
+func boss_defeated():
+	if encountersResolved == 8 and luresActivated == 4:
+		monologue.show_monologue("Otis","Excellent job, Angel! Pallas Athena can clear up the rest. Let's get you home.")
+	

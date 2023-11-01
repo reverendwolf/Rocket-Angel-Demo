@@ -39,7 +39,6 @@ func explode():
 	queue_free()
 
 func _on_body_entered(body):
-	
 	if body == projectile_owner:
 		return
 	

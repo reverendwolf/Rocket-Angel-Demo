@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d33xosq4vkl53"]
+[gd_scene load_steps=13 format=3 uid="uid://d33xosq4vkl53"]
 
 [ext_resource type="Script" path="res://scripts/state machine/enemy_formic_soldier.gd" id="1_wiwwc"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_oqpfu"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://kusgpibdg2e5" path="res://assets/characters/ballista-pillbug.block.glb" id="4_r200x"]
 [ext_resource type="Script" path="res://scripts/state machine/pillbugstate_active.gd" id="5_ojx46"]
 [ext_resource type="PackedScene" uid="uid://c3ahbd251yt34" path="res://scenes/components/senses.tscn" id="5_pnxgy"]
+[ext_resource type="PackedScene" uid="uid://dnqdmfyi8isxe" path="res://scenes/components/pillbug_shot.tscn" id="6_txcl4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2j05"]
 radius = 2.0
@@ -33,12 +34,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
 script = ExtResource("3_b5yy5")
 current_state = NodePath("PillbugIdle")
 
-[node name="PillbugIdle" type="Node" parent="FSM" node_paths=PackedStringArray("character_body")]
+[node name="PillbugIdle" type="Node" parent="FSM" node_paths=PackedStringArray("character_body", "shoot_point")]
 script = ExtResource("4_8d0ab")
 character_body = NodePath("../..")
+shoot_point = NodePath("../../ShootPoint")
+projectile = ExtResource("6_txcl4")
 
-[node name="PillbugActive" type="Node" parent="FSM"]
+[node name="PillbugActive" type="Node" parent="FSM" node_paths=PackedStringArray("character_body", "player_sensor", "shoot_point")]
 script = ExtResource("5_ojx46")
+character_body = NodePath("../..")
+player_sensor = NodePath("../../Senses")
+shoot_point = NodePath("../../ShootPoint")
+projectile = ExtResource("6_txcl4")
 
 [node name="EnemyPain" type="Node" parent="FSM" node_paths=PackedStringArray("player_sensor")]
 script = ExtResource("3_15xwv")
@@ -50,11 +57,15 @@ character_body = NodePath("../..")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_oqpfu")
+maxHealth = 35
 
 [node name="DamageTaker" type="Node" parent="."]
 script = ExtResource("3_5p8x6")
 
 [node name="Senses" parent="." instance=ExtResource("5_pnxgy")]
+
+[node name="ShootPoint" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.02354, 2.11774)
 
 [connection signal="healthDepleted" from="Health" to="." method="health_depleted"]
 [connection signal="healthLowered" from="Health" to="." method="damage_taken"]

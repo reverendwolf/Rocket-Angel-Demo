@@ -1,0 +1,123 @@
+[gd_scene load_steps=11 format=3 uid="uid://dd2b2dfw3osli"]
+
+[ext_resource type="Script" path="res://scripts/enemy_armor_queen.gd" id="1_t7j2n"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="2_bgr0b"]
+[ext_resource type="PackedScene" uid="uid://bxjhmro2u4umb" path="res://assets/characters/armor-wasp.block.glb" id="2_xfxdg"]
+[ext_resource type="Script" path="res://scripts/damage_taker.gd" id="3_l8dg0"]
+[ext_resource type="Script" path="res://scripts/queen_turret.gd" id="5_chg6h"]
+[ext_resource type="PackedScene" uid="uid://c3ahbd251yt34" path="res://scenes/components/senses.tscn" id="6_82mqg"]
+[ext_resource type="PackedScene" uid="uid://dnqdmfyi8isxe" path="res://scenes/components/pillbug_shot.tscn" id="6_ltcnf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bfibc"]
+radius = 3.0
+height = 15.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1jy4"]
+size = Vector3(6.50084, 1, 9.44901)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mu4ke"]
+radius = 35.0
+
+[node name="Enemy-ArmorQueen" type="CharacterBody3D" node_paths=PackedStringArray("player_sensor", "turret_L", "turret_R")]
+motion_mode = 1
+script = ExtResource("1_t7j2n")
+player_sensor = NodePath("Senses")
+follow_speed = 4.5
+turret_L = NodePath("TurretL")
+turret_R = NodePath("TurretR")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.343446, -1.63505)
+shape = SubResource("CapsuleShape3D_bfibc")
+
+[node name="armor-wasp_block" parent="." instance=ExtResource("2_xfxdg")]
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_bgr0b")
+maxHealth = 125
+curHealth = 125
+
+[node name="DamageTaker" type="Node" parent="."]
+script = ExtResource("3_l8dg0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.2, -4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_e1jy4")
+
+[node name="DamageTaker" type="Node" parent="StaticBody3D"]
+script = ExtResource("3_l8dg0")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.2, -4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_e1jy4")
+
+[node name="DamageTaker" type="Node" parent="StaticBody3D2"]
+script = ExtResource("3_l8dg0")
+
+[node name="TurretL" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -1, -4)
+script = ExtResource("5_chg6h")
+projectile = ExtResource("6_ltcnf")
+
+[node name="TurretR" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -1, -4)
+script = ExtResource("5_chg6h")
+projectile = ExtResource("6_ltcnf")
+
+[node name="Senses" parent="." instance=ExtResource("6_82mqg")]
+
+[node name="CollisionShape3D" parent="Senses/SightArea" index="0"]
+shape = SubResource("SphereShape3D_mu4ke")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Boss Health" type="ProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -49.0
+offset_right = 160.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 125.0
+step = 1.0
+value = 45.0
+show_percentage = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -182.0
+offset_top = -49.0
+offset_right = 186.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+text = "[center]Formic Construct: Armor Queen"
+
+[connection signal="healthDepleted" from="Health" to="." method="_on_health_depleted"]
+[connection signal="damage_taken" from="DamageTaker" to="Health" method="damage"]
+[connection signal="damage_taken" from="StaticBody3D/DamageTaker" to="Health" method="damage"]
+[connection signal="damage_taken" from="StaticBody3D2/DamageTaker" to="Health" method="damage"]
+
+[editable path="Senses"]

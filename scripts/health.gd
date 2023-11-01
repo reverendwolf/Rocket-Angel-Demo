@@ -29,3 +29,7 @@ func health_check(health_raised):
 		healthRaised.emit()
 	else:
 		healthLowered.emit()
+
+func get_health_pct() -> float:
+	print(str(float(curHealth) / float(maxHealth)))
+	return float(curHealth) / float(maxHealth)

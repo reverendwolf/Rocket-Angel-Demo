@@ -13,6 +13,11 @@ var attacking : bool = false
 var chase_timer : float = 0.0
 var timer : Timer
 
+@export var melee_point : Node3D
+@export var shoot_point : Node3D
+@export var melee_projectile : PackedScene
+@export var ranged_projectile : PackedScene
+
 func _ready():
 	super._ready()
 	timer = Timer.new()
@@ -40,15 +45,27 @@ func enter_state():
 	super.enter_state()
 	attacking = false
 	
+	#if in attack range, melee
+	#else, choose between advancing or shooting
+	
 	if player_sensor.get_player_distance() < attack_range:
 		attacking = true
+		melee_attack()
 		timer.wait_time = 1.5
 		timer.start()
 		await timer.timeout
 		stateComplete.emit()
 	else:
-		chase_timer = randf_range(chase_max_time * 0.5, chase_max_time)
-		nav_agent.set_target_position(player_sensor.get_player_position())
+		if randf() <= 0.25:
+			attacking = true
+			ranged_attack()
+			timer.wait_time = 1.5
+			timer.start()
+			await timer.timeout
+			stateComplete.emit()
+		else:
+			chase_timer = randf_range(chase_max_time * 0.5, chase_max_time)
+			nav_agent.set_target_position(player_sensor.get_player_position())
 
 func exit_state():
 	super.exit_state()
@@ -56,3 +73,22 @@ func exit_state():
 #check range to player (senses reference)
 #if we are close (within range of an attack), play an attack animation, wait, singal completion
 #if we are not close, path to a spot near the player, wait 0.5-1 seconds, signal completion
+
+func melee_attack():
+	var obj = melee_projectile.instantiate() as Projectile
+	get_tree().root.add_child(obj)
+	obj.position = melee_point.global_position
+	obj.global_rotation = melee_point.global_rotation
+	obj.assign_owner(character_body)
+	
+
+func ranged_attack():
+	var gauss_x = (randf() + randf() - 1) * 3.0
+	var gauss_z = (randf() + randf() - 1) * 3.0
+	shoot_point.look_at(player_sensor.get_player_position() + Vector3(gauss_x, 1, gauss_z))
+	var obj = ranged_projectile.instantiate() as Projectile
+	get_tree().root.add_child(obj)
+	obj.position = shoot_point.global_position
+	obj.global_rotation = shoot_point.global_rotation
+	obj.assign_owner(character_body)
+	
