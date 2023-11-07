@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d33xosq4vkl53"]
+[gd_scene load_steps=33 format=3 uid="uid://d33xosq4vkl53"]
 
 [ext_resource type="Script" path="res://scripts/state machine/enemy_formic_soldier.gd" id="1_wiwwc"]
 [ext_resource type="Shader" path="res://shaders/ps1-lit.gdshader" id="2_dnyon"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c3ahbd251yt34" path="res://scenes/components/senses.tscn" id="5_pnxgy"]
 [ext_resource type="PackedScene" uid="uid://dnqdmfyi8isxe" path="res://scenes/components/pillbug_shot.tscn" id="6_txcl4"]
 [ext_resource type="PackedScene" uid="uid://c5suebfbxwvn" path="res://scenes/components/bugshot.tscn" id="7_vnakf"]
+[ext_resource type="PackedScene" uid="uid://c26achhy75rl8" path="res://scenes/components/blood_death.tscn" id="10_hky5u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2j05"]
 radius = 1.6
@@ -299,14 +300,14 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, -7.10543e-15, 2.38419e-07, -7.10543e-15, 1, 5.96046e-08, -2.38419e-07, -5.96046e-08, 1, 0, 0, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0.054364, -0.00165509, -0.0303876, 0.998057)
-bones/0/scale = Vector3(0.991491, 0.991491, 0.991491)
+bones/0/rotation = Quaternion(0.057102, -0.00173845, -0.0303829, 0.997904)
+bones/0/scale = Vector3(0.993315, 0.993315, 0.993315)
 bones/1/name = "Head"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, -1.38299e-07, 2.82629e-07, 2.76599e-07, 0.814567, -0.58007, -1.49997e-07, 0.58007, 0.814567, 0, 1.94264, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 1.94264, 0)
-bones/1/rotation = Quaternion(0.413358, 0.0271695, -0.0384251, 0.909352)
+bones/1/rotation = Quaternion(0.411113, 0.0260931, -0.0387233, 0.910388)
 bones/1/scale = Vector3(1, 1, 1)
 
 [node name="PillbugBody" type="MeshInstance3D" parent="PillbugArm/Skeleton3D"]
@@ -351,6 +352,7 @@ animTree = NodePath("../../AnimationTree")
 [node name="EnemyDeath" type="Node" parent="FSM" node_paths=PackedStringArray("character_body", "animTree")]
 script = ExtResource("4_hpefw")
 character_body = NodePath("../..")
+death_package = ExtResource("10_hky5u")
 animTree = NodePath("../../AnimationTree")
 
 [node name="Health" type="Node" parent="."]

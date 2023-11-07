@@ -3,6 +3,7 @@ extends Node3D
 class_name PlayerGun
 
 @export var shoot_point : Node3D
+@export var audio_source_shoot : AudioStreamPlayer3D
 
 @export var player_parent : Node3D
 @export var normal_rocket : PackedScene
@@ -53,6 +54,9 @@ func _shoot_primary():
 	magazine -= 1
 	shot_cooldown = SHOT_COOLDOWN
 	_update_ammo_label()
+	if audio_source_shoot:
+		audio_source_shoot.pitch_scale = randf_range(0.9, 1.15)
+		audio_source_shoot.play()
 	var r = normal_rocket.instantiate() as Projectile
 	r.position = shoot_point.global_position
 	r.basis = shoot_point.global_transform.basis
@@ -63,6 +67,9 @@ func _shoot_secondary():
 	shot_cooldown = SHOT_COOLDOWN * 2
 	secondary -= 1
 	_update_ammo_label()
+	if audio_source_shoot:
+		audio_source_shoot.pitch_scale = randf_range(0.9, 1.15)
+		audio_source_shoot.play()
 	var r = super_rocket.instantiate() as Projectile
 	r.position = shoot_point.global_position
 	r.basis = shoot_point.global_transform.basis

@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://brplm784cg4hj"]
+[gd_scene load_steps=7 format=3 uid="uid://brplm784cg4hj"]
 
 [ext_resource type="Texture2D" uid="uid://j8wdhvqwu123" path="res://assets/textures/exp2_0.png" id="1_awb74"]
+[ext_resource type="AudioStream" uid="uid://c7ftup52dhuve" path="res://assets/audio/effects/rocket-pop-2.wav" id="2_tdfw8"]
+[ext_resource type="Script" path="res://scripts/simple_audio_variator.gd" id="3_tm17c"]
 
 [sub_resource type="Animation" id="Animation_2qokb"]
 tracks/0/type = "value"
@@ -81,3 +83,10 @@ autoplay = "explosion_sprite"
 libraries = {
 "": SubResource("AnimationLibrary_7swce")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_tdfw8")
+unit_size = 15.0
+autoplay = true
+bus = &"Effects"
+script = ExtResource("3_tm17c")

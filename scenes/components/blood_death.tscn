@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c26achhy75rl8"]
+[gd_scene load_steps=10 format=3 uid="uid://c26achhy75rl8"]
 
 [ext_resource type="Texture2D" uid="uid://cdlo87k6svqpa" path="res://assets/textures/blood-1.png" id="1_j58mk"]
 [ext_resource type="ArrayMesh" uid="uid://xx230jet5olg" path="res://assets/objects/BugParticle05.obj" id="2_y2sja"]
 [ext_resource type="ArrayMesh" uid="uid://0rosnjc8qoko" path="res://assets/objects/BugParticle06.obj" id="3_ka05x"]
+[ext_resource type="AudioStream" uid="uid://g7s3745egtx0" path="res://assets/audio/effects/bug-explosion.wav" id="4_5b4w2"]
+[ext_resource type="Script" path="res://scripts/simple_audio_variator.gd" id="5_2omug"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grpeb"]
 transparency = 1
@@ -146,3 +148,9 @@ autoplay = "asplode"
 libraries = {
 "": SubResource("AnimationLibrary_ceo8r")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_5b4w2")
+autoplay = true
+bus = &"Effects"
+script = ExtResource("5_2omug")

@@ -7,7 +7,7 @@ class_name Projectile
 
 @export var damage_dealer : DamageDealer
 
-@export var tail : Node3D
+@export var tail : CPUParticles3D
 
 var projectile_owner : Node
 
@@ -33,8 +33,8 @@ func explode():
 		get_tree().root.add_child(e)
 	
 	if tail:
-		remove_child(tail)
-		get_tree().root.add_child(tail)
+		tail.reparent(get_tree().get_first_node_in_group("CurrentScene"))
+		tail.emitting = false
 		
 	queue_free()
 

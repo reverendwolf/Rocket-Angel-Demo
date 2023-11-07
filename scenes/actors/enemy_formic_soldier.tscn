@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bgts36gx0iuad"]
+[gd_scene load_steps=42 format=3 uid="uid://bgts36gx0iuad"]
 
 [ext_resource type="Script" path="res://scripts/state machine/enemy_formic_soldier.gd" id="1_g2rv5"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_87gic"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/state machine/enemystate_death.gd" id="6_xx62h"]
 [ext_resource type="PackedScene" uid="uid://ci5vvf6ee8xrf" path="res://scenes/components/soldier_shot.tscn" id="7_akkos"]
 [ext_resource type="PackedScene" uid="uid://c3ahbd251yt34" path="res://scenes/components/senses.tscn" id="10_p52ho"]
+[ext_resource type="PackedScene" uid="uid://c26achhy75rl8" path="res://scenes/components/blood_death.tscn" id="10_x5fxa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2j05"]
 radius = 0.75
@@ -893,22 +894,22 @@ bones/1/name = "Body"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, 0, 0, 0, -0.196116, 0.980581, 0, -0.980581, -0.196116, 0, 0.8, 0.4)
 bones/1/enabled = true
-bones/1/position = Vector3(0, 0.748523, 0.359963)
-bones/1/rotation = Quaternion(-0.752695, -0.0229171, -0.0200238, 0.657666)
+bones/1/position = Vector3(-2.54522e-18, 0.799841, 0.399877)
+bones/1/rotation = Quaternion(-0.772923, -0.0235329, -0.0192963, 0.63377)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Head"
 bones/2/parent = 1
 bones/2/rest = Transform3D(1, 0, -3.25842e-07, 6.39027e-08, -0.980581, 0.196116, -3.19514e-07, -0.196116, -0.980581, 0, 1.3411e-07, 1.49012e-08)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 1.3411e-07, 1.49012e-08)
-bones/2/rotation = Quaternion(0.998961, 0.0411847, 0.00633062, 0.018448)
+bones/2/rotation = Quaternion(0.994338, 0.0402977, 0.00399416, -0.0982471)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Arm.L"
 bones/3/parent = 2
 bones/3/rest = Transform3D(0.416761, 0.89645, -0.15062, -0.899568, 0.430556, 0.0734764, 0.130718, 0.104871, 0.985857, 0.368408, 0.54303, 0.4)
 bones/3/enabled = true
-bones/3/position = Vector3(0.368393, 0.545017, 0.397778)
-bones/3/rotation = Quaternion(0.187952, -0.00791958, -0.336479, 0.92271)
+bones/3/position = Vector3(0.368408, 0.543055, 0.399972)
+bones/3/rotation = Quaternion(-0.00952015, -0.0833762, -0.328703, 0.940698)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Claw.L"
 bones/4/parent = 3
@@ -921,8 +922,8 @@ bones/5/name = "Arm.R"
 bones/5/parent = 2
 bones/5/rest = Transform3D(0.416761, -0.89645, 0.150621, 0.899568, 0.430556, 0.0734763, -0.130719, 0.104872, 0.985857, -0.368408, 0.54303, 0.4)
 bones/5/enabled = true
-bones/5/position = Vector3(-0.368392, 0.541043, 0.402222)
-bones/5/rotation = Quaternion(0.183637, -0.0532181, 0.649309, 0.7361)
+bones/5/position = Vector3(-0.368408, 0.543005, 0.400028)
+bones/5/rotation = Quaternion(0.0210961, 0.0812383, 0.644879, 0.759662)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "Claw.R"
 bones/6/parent = 5
@@ -943,7 +944,7 @@ bones/8/parent = 1
 bones/8/rest = Transform3D(0.63763, 0.448959, 0.625991, -0.73939, 0.584716, 0.333781, -0.216172, -0.67568, 0.704788, 0.36461, 0.995746, -0.0399008)
 bones/8/enabled = true
 bones/8/position = Vector3(0.36461, 0.995746, -0.0399008)
-bones/8/rotation = Quaternion(-0.327798, 0.130086, -0.151133, 0.923463)
+bones/8/rotation = Quaternion(-0.327798, 0.130086, -0.151133, 0.923464)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "LegFront.R"
 bones/9/parent = 1
@@ -1008,6 +1009,7 @@ animTree = NodePath("../../AnimationTree")
 [node name="EnemyDeathState" type="Node" parent="FSM" node_paths=PackedStringArray("character_body", "animTree")]
 script = ExtResource("6_xx62h")
 character_body = NodePath("../..")
+death_package = ExtResource("10_x5fxa")
 animTree = NodePath("../../AnimationTree")
 
 [node name="Health" type="Node" parent="."]

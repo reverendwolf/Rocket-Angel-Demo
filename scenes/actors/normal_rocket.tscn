@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmboswaegysjb"]
+[gd_scene load_steps=13 format=3 uid="uid://cmboswaegysjb"]
 
 [ext_resource type="Script" path="res://scripts/projectile_forward.gd" id="1_7kews"]
 [ext_resource type="PackedScene" uid="uid://brplm784cg4hj" path="res://scenes/prefabs/simple_explosion.tscn" id="2_g0run"]
 [ext_resource type="PackedScene" uid="uid://dmwmo61sc0ocw" path="res://assets/blends/rocket-normal.glb" id="3_lg6bk"]
 [ext_resource type="Texture2D" uid="uid://cavpw0cp7gcr5" path="res://assets/kenney/particle pack/smoke_09.png" id="4_6laoe"]
 [ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="4_mjlrw"]
+[ext_resource type="AudioStream" uid="uid://dy7k8xayxh1vj" path="res://assets/audio/effects/rocket-fly.wav" id="6_uvksx"]
+[ext_resource type="Script" path="res://scripts/simple_audio_variator.gd" id="7_ucify"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t4d6c"]
 radius = 0.2
@@ -77,6 +79,13 @@ scale_amount_min = 0.2
 scale_amount_max = 0.3
 scale_amount_curve = SubResource("Curve_pudti")
 color_ramp = SubResource("Gradient_1u12a")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_uvksx")
+unit_size = 5.0
+autoplay = true
+bus = &"Effects"
+script = ExtResource("7_ucify")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

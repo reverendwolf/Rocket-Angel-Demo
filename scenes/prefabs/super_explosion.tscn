@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cl763k5d0ycw4"]
+[gd_scene load_steps=12 format=3 uid="uid://cl763k5d0ycw4"]
 
 [ext_resource type="Texture2D" uid="uid://j8wdhvqwu123" path="res://assets/textures/exp2_0.png" id="1_fdjct"]
 [ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="2_g2hq4"]
+[ext_resource type="AudioStream" uid="uid://djcobmbl6huu3" path="res://assets/audio/effects/rocket-pop.wav" id="3_hw3c3"]
 
 [sub_resource type="Animation" id="Animation_2qokb"]
 length = 2.0
@@ -157,5 +158,9 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SplashArea"]
 shape = SubResource("SphereShape3D_3q5h2")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_hw3c3")
+unit_size = 25.0
 
 [connection signal="body_entered" from="SplashArea" to="DamageDealer" method="deal_damage"]
