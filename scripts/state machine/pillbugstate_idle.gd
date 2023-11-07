@@ -4,10 +4,12 @@ extends FSMState
 @export var rotation_speed : float = 90
 @export var shoot_point : Node3D
 @export var projectile : PackedScene
+@export var anim_tree : AnimationTree
 
 var random_direction : Vector3
 var shot_cooldown : float
 var timer : Timer
+var anim_state
 
 func _ready():
 	super._ready()
@@ -16,6 +18,7 @@ func _ready():
 
 func enter_state():
 	super.enter_state()
+	anim_state = anim_tree["parameters/playback"]
 	random_direction = Vector3((randf() - 0.5) * 2, 0.0, (randf() - 0.5 * 2))
 	timer.wait_time = randf_range(4.0, 6.5)
 	timer.start()
@@ -40,16 +43,5 @@ func _physics_process(delta):
 
 func shoot():
 	shot_cooldown = randf_range(2.5, 4.5)
-	
-	var gauss_x : float = randf_range(-0.5, 0.5) + randf_range(-0.5, 0.5) * 3.0
-	var gauss_y : float = randf_range(-0.5, 0.5) + randf_range(-0.5, 0.5) + 1.5
-	var gauss_z : float = randf_range(-0.5, 0.5) + randf_range(-0.5, 0.5) * 3.0
-
-	shoot_point.look_at(character_body.global_position + (character_body.transform.basis.z * 5) + Vector3(gauss_x, gauss_y, gauss_z))
-	
-	var obj = projectile.instantiate() as Projectile
-	obj.assign_owner(character_body)
-	get_tree().get_first_node_in_group("CurrentScene").add_child(obj)
-	obj.position = shoot_point.global_position
-	obj.global_rotation = shoot_point.global_rotation
+	anim_state.travel("Ranged")
 	

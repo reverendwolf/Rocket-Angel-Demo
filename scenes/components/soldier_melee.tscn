@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_pt1fq"]
 size = Vector3(3.01893, 1.91609, 1.57031)
 
-[node name="SoldierMelee" type="Area3D" node_paths=PackedStringArray("damage_dealer")]
+[node name="SoldierMelee" type="Area3D" node_paths=PackedStringArray("damage_dealer") groups=["Enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.69414)
 script = ExtResource("1_7ofts")
 damage_dealer = NodePath("DamageDealer")

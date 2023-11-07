@@ -23,6 +23,8 @@ var total_shots : int
 @export var shootPoint : Node3D
 @onready var player_sensor : PlayerSensor = $Senses as PlayerSensor
 
+@export var death_package : PackedScene
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	startPosition = global_position
@@ -33,12 +35,18 @@ func _ready():
 	update_behavior()
 
 func _on_health_depleted():
-#	spawn_death()
+	spawn_death()
 	queue_free()
 
 func reset_timer(time : float):
 	timer.wait_time = time
 	timer.start()
+
+func spawn_death():
+	var obj = death_package.instantiate()
+	get_tree().get_first_node_in_group("CurrentScene").add_child(obj)
+	obj.global_position = global_position
+	obj.global_rotation = global_rotation
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

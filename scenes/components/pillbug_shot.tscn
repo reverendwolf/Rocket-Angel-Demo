@@ -6,7 +6,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_nq7ho"]
 radius = 1.0
 
-[node name="PillbugShot" type="Area3D" node_paths=PackedStringArray("damage_dealer")]
+[node name="PillbugShot" type="Area3D" node_paths=PackedStringArray("damage_dealer") groups=["Enemy"]]
 script = ExtResource("1_22jaw")
 SPEED = 8.0
 damage_dealer = NodePath("DamageDealer")

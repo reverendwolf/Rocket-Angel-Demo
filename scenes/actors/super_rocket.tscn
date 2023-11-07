@@ -39,14 +39,14 @@ EXPLOSION = ExtResource("2_edlgs")
 damage_dealer = NodePath("Damage Dealer")
 
 [node name="rocket-super" parent="." instance=ExtResource("3_bl8jb")]
-transform = Transform3D(-1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 0, 0, 0)
+transform = Transform3D(-2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.219233)
 shape = SubResource("CapsuleShape3D_uctjh")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.75
 one_shot = true
 autostart = true
 

@@ -2,25 +2,20 @@
 
 [ext_resource type="Script" path="res://scripts/projectile_forward.gd" id="1_3x8lq"]
 [ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="2_lox1t"]
+[ext_resource type="PackedScene" uid="uid://3acm5n3nyk8x" path="res://assets/blends/wasp-shot.glb" id="3_ixo14"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mu81w"]
 radius = 0.246502
 height = 1.66275
 
-[sub_resource type="PrismMesh" id="PrismMesh_gxjyr"]
-size = Vector3(0.25, 0.25, 1)
-
-[node name="WaspShot" type="Area3D" node_paths=PackedStringArray("damage_dealer")]
+[node name="WaspShot" type="Area3D" node_paths=PackedStringArray("damage_dealer") groups=["Enemy"]]
 script = ExtResource("1_3x8lq")
-SPEED = 16.0
+SPEED = 24.0
 damage_dealer = NodePath("DamageDealer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.1999)
 shape = SubResource("CapsuleShape3D_mu81w")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PrismMesh_gxjyr")
 
 [node name="DamageDealer" type="Node" parent="."]
 script = ExtResource("2_lox1t")
@@ -30,6 +25,9 @@ damage = 10
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="wasp-shot" parent="." instance=ExtResource("3_ixo14")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -0.4)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="explode"]

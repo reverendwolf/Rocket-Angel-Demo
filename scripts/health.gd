@@ -5,6 +5,8 @@ class_name Health
 @export var maxHealth = 10
 @export var curHealth = 1
 
+var died = false;
+
 signal healthDepleted
 signal healthLowered
 signal healthRaised
@@ -22,9 +24,12 @@ func restore(dmg : int):
 	health_check(true)
 	
 func health_check(health_raised):
+	if died: return
+	
 	curHealth = clamp(curHealth, 0, maxHealth)
 	if curHealth == 0:
 		healthDepleted.emit()
+		died = true
 	elif health_raised:
 		healthRaised.emit()
 	else:

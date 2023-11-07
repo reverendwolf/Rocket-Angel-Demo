@@ -21,6 +21,7 @@ func plug_in():
 	painState.stateComplete.connect(fsm.change_state.bind(activeState))
 	
 func plug_out():
+	print("Plug out: " + name)
 	idleState.stateComplete.disconnect(fsm.change_state.bind(idleState))
 	senses.PlayerSeen.disconnect(fsm.change_state.bind(activeState))
 	senses.PlayerLost.disconnect(fsm.change_state.bind(idleState))
@@ -31,5 +32,5 @@ func damage_taken():
 	fsm.change_state(painState)
 
 func health_depleted():
-	plug_out()
 	fsm.change_state(deathState)
+	plug_out()

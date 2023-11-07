@@ -15,10 +15,15 @@ class_name ArmorQueen
 @export var turret_L : QueenTurret
 @export var turret_R : QueenTurret
 
+@export var anim_player : AnimationPlayer
+@export var death_explosion : PackedScene
+@export var explosion_array : Array[QueenExplosionSpawner]
+
 var last_position : Vector3
 
 var start_path : bool
 var follow_path : bool = false
+var dead : bool = false
 var start_point : Vector3
 
 var l_timer : float
@@ -40,21 +45,25 @@ func _process(delta):
 	
 	if follow_path:
 		path_follower.progress += delta * follow_speed
-		path.global_position = lerp(path.global_position, Vector3(0,5,0), delta)
+		
+		if not dead:
+			path.global_position = lerp(path.global_position, Vector3(0,5,0), delta)
+		else:
+			path.global_position = lerp(path.global_position, Vector3(0,0,0), delta * 0.15)
 		
 		if l_timer >= 0.0:
 			l_timer -= delta
 		else:
 			l_timer = randf_range(2.5, 6.0)
-			turret_L.shoot()
-			print("L")
+			#turret_L.shoot()
+			#print("L")
 		
 		if r_timer >= 0.0:
 			r_timer -= delta
 		else:
 			r_timer = randf_range(2.5, 6.0)
-			turret_R.shoot()
-			print("R")
+			#turret_R.shoot()
+			#print("R")
 
 func start_following(start : Vector3):
 	add_to_group("Objectives")
@@ -62,8 +71,17 @@ func start_following(start : Vector3):
 	follow_path = true
 
 func _on_health_depleted():
-	queue_free()
+	for explosion in explosion_array:
+		explosion.start_spawning()
+	anim_player.play("Death", 0.2)
+	dead = true
 	
 func _on_take_damage():
 	target_bar_pct = health.get_health_pct()
 	pass
+
+func die():
+	var obj = death_explosion.instantiate()
+	get_tree().get_first_node_in_group("CurrentScene").add_child(obj)
+	obj.global_position = global_position
+	queue_free()

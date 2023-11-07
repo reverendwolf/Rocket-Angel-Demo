@@ -4,6 +4,7 @@ extends FSMState
 @export var player_sensor : PlayerSensor
 @export var nav_agent : NavigationAgent3D
 @export var character_body : CharacterBody3D
+@export var animTree : AnimationTree
 
 @export var attack_range : float = 2.0
 @export var chase_speed : float = 1.5
@@ -18,11 +19,14 @@ var timer : Timer
 @export var melee_projectile : PackedScene
 @export var ranged_projectile : PackedScene
 
+var anim_state
+
 func _ready():
 	super._ready()
 	timer = Timer.new()
 	add_child(timer)
 	timer.one_shot = true
+	
 
 func _physics_process(delta):
 	if not attacking:
@@ -44,24 +48,21 @@ func _physics_process(delta):
 func enter_state():
 	super.enter_state()
 	attacking = false
-	
+	anim_state = animTree["parameters/playback"]
+	animTree.set("parameters/Loco/blend_position", 1)
 	#if in attack range, melee
 	#else, choose between advancing or shooting
 	
 	if player_sensor.get_player_distance() < attack_range:
 		attacking = true
-		melee_attack()
-		timer.wait_time = 1.5
-		timer.start()
-		await timer.timeout
+		anim_state.travel("Melee")
+		await animTree.animation_finished
 		stateComplete.emit()
 	else:
 		if randf() <= 0.25:
 			attacking = true
-			ranged_attack()
-			timer.wait_time = 1.5
-			timer.start()
-			await timer.timeout
+			anim_state.travel("Ranged")
+			await animTree.animation_finished
 			stateComplete.emit()
 		else:
 			chase_timer = randf_range(chase_max_time * 0.5, chase_max_time)
@@ -70,6 +71,7 @@ func enter_state():
 func exit_state():
 	super.exit_state()
 	timer.stop()
+	animTree.set("parameters/Loco/blend_position", 0)
 #check range to player (senses reference)
 #if we are close (within range of an attack), play an attack animation, wait, singal completion
 #if we are not close, path to a spot near the player, wait 0.5-1 seconds, signal completion
@@ -80,6 +82,7 @@ func melee_attack():
 	obj.position = melee_point.global_position
 	obj.global_rotation = melee_point.global_rotation
 	obj.assign_owner(character_body)
+	
 	
 
 func ranged_attack():

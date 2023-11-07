@@ -39,6 +39,8 @@ var glide_refuel_timer = 0.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.81
 
+var paused : bool = false
+
 func _ready():
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	fuel_bar.max_value = GLIDE_FUEL_MAX
@@ -51,6 +53,11 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	# Add the gravity.
+	if Input.is_action_just_pressed("pause"):
+		paused = !paused
+		if paused: Engine.time_scale = 0.1
+		else: Engine.time_scale = 1
+	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 

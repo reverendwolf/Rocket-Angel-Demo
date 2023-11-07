@@ -3,6 +3,7 @@ extends FSMState
 
 @export var character_body : CharacterBody3D
 @export var navAgent : NavigationAgent3D
+@export var animTree : AnimationTree
 @export var rotation_speed : float = 120.0
 @export var movement_speed : float = 3.5
 @export var wander_distance : float = 8.0
@@ -21,6 +22,8 @@ func _ready():
 func enter_state():
 	super.enter_state()
 	
+	animTree.set("parameters/Loco/blend_position", 0.5)
+	
 	var randomDir : Vector2 = Vector2.RIGHT.rotated(randf_range(0, TAU)) * randf_range(0, wander_distance)
 	navAgent.set_target_position(startPosition + \
 	Vector3(randomDir.x, character_body.global_position.y, randomDir.y))
@@ -32,10 +35,16 @@ func enter_state():
 	
 func exit_state():
 	super.exit_state()
+	animTree.set("parameters/Loco/blend_position", 0)
 	timer.stop()
+
+func _process(delta):
+	pass
+	#animTree.tree_root.set_parameter("Loco", 0.0 if navAgent.is_navigation_finished() else 0.5 )
 
 func _physics_process(delta):
 	if navAgent.is_navigation_finished():
+		animTree.set("parameters/Loco/blend_position", 0)
 		return
 	
 	var nextPoint : Vector3 = navAgent.get_next_path_position()
