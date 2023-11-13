@@ -1,8 +1,8 @@
 extends Node
 
+@export var player : FPSPlayer
 @export var monologue : Monologue
-@export var object_holder : Node
-@export var objective_label : ColorRect
+@export var objective_label : Control
 @export var objective_label_timer : Timer
 @export var boss_remote_transform : RemoteTransform3D
 @export var armor_queen : ArmorQueen
@@ -33,7 +33,7 @@ func _ready():
 	objective_label.visible = false
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("context"):
 		show_nearest_objective()
 
@@ -81,47 +81,48 @@ func mission_encounter_resolved():
 func encounter_progress():
 	
 	if encountersResolved == 1:
-		monologue.show_monologue("Otis","Elimination confirmed. Several targets remain, get at them, Angel.")
-		#await get_tree().create_timer(6).timeout
+		monologue.show_monologue("Otis","Elimination confirmed. Several targets remain, keep it up, Angel.")
+		#await get_tree().create_timer(6, false).timeout
 		#activate_boss()
 		
-	if encountersResolved == 4:
+	if encountersResolved == 3:
 		monologue.show_monologue("Otis","Half of the targets remain. Keep it going!")
 		
-	if encountersResolved == 7:
+	if encountersResolved == 5:
 		monologue.show_monologue("Otis","One target remains, Angel. You're almost home.")
 		
-	if encountersResolved == 8:
+	if encountersResolved == 6:
 		if luresActivated < 4:
+			player.set_invulnerable(true)
 			monologue.show_monologue("Otis","Objective achieved. Pack it up and return to base.")
 		else:
 			activate_boss()
 
 func activate_boss():
 	monologue.show_monologue("Otis","Objective achieved. Pack it up and... Wait...")
-	await get_tree().create_timer(7).timeout
-	armor_queen.start_following(boss_path.curve.get_point_position(0))
-	monologue.show_monologue("Otis","Angel! That massive enemy is closing in! It's a Formic Queen!")
+	await get_tree().create_timer(7, false).timeout
+	armor_queen.start_following()
+	monologue.show_monologue("Otis","Angel! That massive enemy is closing in! It's a Terranoid Queen!")
 	
 func activate_formic_lure():
-	if encountersResolved < 8:
+	if encountersResolved < 6:
 		luresActivated += 1
 		lure_progress()
 	
 func lure_progress():
+	await get_tree().create_timer(1.5).timeout
+	
 	if luresActivated == 1:
-		monologue.show_monologue("Otis","That panel is generating some sort of sub-sonic frequency. I'll look into it from here.")
+		monologue.show_monologue("Otis","That device is acting like a Terranoid Lure. Why would that be in the city?")
 	
 	if luresActivated == 2:
-		monologue.show_monologue("Otis","Formic activity in the surrounding sectors is shifting. Be careful, Angel")
-
-	if luresActivated == 3:
-		monologue.show_monologue("Otis","Angel, those terminals are Formic Lures. You're affecting the Formic traffic in the surrounding sectors.")
+		monologue.show_monologue("Otis","Angel, Terranoid activity in the surrounding sectors is shifting. Be careful!")
 		
-	if luresActivated == 4:
-		monologue.show_monologue("Otis","A massive heat signature is headed your way, Angel. Perhaps you can get out of there before it arrives?")
+	if luresActivated == 3:
+		monologue.show_monologue("Otis","A massive heat signature is headed your way, Angel. Can you get out of there before it arrives?")
 
 func boss_defeated():
-	if encountersResolved == 8 and luresActivated == 4:
+	if encountersResolved == 6 and luresActivated == 3:
+		player.set_invulnerable(true)
 		monologue.show_monologue("Otis","Excellent job, Angel! Pallas Athena can clear up the rest. Let's get you home.")
 	

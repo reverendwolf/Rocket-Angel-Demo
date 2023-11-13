@@ -38,10 +38,6 @@ func exit_state():
 	animTree.set("parameters/Loco/blend_position", 0)
 	timer.stop()
 
-func _process(delta):
-	pass
-	#animTree.tree_root.set_parameter("Loco", 0.0 if navAgent.is_navigation_finished() else 0.5 )
-
 func _physics_process(delta):
 	if navAgent.is_navigation_finished():
 		animTree.set("parameters/Loco/blend_position", 0)

@@ -6,6 +6,8 @@ extends RigidBody3D
 
 var projectile_owner : Node
 
+@export var explode_on_contact : bool
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if damage_dealer:
@@ -15,13 +17,13 @@ func _ready():
 func assign_owner(body):
 	projectile_owner = body
 
-func _on_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
-	if body == projectile_owner:
-		return
-	
+func _on_body_entered(body):
 	if linear_velocity != Vector3.ZERO:
-		if damage_dealer:
+		if damage_dealer and body != projectile_owner:
 			damage_dealer.deal_damage(body)
+			
+	if explode_on_contact:
+		explode()
 
 func damage_dealt():
 	explode()

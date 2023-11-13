@@ -7,7 +7,7 @@ enum PickupType
 	SHARD,
 	PLATE,
 	AMMO,
-	QUAD
+	CHARGE
 }
 
 @export var pickup_type : PickupType 

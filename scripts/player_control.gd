@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name FPSPlayer
 
 const SPEED = 4.5
 const SPRINT_SPEED = 6.0
@@ -29,10 +30,15 @@ var glide_refuel_timer = 0.0
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var fuel_bar = $"Player Hud/Fuel Gauge"
+@onready var fuel_bar = $"Player Hud/ProgressBar"
 @onready var footstep_cast = $FootstepShapeCast
 @onready var footstepSound = $FootstepSound
 @onready var interactionRaycast = $Head/Camera3D/InteractionRayCast
+@onready var health = $PlayerHealth
+
+@onready var floatJetSound = $FloatJetSound
+@onready var jumpSound = $JumpSound
+@onready var jumpJetSound = $JumpJetSound
 
 @export var gun_holder : Node3D
 
@@ -46,30 +52,25 @@ func _ready():
 	fuel_bar.max_value = GLIDE_FUEL_MAX
 	glide_fuel = GLIDE_FUEL_MAX
 
-func _unhandled_input(event):
-	if(event is InputEventKey):
-		if(event.keycode == KEY_ESCAPE):
-			get_tree().quit()
+
 
 func _physics_process(delta):
 	# Add the gravity.
-	if Input.is_action_just_pressed("pause"):
-		paused = !paused
-		if paused: Engine.time_scale = 0.1
-		else: Engine.time_scale = 1
-	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 	# Handle Jump and Glide
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jump(JUMP_VELOCITY)
+		jumpSound.play()
 	
 	if Input.is_action_just_pressed("jump") and !is_on_floor():
 		gliding = true
+		floatJetSound.play()
 	
 	if gliding and (Input.is_action_just_released("jump") or is_on_floor() or glide_fuel <= 0):
 		gliding = false
+		floatJetSound.stop()
 		glide_refuel_timer += GLIDE_REFUEL_DELAY
 		
 	if Input.is_action_just_pressed("interact") and interactionRaycast.is_colliding():
@@ -91,6 +92,8 @@ func _physics_process(delta):
 		jump(BOOST_VELOCITY)
 		glide_fuel -= (GLIDE_FUEL_MAX * 0.65)
 		glide_refuel_timer = (GLIDE_REFUEL_DELAY * 4)
+		variator(jumpJetSound)
+		jumpJetSound.play()
 
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -149,6 +152,9 @@ func _footstep():
 	
 	pass
 
+func variator(aud : AudioStreamPlayer3D):
+	aud.pitch_scale = randf_range(0.85, 1.15)
+
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO
 	
@@ -181,4 +187,7 @@ func _handle_cooldowns(time):
 		glide_fuel += time 
 		glide_fuel = clamp(glide_fuel, 0.0, GLIDE_FUEL_MAX)
 		
-	fuel_bar.value = glide_fuel
+	fuel_bar.value = GLIDE_FUEL_MAX - glide_fuel
+
+func set_invulnerable(value : bool):
+	health.set_invulnerable(value)

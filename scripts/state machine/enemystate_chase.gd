@@ -89,9 +89,9 @@ func ranged_attack():
 	var gauss_x = (randf() + randf() - 1) * 3.0
 	var gauss_z = (randf() + randf() - 1) * 3.0
 	shoot_point.look_at(player_sensor.get_player_position() + Vector3(gauss_x, 1, gauss_z))
-	var obj = ranged_projectile.instantiate() as Projectile
-	get_tree().root.add_child(obj)
-	obj.position = shoot_point.global_position
+	var obj = ranged_projectile.instantiate() as Bugshot
+	get_tree().get_first_node_in_group("CurrentScene").add_child(obj)
+	obj.global_position = shoot_point.global_position
 	obj.global_rotation = shoot_point.global_rotation
 	obj.assign_owner(character_body)
-	
+	obj.set_axis_velocity(-obj.basis.z * randf_range(-0.5,2.0) * player_sensor.get_player_distance())

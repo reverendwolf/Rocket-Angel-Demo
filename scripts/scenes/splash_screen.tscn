@@ -1,0 +1,143 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnlvuwb7boa3p"]
+
+[ext_resource type="Script" path="res://scripts/simple_scene_loader.gd" id="1_ebu2s"]
+[ext_resource type="AudioStream" uid="uid://d24jnpwj1s825" path="res://assets/audio/Ps1 startup sound.mp3" id="1_l52q2"]
+[ext_resource type="Texture2D" uid="uid://0bai768mr5oo" path="res://assets/ui/splash-button-light.png" id="3_73a6t"]
+[ext_resource type="Texture2D" uid="uid://cvynkkt6q73sq" path="res://assets/ui/splash-flynncat.png" id="4_wjd1e"]
+[ext_resource type="Texture2D" uid="uid://607cvgn8p3qu" path="res://assets/ui/splash-controller.png" id="5_vdv6c"]
+
+[sub_resource type="Animation" id="Animation_30l5q"]
+resource_name = "splash"
+length = 15.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("1_l52q2")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Godot Splash:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 6, 6.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Flynn Splash:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.5, 6, 8.5, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/Control Splash:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(8, 8.5, 11.1, 13),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"do_load_scene"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ix3bo"]
+_data = {
+"splash": SubResource("Animation_30l5q")
+}
+
+[node name="SplashScreen" type="Node"]
+script = ExtResource("1_ebu2s")
+scene_path = "res://scenes/title_screen.tscn"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "splash"
+libraries = {
+"": SubResource("AnimationLibrary_ix3bo")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Black" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Godot Splash" type="TextureRect" parent="Control"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_right = 106.333
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_73a6t")
+expand_mode = 1
+
+[node name="Flynn Splash" type="TextureRect" parent="Control"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_wjd1e")
+
+[node name="Control Splash" type="TextureRect" parent="Control"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_vdv6c")

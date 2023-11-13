@@ -1,11 +1,13 @@
 class_name Monologue
-extends ColorRect
+extends Control
 
 @export var nameText : RichTextLabel
 @export var dialogueText : RichTextLabel
 @export var messageTimer : Timer
 @export var characterTime : float = 0.01
 @export var punctuationtime : float = 0.05
+
+@onready var audio_click : AudioStreamPlayer = $AudioStreamPlayer
 
 var s_name : String
 var s_text : String
@@ -36,6 +38,7 @@ func display_text():
 	
 	while dialogueText.visible_characters < len(dialogueText.get_parsed_text()):
 		dialogueText.visible_characters += 1
+		audio_click.play()
 		if dialogueText.get_parsed_text()[dialogueText.visible_characters - 1] in ".,?!":
 			await get_tree().create_timer(punctuationtime).timeout
 		else:

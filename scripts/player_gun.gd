@@ -9,7 +9,8 @@ class_name PlayerGun
 @export var normal_rocket : PackedScene
 @export var super_rocket : PackedScene
 
-@onready var ammoLabel : RichTextLabel = $"../Player Hud/AmmoLabel"
+@onready var primaryLabel : RichTextLabel = $"../Player Hud/Panel2/MagazineLabel"
+@onready var ammoLabel : RichTextLabel = $"../Player Hud/Panel3/AmmoLabel"
 
 const MAX_MAGAZINE = 6
 const MAX_SECONDARY = 9
@@ -47,16 +48,16 @@ func _process(delta):
 	
 	
 func _update_ammo_label():
-	ammoLabel.text = str(magazine) + "/" + str(MAX_MAGAZINE) + "\n" + \
-					str(secondary) + "/" + str(MAX_SECONDARY)
+	primaryLabel.text = "[right]" + str(magazine) + "/" + str(MAX_MAGAZINE) + "[/right]"
+	ammoLabel.text =  "[right]" + str(secondary) + "[/right]"
 	
 func _shoot_primary():
 	magazine -= 1
 	shot_cooldown = SHOT_COOLDOWN
 	_update_ammo_label()
-	if audio_source_shoot:
-		audio_source_shoot.pitch_scale = randf_range(0.9, 1.15)
-		audio_source_shoot.play()
+	#if audio_source_shoot:
+	#	audio_source_shoot.pitch_scale = randf_range(0.9, 1.15)
+	#	audio_source_shoot.play()
 	var r = normal_rocket.instantiate() as Projectile
 	r.position = shoot_point.global_position
 	r.basis = shoot_point.global_transform.basis

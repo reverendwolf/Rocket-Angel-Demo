@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://brqbe1avldkak"]
+
+[ext_resource type="Script" path="res://scripts/health.gd" id="1_10os3"]
+[ext_resource type="Script" path="res://scripts/destructible_object.gd" id="1_pibjo"]
+[ext_resource type="Script" path="res://scripts/damage_taker.gd" id="2_j1oke"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wbk1a"]
+points = PackedVector3Array(-1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, 1, -1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kvffo"]
+size = Vector3(2, 2, 2)
+
+[node name="destructible_object" type="CharacterBody3D"]
+script = ExtResource("1_pibjo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("ConvexPolygonShape3D_wbk1a")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("1_10os3")
+
+[node name="Damage Taker" type="Node" parent="."]
+script = ExtResource("2_j1oke")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_kvffo")
+
+[connection signal="healthDepleted" from="Health" to="." method="_on_health_depleted"]
+[connection signal="damage_taken" from="Damage Taker" to="Health" method="damage"]

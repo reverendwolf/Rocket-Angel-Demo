@@ -1,0 +1,414 @@
+[gd_scene load_steps=33 format=3 uid="uid://dnxmcvv30c5xt"]
+
+[ext_resource type="Script" path="res://scripts/player_control.gd" id="1_se3li"]
+[ext_resource type="PackedScene" uid="uid://yanqbc7bpnat" path="res://assets/kenney/blaster kit/blasterG.glb" id="2_61dwy"]
+[ext_resource type="Script" path="res://scripts/player_gun.gd" id="2_eqdhm"]
+[ext_resource type="Script" path="res://scripts/player_health.gd" id="2_urexo"]
+[ext_resource type="Script" path="res://scripts/damage_taker.gd" id="3_mtu62"]
+[ext_resource type="PackedScene" uid="uid://cmboswaegysjb" path="res://scripts/scenes/actors/normal_rocket.tscn" id="4_8ux6f"]
+[ext_resource type="PackedScene" uid="uid://bjs776mbyhs8u" path="res://scripts/scenes/actors/super_rocket.tscn" id="4_148x0"]
+[ext_resource type="AudioStream" uid="uid://dxerpmy4r515i" path="res://assets/audio/effects/080902_shotgun-39753.mp3" id="7_yv37b"]
+[ext_resource type="PackedScene" uid="uid://duleeg5pvckow" path="res://assets/blends/rocket-redeemer.glb" id="8_u78yc"]
+[ext_resource type="Script" path="res://scripts/pickup_handler.gd" id="10_v2e87"]
+[ext_resource type="AudioStream" uid="uid://dauh1tf6eyjk5" path="res://assets/sfx/heavy-footstep5.wav" id="10_yckb8"]
+[ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="11_fehsr"]
+[ext_resource type="FontFile" uid="uid://dgb4xb5nykhse" path="res://assets/fonts/Not Jam Laika 14.ttf" id="12_bj0hs"]
+[ext_resource type="Texture2D" uid="uid://0kbscu6m8xbj" path="res://assets/ui/normal-rocket.PNG" id="13_20o86"]
+[ext_resource type="Texture2D" uid="uid://wvi5bq7slsny" path="res://assets/ui/super-rocket.png" id="14_sp5gc"]
+[ext_resource type="Texture2D" uid="uid://yev4me787d4e" path="res://assets/kenney/crosshair kit/crosshair087.png" id="15_sgibl"]
+[ext_resource type="Texture2D" uid="uid://dym2ws7u86aar" path="res://assets/ui/BarV6_Bar.png" id="16_1tk4w"]
+[ext_resource type="AudioStream" uid="uid://d3qowsu4a0sbw" path="res://assets/audio/effects/Magic_Spells_Impact_Air24.wav" id="16_lev0o"]
+[ext_resource type="AudioStream" uid="uid://510340ny7x1j" path="res://assets/audio/effects/thrust-float.mp3" id="17_bulqf"]
+[ext_resource type="Texture2D" uid="uid://dxjjqlxs3fi5g" path="res://assets/ui/fuel-bar.png" id="18_18j6x"]
+[ext_resource type="AudioStream" uid="uid://vqx6pitmu6o2" path="res://assets/audio/effects/Voice_Female_V1_Jump_Mono_01.wav" id="18_e6dgx"]
+[ext_resource type="AudioStream" uid="uid://dmdwkhaylk0nc" path="res://assets/audio/effects/Voice_Female_V1_Pain_Mono_03.wav" id="19_blbnp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xpfw6"]
+radius = 0.75
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hgxha"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_koi13"]
+radius = 0.75
+
+[sub_resource type="Animation" id="Animation_c132r"]
+resource_name = "damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.717647, 0, 0, 0.501961), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_eml85"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_54b27"]
+resource_name = "pickup"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.717647, 0.752941, 1, 0.501961), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_loh43"]
+_data = {
+"RESET": SubResource("Animation_eml85"),
+"damage": SubResource("Animation_c132r"),
+"pickup": SubResource("Animation_54b27")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_47742"]
+texture = ExtResource("18_18j6x")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdipr"]
+bg_color = Color(0, 0, 0, 0.768627)
+border_width_left = 4
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_itt28"]
+height = 0.5
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("gun_holder") groups=["PlayerOnly"]]
+collision_layer = 3
+floor_max_angle = 0.837758
+safe_margin = 0.005
+script = ExtResource("1_se3li")
+gun_holder = NodePath("Head/Camera3D/GunHolder")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xpfw6")
+
+[node name="PlayerHealth" type="Node" parent="."]
+script = ExtResource("2_urexo")
+
+[node name="Timer" type="Timer" parent="PlayerHealth"]
+wait_time = 2.5
+one_shot = true
+
+[node name="DamageTaker" type="Node" parent="."]
+script = ExtResource("3_mtu62")
+
+[node name="Gun" type="Node3D" parent="." node_paths=PackedStringArray("shoot_point", "audio_source_shoot", "player_parent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("2_eqdhm")
+shoot_point = NodePath("../Head/Camera3D/Shoot Point")
+audio_source_shoot = NodePath("ShootAudio")
+player_parent = NodePath("..")
+normal_rocket = ExtResource("4_8ux6f")
+super_rocket = ExtResource("4_148x0")
+
+[node name="ShootAudio" type="AudioStreamPlayer3D" parent="Gun"]
+stream = ExtResource("7_yv37b")
+bus = &"Effects"
+
+[node name="ReloadAudio" type="AudioStreamPlayer3D" parent="Gun"]
+bus = &"Effects"
+
+[node name="Pickup Handler" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+monitorable = false
+script = ExtResource("10_v2e87")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup Handler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_hgxha")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_koi13")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+fov = 60.0
+far = 50.0
+
+[node name="InteractionRayCast" type="RayCast3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0878913, 0)
+target_position = Vector3(0, 0, -1.25)
+collision_mask = 16
+collide_with_areas = true
+debug_shape_custom_color = Color(0.572549, 0, 0, 1)
+
+[node name="GunHolder" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
+
+[node name="rocket-redeemer" parent="Head/Camera3D/GunHolder" instance=ExtResource("8_u78yc")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.4, -0.12421, -0.121041, 0.241867)
+
+[node name="blasterG" parent="Head/Camera3D/GunHolder" instance=ExtResource("2_61dwy")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00802468, -0.134201, 0.245849)
+visible = false
+
+[node name="Shoot Point" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -1.1)
+
+[node name="Player Hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_fehsr")
+
+[node name="Panel" type="Panel" parent="Player Hud"]
+self_modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -43.0
+offset_right = 105.0
+offset_bottom = -9.0
+grow_vertical = 0
+
+[node name="ArmorLabel" type="RichTextLabel" parent="Player Hud/Panel"]
+self_modulate = Color(0.929412, 0.929412, 0.929412, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 11.0
+offset_top = -4.0
+offset_right = 160.0
+offset_bottom = 68.0
+theme_override_fonts/normal_font = ExtResource("12_bj0hs")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "100"
+
+[node name="Panel2" type="Panel" parent="Player Hud"]
+self_modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -72.0
+offset_right = -4.0
+offset_bottom = -38.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MagazineLabel" type="RichTextLabel" parent="Player Hud/Panel2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 4.0
+offset_right = 92.0
+offset_bottom = 30.0
+theme_override_fonts/normal_font = ExtResource("12_bj0hs")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[right]6/6"
+
+[node name="TextureRect" type="TextureRect" parent="Player Hud/Panel2"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 9.0
+offset_right = 46.0
+offset_bottom = 22.0
+texture = ExtResource("13_20o86")
+expand_mode = 1
+
+[node name="Panel3" type="Panel" parent="Player Hud"]
+self_modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -37.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="AmmoLabel" type="RichTextLabel" parent="Player Hud/Panel3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 49.0
+offset_right = 91.0
+offset_bottom = 31.0
+theme_override_fonts/normal_font = ExtResource("12_bj0hs")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[right]0
+"
+
+[node name="TextureRect" type="TextureRect" parent="Player Hud/Panel3"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 58.0
+offset_bottom = 31.0
+texture = ExtResource("14_sp5gc")
+expand_mode = 1
+
+[node name="Crosshair" type="TextureRect" parent="Player Hud"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.25098)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(36, 36)
+texture = ExtResource("15_sgibl")
+
+[node name="ColorRect" type="ColorRect" parent="Player Hud"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="ColorAnimator" type="AnimationPlayer" parent="Player Hud/ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_loh43")
+}
+
+[node name="Crosshair2" type="TextureRect" parent="Player Hud"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 266.0
+offset_top = 106.0
+offset_right = 475.0
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.57079
+texture = ExtResource("16_1tk4w")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Player Hud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 269.0
+offset_top = 103.0
+offset_right = 472.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+theme_override_styles/background = SubResource("StyleBoxTexture_47742")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pdipr")
+step = 0.05
+value = 80.5
+fill_mode = 1
+show_percentage = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Player Hud"]
+self_modulate = Color(0, 0, 0, 0.372549)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -99.0
+offset_right = 166.0
+offset_bottom = -76.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 1.5708
+bbcode_enabled = true
+text = "[center]FUEL"
+
+[node name="FootstepShapeCast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CylinderShape3D_itt28")
+target_position = Vector3(0, -0.25, 0)
+max_results = 1
+
+[node name="FootstepSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_yckb8")
+volume_db = -5.0
+max_db = 2.0
+bus = &"Effects"
+
+[node name="JumpJetSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("16_lev0o")
+volume_db = -5.0
+max_db = -1.0
+bus = &"Effects"
+
+[node name="FloatJetSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("17_bulqf")
+volume_db = -5.0
+max_db = 2.0
+bus = &"Effects"
+
+[node name="JumpSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("18_e6dgx")
+volume_db = -5.0
+max_db = 2.0
+bus = &"Effects"
+
+[node name="PainSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("19_blbnp")
+volume_db = -5.0
+max_db = 2.0
+bus = &"Effects"
+
+[connection signal="timeout" from="PlayerHealth/Timer" to="PlayerHealth" method="health_decay"]
+[connection signal="damage_event" from="DamageTaker" to="Player Hud/ColorRect/ColorAnimator" method="play" binds= ["damage"]]
+[connection signal="damage_taken" from="DamageTaker" to="PlayerHealth" method="damage"]
+[connection signal="area_entered" from="Pickup Handler" to="Pickup Handler" method="_on_area_entered"]
+[connection signal="pickup_event" from="Pickup Handler" to="Player Hud/ColorRect/ColorAnimator" method="play" binds= ["pickup"]]

@@ -10,7 +10,6 @@ var player_in_range : bool = false
 var player_ref : CharacterBody3D
 
 @onready var look_point : Node3D = $RaycastPoint
-
 #lost (outside range or LOS)
 #seen (inside range or LOS)
 

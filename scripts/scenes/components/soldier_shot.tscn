@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://ci5vvf6ee8xrf"]
+
+[ext_resource type="Script" path="res://scripts/bugshot.gd" id="1_cl5ns"]
+[ext_resource type="PackedScene" uid="uid://b8ujq8eyc2nv3" path="res://scripts/scenes/components/blood_death_2.tscn" id="2_0p1ug"]
+[ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="2_25gsw"]
+[ext_resource type="PackedScene" uid="uid://du0e6x4xtssbs" path="res://assets/blends/soldier-shot.glb" id="4_y5lt0"]
+[ext_resource type="AudioStream" uid="uid://vm6svyrwikoa" path="res://assets/audio/effects/soldier-spit.wav" id="5_0omeo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6mfwd"]
+radius = 0.318683
+height = 1.183
+
+[node name="SoldierShot" type="RigidBody3D" node_paths=PackedStringArray("damage_dealer") groups=["Enemy"]]
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_cl5ns")
+damage_dealer = NodePath("DamageDealer")
+explosion = ExtResource("2_0p1ug")
+explode_on_contact = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.372815)
+shape = SubResource("CapsuleShape3D_6mfwd")
+
+[node name="DamageDealer" type="Node" parent="."]
+script = ExtResource("2_25gsw")
+damage = 5
+
+[node name="soldier-shot" parent="." instance=ExtResource("4_y5lt0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_0omeo")
+pitch_scale = 0.75
+autoplay = true
+bus = &"Effects"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

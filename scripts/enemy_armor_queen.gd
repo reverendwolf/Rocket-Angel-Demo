@@ -16,6 +16,7 @@ class_name ArmorQueen
 @export var turret_R : QueenTurret
 
 @export var anim_player : AnimationPlayer
+@export var boss_bar : AnimationPlayer
 @export var death_explosion : PackedScene
 @export var explosion_array : Array[QueenExplosionSpawner]
 
@@ -34,7 +35,7 @@ var target_bar_pct : float = 1.0
 func _ready():
 	follow_path = false
 	start_path = false;
-	boss_label.hide()
+	#boss_label.hide()
 	l_timer = randf_range(2.5, 6.0)
 	r_timer = randf_range(2.5, 6.0)
 	pass # Replace with function body.
@@ -65,15 +66,16 @@ func _process(delta):
 			#turret_R.shoot()
 			#print("R")
 
-func start_following(start : Vector3):
+func start_following():
 	add_to_group("Objectives")
-	boss_label.show()
+	boss_bar.play("show_bar")
 	follow_path = true
 
 func _on_health_depleted():
 	for explosion in explosion_array:
 		explosion.start_spawning()
 	anim_player.play("Death", 0.2)
+	boss_bar.play_backwards("show_bar")
 	dead = true
 	
 func _on_take_damage():

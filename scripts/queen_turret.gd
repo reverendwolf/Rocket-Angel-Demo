@@ -8,7 +8,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	look_at(global_position - Vector3.DOWN, Vector3.FORWARD, true)
 	pass
 	

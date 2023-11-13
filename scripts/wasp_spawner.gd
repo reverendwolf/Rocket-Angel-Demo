@@ -14,10 +14,6 @@ func _ready():
 	reset_timer()
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func spawn():
 	if cur_children < max_children:
 		var obj = spawn_object.instantiate()

@@ -1,0 +1,163 @@
+[gd_scene load_steps=54 format=3 uid="uid://d2iomjiyk5qtf"]
+
+[ext_resource type="PackedScene" uid="uid://2oh7isk8mbat" path="res://assets/tiles-world/Apartment-Base-621-A.glb" id="1_2wjk0"]
+[ext_resource type="PackedScene" uid="uid://ddyiqll37kydl" path="res://assets/tiles-world/Apartment-Base-Corner.glb" id="2_qi4l3"]
+[ext_resource type="PackedScene" uid="uid://c7aigu2ueb15r" path="res://assets/tiles-world/Apartment-Base-Dirty.glb" id="3_7ovur"]
+[ext_resource type="PackedScene" uid="uid://bo1qpbml5k2wq" path="res://assets/tiles-world/Apartment-Base-Door-A.glb" id="4_jbrpx"]
+[ext_resource type="PackedScene" uid="uid://bvjnuarwpeevk" path="res://assets/tiles-world/Apartment-Base-Door-B.glb" id="5_bqfib"]
+[ext_resource type="PackedScene" uid="uid://dxx0dvlo1tcmv" path="res://assets/tiles-world/Apartment-Base-Girl.glb" id="6_o47tr"]
+[ext_resource type="PackedScene" uid="uid://daa16sx4wbtow" path="res://assets/tiles-world/Apartment-Base-Moon-A.glb" id="7_sgvh0"]
+[ext_resource type="PackedScene" uid="uid://ywv2xicgar2f" path="res://assets/tiles-world/Apartment-Base-Moon-B.glb" id="8_vjpp0"]
+[ext_resource type="PackedScene" uid="uid://nknhord3i5ng" path="res://assets/tiles-world/Apartment-Base-Moon-C.glb" id="9_cwtpe"]
+[ext_resource type="PackedScene" uid="uid://544uoqohvwi5" path="res://assets/tiles-world/Apartment-Base-Posters.glb" id="10_r76sk"]
+[ext_resource type="PackedScene" uid="uid://b0urmwtfb44vc" path="res://assets/tiles-world/Apartment-Base-Scuffed.glb" id="11_dprfm"]
+[ext_resource type="PackedScene" uid="uid://msumov1whqwd" path="res://assets/tiles-world/Apartment-Base-Shutters-A.glb" id="12_fvmy2"]
+[ext_resource type="PackedScene" uid="uid://c1kgt700v1l7g" path="res://assets/tiles-world/Apartment-Base-Shutters-B.glb" id="13_ae20m"]
+[ext_resource type="PackedScene" uid="uid://cy6rr3e2jo6m" path="res://assets/tiles-world/Apartment-Base-Window-A.glb" id="14_8iv0g"]
+[ext_resource type="PackedScene" uid="uid://cjlhj3yjdlqle" path="res://assets/tiles-world/Apartment-Base-Window-B.glb" id="15_lf0g4"]
+[ext_resource type="PackedScene" uid="uid://dnnnkk4wk2d6n" path="res://assets/tiles-world/Apartment-Height-ACUnit.glb" id="16_pebi6"]
+[ext_resource type="PackedScene" uid="uid://8m1bgacbxcod" path="res://assets/tiles-world/Apartment-Height-BigWindow.glb" id="17_3gd6j"]
+[ext_resource type="PackedScene" uid="uid://bytqkssqq22yf" path="res://assets/tiles-world/Apartment-Height-Corner.glb" id="18_kxqi7"]
+[ext_resource type="PackedScene" uid="uid://bbuooxt0uvwc5" path="res://assets/tiles-world/Apartment-Height-Fence.glb" id="19_ymla3"]
+[ext_resource type="PackedScene" uid="uid://cj5uveoyjxcof" path="res://assets/tiles-world/ApartmentHeight-Balcony-A.glb" id="20_in3d5"]
+[ext_resource type="PackedScene" uid="uid://d3v33tu5lgcgy" path="res://assets/tiles-world/ApartmentHeight-Balcony-B.glb" id="21_3r4ah"]
+[ext_resource type="PackedScene" uid="uid://b0x0hn5ovdbao" path="res://assets/tiles-world/ApartmentHeight-Balcony-C.glb" id="22_o1wy6"]
+[ext_resource type="PackedScene" uid="uid://bfiwe1bje6y1w" path="res://assets/tiles-world/Building-Topper.glb" id="23_0u07a"]
+[ext_resource type="PackedScene" uid="uid://c34trcycsyra4" path="res://assets/tiles-world/Facade-Office-Glass-Edge.glb" id="24_31i3h"]
+[ext_resource type="PackedScene" uid="uid://ue0ndlkwb0su" path="res://assets/tiles-world/Facade-Office-Glass-Edge_001.glb" id="25_4a4mf"]
+[ext_resource type="PackedScene" uid="uid://ctdvu6x8rs54b" path="res://assets/tiles-world/Facade-Office-Glass-Topper-Center.glb" id="26_s8fd3"]
+[ext_resource type="PackedScene" uid="uid://d2vfe7ilhrsuw" path="res://assets/tiles-world/Facade-Office-Glass-Topper-Left.glb" id="27_wudjf"]
+[ext_resource type="PackedScene" uid="uid://bhmryxm3ijwcg" path="res://assets/tiles-world/Facade-Office-Glass-Topper-Right.glb" id="28_fjlxq"]
+[ext_resource type="PackedScene" uid="uid://c2qfe7wjxbac0" path="res://assets/tiles-world/Facade-Office-Lower-Edge.glb" id="29_ogquf"]
+[ext_resource type="PackedScene" uid="uid://dycqcvmmv16xg" path="res://assets/tiles-world/Facade-Office-Lower-Edge_001.glb" id="30_iacwq"]
+[ext_resource type="PackedScene" uid="uid://0aotp5swkjl3" path="res://assets/tiles-world/Facade-Office-Lower-Entrance.glb" id="31_qy1t4"]
+[ext_resource type="PackedScene" uid="uid://c36utqbrmbj3w" path="res://assets/tiles-world/Facade-Office-Upper-Corner_.glb" id="32_squ12"]
+[ext_resource type="PackedScene" uid="uid://h33vkgtqsxdu" path="res://assets/tiles-world/Facade-Office-Upper-Edge.glb" id="33_48kx0"]
+[ext_resource type="PackedScene" uid="uid://dsld14dg4bkt0" path="res://assets/tiles-world/Road-Bare.glb" id="34_u6qyd"]
+[ext_resource type="PackedScene" uid="uid://c8strqdht1jaf" path="res://assets/tiles-world/Road-Crosswalk.glb" id="35_uggka"]
+[ext_resource type="PackedScene" uid="uid://lol6n3ef610y" path="res://assets/tiles-world/Road-Lines.glb" id="36_523kx"]
+[ext_resource type="PackedScene" uid="uid://bt37n8npl5x7s" path="res://assets/tiles-world/ShippingContainer-A.glb" id="37_h8rrk"]
+[ext_resource type="PackedScene" uid="uid://b1mcdpyo1538o" path="res://assets/tiles-world/ShippingContainer-B.glb" id="38_hyj8j"]
+[ext_resource type="PackedScene" uid="uid://c0pkrysv4y72u" path="res://assets/tiles-world/ShippingContainer-C.glb" id="39_ab5te"]
+[ext_resource type="PackedScene" uid="uid://bdumbd7qyoyhv" path="res://assets/tiles-world/Sidewalk-Crosswalk.glb" id="40_fhxpw"]
+[ext_resource type="PackedScene" uid="uid://211431pw1mcx" path="res://assets/tiles-world/Sidewalk-Edge.glb" id="41_w77vi"]
+[ext_resource type="PackedScene" uid="uid://bo53kcw8v1niw" path="res://assets/tiles-world/Sidewalk-Elevate-Edge.glb" id="42_4tpv2"]
+[ext_resource type="PackedScene" uid="uid://ds673r0khvvmd" path="res://assets/tiles-world/Sidewalk-Elevate-Edge_001.glb" id="43_pkrls"]
+[ext_resource type="PackedScene" uid="uid://b77o65ucvj460" path="res://assets/tiles-world/Sidewalk-Elevate-Edge_002.glb" id="44_tiqo5"]
+[ext_resource type="PackedScene" uid="uid://b7u47v4d8nxff" path="res://assets/tiles-world/Sidewalk-Elevate-Stairs.glb" id="45_2qcau"]
+[ext_resource type="PackedScene" uid="uid://bkjjsmdayb7dk" path="res://assets/tiles-world/Sidewalk-Full-Tarmac.glb" id="46_f2pem"]
+[ext_resource type="PackedScene" uid="uid://dt8gm8imlen0k" path="res://assets/tiles-world/Sidewalk-Full.glb" id="47_uvx5d"]
+[ext_resource type="PackedScene" uid="uid://bf0gkr3e5aapq" path="res://assets/tiles-world/Sidewalk-Inner.glb" id="48_4nxxw"]
+[ext_resource type="PackedScene" uid="uid://c7hw0jawdmnpm" path="res://assets/tiles-world/Sidewalk-Outer.glb" id="49_tib2p"]
+[ext_resource type="PackedScene" uid="uid://chfq7kyk5hcaf" path="res://assets/tiles-world/Tech-Scaffold-Corner.glb" id="50_x8bcp"]
+[ext_resource type="PackedScene" uid="uid://bba10knn2s3ij" path="res://assets/tiles-world/Tech-Scaffold-Edge.glb" id="51_0mcte"]
+[ext_resource type="PackedScene" uid="uid://bd4ovuimhi6y7" path="res://assets/tiles-world/Wall-Concrete-Corner.glb" id="52_j4jxk"]
+[ext_resource type="PackedScene" uid="uid://insbip1avr0l" path="res://assets/tiles-world/Wall-Concrete-Edge-Bare.glb" id="53_eneeq"]
+
+[node name="tiles-world" type="Node3D"]
+
+[node name="Apartment-Base-621-A" parent="." instance=ExtResource("1_2wjk0")]
+
+[node name="Apartment-Base-Corner" parent="." instance=ExtResource("2_qi4l3")]
+
+[node name="Apartment-Base-Dirty" parent="." instance=ExtResource("3_7ovur")]
+
+[node name="Apartment-Base-Door-A" parent="." instance=ExtResource("4_jbrpx")]
+
+[node name="Apartment-Base-Door-B" parent="." instance=ExtResource("5_bqfib")]
+
+[node name="Apartment-Base-Girl" parent="." instance=ExtResource("6_o47tr")]
+
+[node name="Apartment-Base-Moon-A" parent="." instance=ExtResource("7_sgvh0")]
+
+[node name="Apartment-Base-Moon-B" parent="." instance=ExtResource("8_vjpp0")]
+
+[node name="Apartment-Base-Moon-C" parent="." instance=ExtResource("9_cwtpe")]
+
+[node name="Apartment-Base-Posters" parent="." instance=ExtResource("10_r76sk")]
+
+[node name="Apartment-Base-Scuffed" parent="." instance=ExtResource("11_dprfm")]
+
+[node name="Apartment-Base-Shutters-A" parent="." instance=ExtResource("12_fvmy2")]
+
+[node name="Apartment-Base-Shutters-B" parent="." instance=ExtResource("13_ae20m")]
+
+[node name="Apartment-Base-Window-A" parent="." instance=ExtResource("14_8iv0g")]
+
+[node name="Apartment-Base-Window-B" parent="." instance=ExtResource("15_lf0g4")]
+
+[node name="Apartment-Height-ACUnit" parent="." instance=ExtResource("16_pebi6")]
+
+[node name="Apartment-Height-BigWindow" parent="." instance=ExtResource("17_3gd6j")]
+
+[node name="Apartment-Height-Corner" parent="." instance=ExtResource("18_kxqi7")]
+
+[node name="Apartment-Height-Fence" parent="." instance=ExtResource("19_ymla3")]
+
+[node name="ApartmentHeight-Balcony-A" parent="." instance=ExtResource("20_in3d5")]
+
+[node name="ApartmentHeight-Balcony-B" parent="." instance=ExtResource("21_3r4ah")]
+
+[node name="ApartmentHeight-Balcony-C" parent="." instance=ExtResource("22_o1wy6")]
+
+[node name="Building-Topper" parent="." instance=ExtResource("23_0u07a")]
+
+[node name="Facade-Office-Glass-Edge" parent="." instance=ExtResource("24_31i3h")]
+
+[node name="Facade-Office-Glass-Edge_001" parent="." instance=ExtResource("25_4a4mf")]
+
+[node name="Facade-Office-Glass-Topper-Center" parent="." instance=ExtResource("26_s8fd3")]
+
+[node name="Facade-Office-Glass-Topper-Left" parent="." instance=ExtResource("27_wudjf")]
+
+[node name="Facade-Office-Glass-Topper-Right" parent="." instance=ExtResource("28_fjlxq")]
+
+[node name="Facade-Office-Lower-Edge" parent="." instance=ExtResource("29_ogquf")]
+
+[node name="Facade-Office-Lower-Edge_001" parent="." instance=ExtResource("30_iacwq")]
+
+[node name="Facade-Office-Lower-Entrance" parent="." instance=ExtResource("31_qy1t4")]
+
+[node name="Facade-Office-Upper-Corner_" parent="." instance=ExtResource("32_squ12")]
+
+[node name="Facade-Office-Upper-Edge" parent="." instance=ExtResource("33_48kx0")]
+
+[node name="Road-Bare" parent="." groups=["SoundConcrete"] instance=ExtResource("34_u6qyd")]
+
+[node name="Road-Crosswalk" parent="." groups=["SoundConcrete"] instance=ExtResource("35_uggka")]
+
+[node name="Road-Lines" parent="." groups=["SoundConcrete"] instance=ExtResource("36_523kx")]
+
+[node name="ShippingContainer-A" parent="." instance=ExtResource("37_h8rrk")]
+
+[node name="ShippingContainer-B" parent="." instance=ExtResource("38_hyj8j")]
+
+[node name="ShippingContainer-C" parent="." instance=ExtResource("39_ab5te")]
+
+[node name="Sidewalk-Crosswalk" parent="." instance=ExtResource("40_fhxpw")]
+
+[node name="Sidewalk-Edge" parent="." instance=ExtResource("41_w77vi")]
+
+[node name="Sidewalk-Elevate-Edge" parent="." instance=ExtResource("42_4tpv2")]
+
+[node name="Sidewalk-Elevate-Edge_001" parent="." instance=ExtResource("43_pkrls")]
+
+[node name="Sidewalk-Elevate-Edge_002" parent="." instance=ExtResource("44_tiqo5")]
+
+[node name="Sidewalk-Elevate-Stairs" parent="." instance=ExtResource("45_2qcau")]
+
+[node name="Sidewalk-Full-Tarmac" parent="." instance=ExtResource("46_f2pem")]
+
+[node name="Sidewalk-Full" parent="." instance=ExtResource("47_uvx5d")]
+
+[node name="Sidewalk-Inner" parent="." instance=ExtResource("48_4nxxw")]
+
+[node name="Sidewalk-Outer" parent="." instance=ExtResource("49_tib2p")]
+
+[node name="Tech-Scaffold-Corner" parent="." instance=ExtResource("50_x8bcp")]
+
+[node name="Tech-Scaffold-Edge" parent="." instance=ExtResource("51_0mcte")]
+
+[node name="Wall-Concrete-Corner" parent="." instance=ExtResource("52_j4jxk")]
+
+[node name="Wall-Concrete-Edge-Bare" parent="." instance=ExtResource("53_eneeq")]
