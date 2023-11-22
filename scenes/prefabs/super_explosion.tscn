@@ -1,0 +1,175 @@
+[gd_scene load_steps=13 format=3 uid="uid://cl763k5d0ycw4"]
+
+[ext_resource type="Texture2D" uid="uid://j8wdhvqwu123" path="res://assets/textures/exp2_0.png" id="1_fdjct"]
+[ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="2_g2hq4"]
+[ext_resource type="AudioStream" uid="uid://dnrpwr2tix425" path="res://assets/audio/effects/Bluezone_BC0277_explosion_mortar_002_01.wav" id="3_845hm"]
+[ext_resource type="AudioStream" uid="uid://bankcr4m3qp4a" path="res://assets/audio/effects/MagicPack2_WaterExplosions_Explosion2-004.wav" id="4_ar18i"]
+
+[sub_resource type="Animation" id="Animation_2qokb"]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fire:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 59]
+}
+
+[sub_resource type="Animation" id="Animation_xo1hj"]
+resource_name = "explosion_sprite"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fire:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 15]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5d5xl"]
+resource_name = "explosion_sprite_super"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fire:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 15]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7swce"]
+_data = {
+"RESET": SubResource("Animation_2qokb"),
+"explosion_sprite": SubResource("Animation_xo1hj"),
+"explosion_sprite_super": SubResource("Animation_5d5xl")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt8cx"]
+transparency = 1
+albedo_texture = ExtResource("1_fdjct")
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_32dsv"]
+material = SubResource("StandardMaterial3D_wt8cx")
+
+[sub_resource type="Curve" id="Curve_xdf2s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.473684), -1.37193, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3q5h2"]
+radius = 3.0
+
+[node name="SuperExplosion" type="Node3D"]
+
+[node name="Fire" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.415686, 0)
+modulate = Color(0.619608, 0.619608, 0.619608, 1)
+pixel_size = 0.12
+billboard = 1
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("1_fdjct")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "explosion_sprite_super"
+libraries = {
+"": SubResource("AnimationLibrary_7swce")
+}
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+lifetime = 1.5
+explosiveness = 1.0
+fixed_fps = 16
+fract_delta = false
+local_coords = true
+mesh = SubResource("QuadMesh_32dsv")
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(0, -2.452, 0)
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+damping_min = 15.0
+damping_max = 15.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_xdf2s")
+anim_speed_min = 1.0
+anim_speed_max = 3.0
+
+[node name="DamageDealer" type="Node" parent="."]
+script = ExtResource("2_g2hq4")
+damage = 12
+
+[node name="SplashArea" type="Area3D" parent="."]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SplashArea"]
+shape = SubResource("SphereShape3D_3q5h2")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_845hm")
+unit_size = 25.0
+autoplay = true
+bus = &"Effects"
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_ar18i")
+pitch_scale = 0.8
+autoplay = true
+bus = &"Effects"
+
+[connection signal="body_entered" from="SplashArea" to="DamageDealer" method="deal_damage"]

@@ -12,6 +12,7 @@ var boss_node_parent : Node
 var closest_node : Node3D
 var closest_behind : bool
 var show_closest : bool
+var standard_delay :float = 5.0
 
 @export var boss_point : Node3D
 
@@ -92,7 +93,7 @@ func encounter_progress():
 		monologue.show_monologue("Otis","One target remains, Angel. You're almost home.")
 		
 	if encountersResolved == 6:
-		if luresActivated < 4:
+		if luresActivated < 3:
 			player.set_invulnerable(true)
 			monologue.show_monologue("Otis","Objective achieved. Pack it up and return to base.")
 		else:
@@ -100,7 +101,7 @@ func encounter_progress():
 
 func activate_boss():
 	monologue.show_monologue("Otis","Objective achieved. Pack it up and... Wait...")
-	await get_tree().create_timer(7, false).timeout
+	await get_tree().create_timer(standard_delay, false).timeout
 	armor_queen.start_following()
 	monologue.show_monologue("Otis","Angel! That massive enemy is closing in! It's a Terranoid Queen!")
 	
@@ -113,16 +114,32 @@ func lure_progress():
 	await get_tree().create_timer(1.5).timeout
 	
 	if luresActivated == 1:
-		monologue.show_monologue("Otis","That device is acting like a Terranoid Lure. Why would that be in the city?")
-	
+		monologue.show_monologue("Otis","That sound... That device is acting like a Terranoid Lure.")
+		await get_tree().create_timer(standard_delay, false).timeout
+		monologue.show_monologue("Angel","Who would want to lure Terranoids [i]into[/i] the city?") 
+		await get_tree().create_timer(standard_delay, false).timeout
+		monologue.show_monologue("Otis","Keep an eye out for more. I'll see what information I can find from here.")
+		await get_tree().create_timer(standard_delay, false).timeout
+		
 	if luresActivated == 2:
-		monologue.show_monologue("Otis","Angel, Terranoid activity in the surrounding sectors is shifting. Be careful!")
+		monologue.show_monologue("Angel","I found another Terranoid Lure.")
+		await get_tree().create_timer(standard_delay, false).timeout
+		monologue.show_monologue("Otis","Terranoid activity in the surrounding sectors is shifting. Be careful, Angel!")
 		
 	if luresActivated == 3:
-		monologue.show_monologue("Otis","A massive heat signature is headed your way, Angel. Can you get out of there before it arrives?")
-
+		monologue.show_monologue("Otis","Was that another Lure, Angel? Something huge is moving toward your sector.")
+		await get_tree().create_timer(standard_delay, false).timeout
+		monologue.show_monologue("Angel","Better finish the job quick, then.")
+		
 func boss_defeated():
 	if encountersResolved == 6 and luresActivated == 3:
 		player.set_invulnerable(true)
-		monologue.show_monologue("Otis","Excellent job, Angel! Pallas Athena can clear up the rest. Let's get you home.")
+		monologue.show_monologue("Angel","Otis? The Queen is down.")
+		await get_tree().create_timer(standard_delay, false).timeout
+		monologue.show_monologue("Otis","Angel! Are you alright?")
+		await get_tree().create_timer(standard_delay, false).timeout
+		monologue.show_monologue("Angel","I'm fine, but the Queen. It wasn't normal. It was... mechanized somehow.")
+		await get_tree().create_timer(standard_delay, false).timeout
+		monologue.show_monologue("Otis","Pallas Athena can clear up the rest. Let's get you home.")
+		await get_tree().create_timer(standard_delay, false).timeout
 	

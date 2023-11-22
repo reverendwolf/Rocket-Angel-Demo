@@ -40,9 +40,9 @@ func display_text():
 		dialogueText.visible_characters += 1
 		audio_click.play()
 		if dialogueText.get_parsed_text()[dialogueText.visible_characters - 1] in ".,?!":
-			await get_tree().create_timer(punctuationtime).timeout
+			await get_tree().create_timer(punctuationtime, false).timeout
 		else:
-			await get_tree().create_timer(characterTime).timeout
+			await get_tree().create_timer(characterTime, false).timeout
 	
 	if monologue_working:
 		messageTimer.start()

@@ -15,11 +15,11 @@ func _on_area_entered(area):
 		match area.pickup_type:
 			area.PickupType.SHARD:
 				if player_health.currentHealth < 100:
-					player_health.heal(15)
+					player_health.heal(2)
 					used = true
 			area.PickupType.PLATE:
 				if player_health.currentHealth < 100:
-					player_health.heal(35)
+					player_health.heal(25)
 					used = true
 			area.PickupType.CHARGE:
 				player_health.heal(200,true)

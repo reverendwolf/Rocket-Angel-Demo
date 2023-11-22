@@ -1,0 +1,64 @@
+[gd_scene load_steps=21 format=3 uid="uid://cmh1njrrmlvqi"]
+
+[ext_resource type="PackedScene" uid="uid://dv76qkfrkti5h" path="res://assets/tiles-objects/Bench.glb" id="1_nerw3"]
+[ext_resource type="PackedScene" uid="uid://blihu0h5lib4u" path="res://assets/tiles-objects/Lamp-LightCone.glb" id="11_m3rof"]
+[ext_resource type="PackedScene" uid="uid://cw88r3r46jt5s" path="res://assets/tiles-objects/Billboard-Frame.glb" id="12_0my18"]
+[ext_resource type="PackedScene" uid="uid://v58fxbw0urg" path="res://assets/tiles-objects/Lamp-Post-On.glb" id="12_rbiyn"]
+[ext_resource type="PackedScene" uid="uid://b4rfdlvkoxn64" path="res://assets/tiles-objects/Billboard-Farm.glb" id="13_d0ksi"]
+[ext_resource type="PackedScene" uid="uid://bv18t3vr8c7pl" path="res://assets/tiles-objects/LampPost-Off.glb" id="13_u5320"]
+[ext_resource type="PackedScene" uid="uid://d02gavlg8poxs" path="res://assets/tiles-objects/Billboard-misterdungeon.glb" id="14_1gf28"]
+[ext_resource type="PackedScene" uid="uid://dqpc4eojeifhm" path="res://assets/tiles-objects/Metal_Road_Barrier.glb" id="14_toxm0"]
+[ext_resource type="PackedScene" uid="uid://bxicmq0u4pvet" path="res://assets/tiles-objects/Road-Bollard.glb" id="15_8dxsx"]
+[ext_resource type="PackedScene" uid="uid://cpg5bksnveogc" path="res://assets/tiles-objects/Billboard-NoBooks.glb" id="15_t15vh"]
+[ext_resource type="PackedScene" uid="uid://dcedvtkajbqkj" path="res://assets/tiles-objects/Billboard-NYX.glb" id="16_1rq3u"]
+[ext_resource type="PackedScene" uid="uid://lmfdnmdnst75" path="res://assets/tiles-objects/Sign-NoLeft.glb" id="16_lqbjk"]
+[ext_resource type="PackedScene" uid="uid://dyjo4vkgc7b7w" path="res://assets/tiles-objects/Sign-NoRight.glb" id="17_p8ela"]
+[ext_resource type="PackedScene" uid="uid://ct4l586xc7k3l" path="res://assets/tiles-objects/Sign-Stop.glb" id="18_jki0r"]
+[ext_resource type="PackedScene" uid="uid://drwu2n6yoh483" path="res://assets/tiles-objects/Billboard-PallasAthena.glb" id="19_8xrlo"]
+[ext_resource type="PackedScene" uid="uid://dk6fi4md2viet" path="res://assets/tiles-objects/Sign-Stop_001.glb" id="19_xqqp5"]
+[ext_resource type="PackedScene" uid="uid://cky2fsk23lwtn" path="res://assets/tiles-objects/Billboard-Syn.glb" id="20_0h2r5"]
+[ext_resource type="PackedScene" uid="uid://dhvy7n1gaab4o" path="res://assets/tiles-objects/Billboard-Wasteland.glb" id="20_5dtry"]
+[ext_resource type="PackedScene" uid="uid://c7x4doycrrnbt" path="res://assets/tiles-objects/Tree-Box.glb" id="20_uqqhw"]
+[ext_resource type="PackedScene" uid="uid://byw2u1vsarw8h" path="res://assets/tiles-objects/Billboard-Trip.glb" id="21_loraj"]
+
+[node name="tiles-objects" type="Node3D"]
+
+[node name="Bench" parent="." instance=ExtResource("1_nerw3")]
+
+[node name="Lamp-LightCone" parent="." instance=ExtResource("11_m3rof")]
+
+[node name="Lamp-Post-On" parent="." instance=ExtResource("12_rbiyn")]
+
+[node name="LampPost-Off" parent="." instance=ExtResource("13_u5320")]
+
+[node name="Metal_Road_Barrier" parent="." instance=ExtResource("14_toxm0")]
+
+[node name="Road-Bollard" parent="." instance=ExtResource("15_8dxsx")]
+
+[node name="Sign-NoLeft" parent="." instance=ExtResource("16_lqbjk")]
+
+[node name="Sign-NoRight" parent="." instance=ExtResource("17_p8ela")]
+
+[node name="Sign-Stop" parent="." instance=ExtResource("18_jki0r")]
+
+[node name="Sign-Stop_001" parent="." instance=ExtResource("19_xqqp5")]
+
+[node name="Tree-Box" parent="." instance=ExtResource("20_uqqhw")]
+
+[node name="Billboard-Farm" parent="." instance=ExtResource("13_d0ksi")]
+
+[node name="Billboard-Frame" parent="." instance=ExtResource("12_0my18")]
+
+[node name="Billboard-misterdungeon" parent="." instance=ExtResource("14_1gf28")]
+
+[node name="Billboard-NoBooks" parent="." instance=ExtResource("15_t15vh")]
+
+[node name="Billboard-NYX" parent="." instance=ExtResource("16_1rq3u")]
+
+[node name="Billboard-PallasAthena" parent="." instance=ExtResource("19_8xrlo")]
+
+[node name="Billboard-Syn" parent="." instance=ExtResource("20_0h2r5")]
+
+[node name="Billboard-Trip" parent="." instance=ExtResource("21_loraj")]
+
+[node name="Billboard-Wasteland" parent="." instance=ExtResource("20_5dtry")]

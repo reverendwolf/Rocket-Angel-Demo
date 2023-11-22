@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3yue73mkuojx"]
+
+[ext_resource type="PackedScene" uid="uid://k62k4ot5kxnm" path="res://assets/blends/angel-fullbody.glb" id="1_jv8ig"]
+[ext_resource type="Shader" path="res://shaders/ps1-lit.gdshader" id="2_f875w"]
+[ext_resource type="Texture2D" uid="uid://c8xbu58vo34w2" path="res://assets/blends/texture library/angel.png" id="3_rw1bx"]
+[ext_resource type="Shader" path="res://shaders/ps1-unlit.gdshader" id="4_dsj6a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_do26h"]
+render_priority = 0
+shader = ExtResource("2_f875w")
+shader_parameter/jitter = 0.15
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 0.2
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("3_rw1bx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rrdcs"]
+render_priority = 0
+shader = ExtResource("2_f875w")
+shader_parameter/jitter = 0.15
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 0.2
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("3_rw1bx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ccrv8"]
+render_priority = 0
+shader = ExtResource("4_dsj6a")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(0, 0.270588, 0.270588, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+
+[node name="angel-fullbody" instance=ExtResource("1_jv8ig")]
+
+[node name="Gun" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, 1.19209e-07, 3.25963e-07, 4.5076e-07, 4.32134e-07, -1, -1.49012e-07, 1, 3.42727e-07, -0.257898, 0.817456, -0.090309)
+bone_idx = 15
+
+[node name="Gun" parent="Armature/Skeleton3D/Gun" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_do26h")
+
+[node name="Body" parent="Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_rrdcs")
+
+[node name="Visor" parent="Armature/Skeleton3D" index="2"]
+surface_material_override/0 = SubResource("ShaderMaterial_ccrv8")

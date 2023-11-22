@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://prdlscba1n6u"]
+
+[ext_resource type="Script" path="res://scripts/basic_interactable.gd" id="1_361iw"]
+[ext_resource type="PackedScene" uid="uid://clbcxhtiltbeo" path="res://assets/blends/terminal.glb" id="2_8vw0l"]
+[ext_resource type="AudioStream" uid="uid://crovkwf88ihgx" path="res://assets/audio/effects/keyboard.wav" id="3_qop32"]
+[ext_resource type="AudioStream" uid="uid://cb6n3rmhis22n" path="res://assets/audio/effects/designed-circuits-hum-06-118164.mp3" id="4_5jxma"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ghwc5"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="Animation" id="Animation_upxjy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OmniLight3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_da7ay"]
+resource_name = "activate"
+length = 1.2
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("typing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_qop32")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OmniLight3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("humming")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7yfhp"]
+_data = {
+"RESET": SubResource("Animation_upxjy"),
+"activate": SubResource("Animation_da7ay")
+}
+
+[node name="Test Interactable" type="StaticBody3D"]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_361iw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ghwc5")
+
+[node name="terminal" parent="." instance=ExtResource("2_8vw0l")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.200001, 0.8, -0.199997)
+visible = false
+light_color = Color(0, 1, 0, 1)
+light_energy = 0.5
+omni_range = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7yfhp")
+}
+
+[node name="typing" type="AudioStreamPlayer3D" parent="."]
+
+[node name="humming" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_5jxma")
+unit_size = 5.0
+
+[connection signal="interaction" from="." to="CollisionShape3D" method="set_disabled" binds= [true]]
+[connection signal="interaction" from="." to="AnimationPlayer" method="play" binds= ["activate"]]

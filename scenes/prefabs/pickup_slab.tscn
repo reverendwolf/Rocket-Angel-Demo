@@ -1,0 +1,232 @@
+[gd_scene load_steps=19 format=3 uid="uid://ca2vokwoulihg"]
+
+[ext_resource type="Script" path="res://scripts/pickup_def.gd" id="1_aanhd"]
+[ext_resource type="PackedScene" uid="uid://dd2bklastryer" path="res://assets/blends/quartz-refined.glb" id="2_82v3f"]
+[ext_resource type="Texture2D" uid="uid://3e2v82f2wx18" path="res://assets/kenney/particle pack/light_01.png" id="3_1vdm3"]
+[ext_resource type="Texture2D" uid="uid://bcq1bp38f2eip" path="res://assets/kenney/particle pack/light_02.png" id="4_apsag"]
+[ext_resource type="Texture2D" uid="uid://bu6j6c0gjaycq" path="res://assets/kenney/particle pack/flare_01.png" id="5_rs3ta"]
+[ext_resource type="AudioStream" uid="uid://c1w5yeve1snq0" path="res://assets/audio/effects/BELLMisc_Chimes, Atmos, Dark Magic, Unsetting, Magical 06_344 Audio_Cymbals From Hell Vol 3.wav" id="6_tig32"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lr0my"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ln6pt"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("3_1vdm3")
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_npxjk"]
+material = SubResource("StandardMaterial3D_ln6pt")
+
+[sub_resource type="Curve" id="Curve_jlddb"]
+max_value = 2.0
+_data = [Vector2(0, 0.589474), 0.0, 0.0, 0, 0, Vector2(1, 2), 3.69308, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_3anaj"]
+offsets = PackedFloat32Array(0, 0.202206, 0.669118, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32xgm"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("4_apsag")
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_7nwes"]
+material = SubResource("StandardMaterial3D_32xgm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pg3wb"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("5_rs3ta")
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_qajwp"]
+material = SubResource("StandardMaterial3D_pg3wb")
+
+[sub_resource type="Animation" id="Animation_23xn1"]
+resource_name = "spinny"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quartz-refined:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5, 3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("quartz-refined:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5, 3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("quartz-refined:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5, 3)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("quartz-refined:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wdk66"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("quartz-refined:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("quartz-refined:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("quartz-refined:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("quartz-refined:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rv75y"]
+_data = {
+"RESET": SubResource("Animation_wdk66"),
+"spinny": SubResource("Animation_23xn1")
+}
+
+[node name="PickupSlab" type="Area3D"]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_aanhd")
+pickup_type = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lr0my")
+
+[node name="quartz-refined" parent="." instance=ExtResource("2_82v3f")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0)
+
+[node name="PulseGlow" type="CPUParticles3D" parent="."]
+amount = 3
+lifetime = 3.0
+fixed_fps = 16
+mesh = SubResource("QuadMesh_npxjk")
+gravity = Vector3(0, 0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_jlddb")
+color_ramp = SubResource("Gradient_3anaj")
+
+[node name="PulseGlow2" type="CPUParticles3D" parent="."]
+amount = 2
+lifetime = 3.0
+fixed_fps = 16
+mesh = SubResource("QuadMesh_7nwes")
+gravity = Vector3(0, 0, 0)
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_jlddb")
+color_ramp = SubResource("Gradient_3anaj")
+
+[node name="Stars" type="CPUParticles3D" parent="."]
+amount = 4
+lifetime = 3.0
+fixed_fps = 16
+mesh = SubResource("QuadMesh_qajwp")
+emission_shape = 2
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_jlddb")
+color_ramp = SubResource("Gradient_3anaj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spinny"
+libraries = {
+"": SubResource("AnimationLibrary_rv75y")
+}
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0, 0, 1)
+omni_range = 3.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_tig32")
+autoplay = true
+max_distance = 30.0

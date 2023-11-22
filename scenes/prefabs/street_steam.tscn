@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://4ps8oi07m08f"]
+
+[ext_resource type="Texture2D" uid="uid://dd42mwc8yetia" path="res://assets/kenney/particle pack/smoke_04.png" id="1_hgedc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_527hy"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_hgedc")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_oo8yx"]
+material = SubResource("StandardMaterial3D_527hy")
+
+[sub_resource type="Curve" id="Curve_whgme"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 13.387, 0, 0, Vector2(0.2, 0.989474), 0.0, 0.0, 0, 0, Vector2(1, 2), 4.10846, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_tcb8g"]
+offsets = PackedFloat32Array(0, 0.18593, 0.497487, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Street Steam" type="Node3D"]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+lifetime = 2.0
+randomness = 0.5
+lifetime_randomness = 0.51
+fixed_fps = 16
+mesh = SubResource("QuadMesh_oo8yx")
+direction = Vector3(0, 0, -3)
+gravity = Vector3(0, 4, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 2.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_whgme")
+color_ramp = SubResource("Gradient_tcb8g")

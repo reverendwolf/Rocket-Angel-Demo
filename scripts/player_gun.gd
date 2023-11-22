@@ -4,6 +4,7 @@ class_name PlayerGun
 
 @export var shoot_point : Node3D
 @export var audio_source_shoot : AudioStreamPlayer3D
+@export var audio_source_reload : AudioStreamPlayer3D
 
 @export var player_parent : Node3D
 @export var normal_rocket : PackedScene
@@ -12,18 +13,23 @@ class_name PlayerGun
 @onready var primaryLabel : RichTextLabel = $"../Player Hud/Panel2/MagazineLabel"
 @onready var ammoLabel : RichTextLabel = $"../Player Hud/Panel3/AmmoLabel"
 
+@export var anim_tree : AnimationTree
+var anim_state
+
 const MAX_MAGAZINE = 6
 const MAX_SECONDARY = 9
-const SHOT_COOLDOWN = 0.55
+const SHOT_COOLDOWN = 0.6
 const RELOAD_DELAY = 1.25
 
 var magazine = MAX_MAGAZINE
 var secondary = 1
 var shot_cooldown = 0.0
 var reload_delay = 0.0
+var reloading : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	anim_state = anim_tree["parameters/playback"]
 	pass # Replace with function body.
 
 
@@ -31,7 +37,7 @@ func _ready():
 func _process(delta):
 	_process_cooldowns(delta)
 	
-	if reload_delay > 0.0 or shot_cooldown > 0.0:
+	if reloading or shot_cooldown > 0.0:
 		return
 	
 	if Input.is_action_just_pressed("shoot_p"):
@@ -54,6 +60,7 @@ func _update_ammo_label():
 func _shoot_primary():
 	magazine -= 1
 	shot_cooldown = SHOT_COOLDOWN
+	anim_state.travel("Shoot")
 	_update_ammo_label()
 	#if audio_source_shoot:
 	#	audio_source_shoot.pitch_scale = randf_range(0.9, 1.15)
@@ -67,6 +74,7 @@ func _shoot_primary():
 func _shoot_secondary():
 	shot_cooldown = SHOT_COOLDOWN * 2
 	secondary -= 1
+	anim_state.travel("Shoot")
 	_update_ammo_label()
 	if audio_source_shoot:
 		audio_source_shoot.pitch_scale = randf_range(0.9, 1.15)
@@ -78,16 +86,17 @@ func _shoot_secondary():
 	get_tree().root.add_child(r)
 	
 func _reload():
-	reload_delay = RELOAD_DELAY
+	reloading = true
+	anim_state.travel("Reload")
+	audio_source_reload.play(0.0)
+	await anim_tree.animation_finished
 	magazine = MAX_MAGAZINE
 	_update_ammo_label()
+	reloading = false
 	
 func _process_cooldowns(time):
 	if(shot_cooldown >= 0.0):
 		shot_cooldown -= time
-		
-	if(reload_delay >= 0.0):
-		reload_delay -= time
 			
 func add_ammo(value : int):
 	secondary = clamp(secondary + value, 0, MAX_SECONDARY)

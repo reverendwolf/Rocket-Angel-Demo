@@ -34,6 +34,7 @@ var glide_refuel_timer = 0.0
 @onready var footstep_cast = $FootstepShapeCast
 @onready var footstepSound = $FootstepSound
 @onready var interactionRaycast = $Head/Camera3D/InteractionRayCast
+@onready var interactionMarker = $"Player Hud/Interaction"
 @onready var health = $PlayerHealth
 
 @onready var floatJetSound = $FloatJetSound
@@ -52,7 +53,8 @@ func _ready():
 	fuel_bar.max_value = GLIDE_FUEL_MAX
 	glide_fuel = GLIDE_FUEL_MAX
 
-
+func _process(_delta):
+	interactionMarker.visible = interactionRaycast.is_colliding()
 
 func _physics_process(delta):
 	# Add the gravity.

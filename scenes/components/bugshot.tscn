@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5suebfbxwvn"]
+
+[ext_resource type="PackedScene" uid="uid://cl0ayngvmerpa" path="res://assets/blends/bug-shot.glb" id="1_erx0u"]
+[ext_resource type="Script" path="res://scripts/bugshot.gd" id="1_py8ka"]
+[ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="2_2mle7"]
+[ext_resource type="PackedScene" uid="uid://brplm784cg4hj" path="res://scripts/scenes/prefabs/simple_explosion.tscn" id="2_dmph4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cmpww"]
+rough = true
+bounce = 0.15
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1scbv"]
+size = Vector3(0.75, 0.75, 0.75)
+
+[node name="Bugshot" type="RigidBody3D" node_paths=PackedStringArray("damage_dealer")]
+mass = 64.0
+physics_material_override = SubResource("PhysicsMaterial_cmpww")
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_py8ka")
+damage_dealer = NodePath("DamageDealer")
+explosion = ExtResource("2_dmph4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.851278, 0.524714, 0, -0.452953, 0.734855, 0.504799, 0.264875, -0.429724, 0.863237, 0, 0, 0)
+shape = SubResource("BoxShape3D_1scbv")
+
+[node name="bug-shot" parent="." instance=ExtResource("1_erx0u")]
+
+[node name="DamageDealer" type="Node" parent="."]
+script = ExtResource("2_2mle7")
+damage = 6
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="explode"]
