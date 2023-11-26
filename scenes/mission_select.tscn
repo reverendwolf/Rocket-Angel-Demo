@@ -1,0 +1,989 @@
+[gd_scene load_steps=39 format=3 uid="uid://bu74tbki7lnci"]
+
+[ext_resource type="Script" path="res://scripts/mission_select.gd" id="1_2h484"]
+[ext_resource type="PackedScene" uid="uid://cqfxgnl67xhdk" path="res://assets/blends/ultracity-floor.glb" id="1_hnv2n"]
+[ext_resource type="PackedScene" uid="uid://bak7ptrgyxl3y" path="res://assets/blends/ultracity-stuff.glb" id="2_f3e3d"]
+[ext_resource type="Texture2D" uid="uid://b465x08x04ytd" path="res://assets/kenney/game icons/down.png" id="3_3dg11"]
+[ext_resource type="Shader" path="res://shaders/ps1-lit.gdshader" id="3_frmfl"]
+[ext_resource type="Shader" path="res://shaders/ps1-lit-ds.gdshader" id="4_nbu45"]
+[ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="5_47i37"]
+[ext_resource type="Texture2D" uid="uid://d074silw8rwxa" path="res://assets/kenney/crosshair kit/crosshair118.png" id="7_afwje"]
+[ext_resource type="Shader" path="res://shaders/ps1-unlit.gdshader" id="8_rmqpg"]
+[ext_resource type="AudioStream" uid="uid://ysg0jag7skk7" path="res://assets/audio/effects/193_Hit_Impact_Metal-01-02.wav" id="9_1pd52"]
+[ext_resource type="AudioStream" uid="uid://dm4il4yt56pqb" path="res://assets/audio/music/I3-Modern - Investigations.mp3" id="9_rnh8f"]
+[ext_resource type="Texture2D" uid="uid://b7iyf1xa8grpm" path="res://assets/kenney/pixeluipack/9-Slice/space-green-clear-gradient.png" id="10_x4gtb"]
+[ext_resource type="Texture2D" uid="uid://fsy0jn74706b" path="res://assets/ui/wenrexia scifi/MainPanel03.png" id="11_v07rp"]
+[ext_resource type="AudioStream" uid="uid://c3ehjykhq0i3q" path="res://assets/audio/effects/Impact,Sound Design,Hit,Chime,Resonant Hit,Chime Accent,Tinkle,Fast.wav" id="12_0jg11"]
+[ext_resource type="FontFile" uid="uid://hwoxga6h26ln" path="res://assets/fonts/Yulong-Regular.ttf" id="12_ag5n8"]
+[ext_resource type="Script" path="res://scripts/monologue.gd" id="14_pft1q"]
+[ext_resource type="Texture2D" uid="uid://j8wdhvqwu123" path="res://assets/textures/exp2_0.png" id="15_asqxg"]
+[ext_resource type="Texture2D" uid="uid://c4tbmmqwpya0" path="res://assets/ui/gradient-top.png" id="15_hmlma"]
+[ext_resource type="AudioStream" uid="uid://cq4k6cshif0r1" path="res://assets/audio/effects/type-tick.wav" id="16_nni1q"]
+
+[sub_resource type="Environment" id="Environment_p83p3"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdu4q"]
+render_priority = 0
+shader = ExtResource("4_nbu45")
+shader_parameter/jitter = 0.15
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 0.2
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("3_3dg11")
+
+[sub_resource type="QuadMesh" id="QuadMesh_hbrc3"]
+material = SubResource("ShaderMaterial_bdu4q")
+
+[sub_resource type="Animation" id="Animation_dsr5o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8sg7m"]
+resource_name = "spin"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mp1lo"]
+_data = {
+"RESET": SubResource("Animation_dsr5o"),
+"spin": SubResource("Animation_8sg7m")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpvap"]
+render_priority = 0
+shader = ExtResource("3_frmfl")
+shader_parameter/jitter = 0.15
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 0.2
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("7_afwje")
+
+[sub_resource type="QuadMesh" id="QuadMesh_xh4kd"]
+material = SubResource("ShaderMaterial_kpvap")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7grx8"]
+render_priority = 0
+shader = ExtResource("8_rmqpg")
+shader_parameter/jitter = 0.15
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 0.2
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_dd0cs"]
+material = SubResource("ShaderMaterial_7grx8")
+shape = 0
+size = 2.5
+section_length = 0.02
+section_segments = 1
+
+[sub_resource type="Shader" id="Shader_fxu5v"]
+code = "//*** *** *** *** *** *** *** *** *** *** ***    ***//
+//*** === PSX unlit surface shader effect    === ***//
+//*** ===          For Godot 4.0             === ***//
+//*** ===         By Analog Feelings         === ***//
+//*** === https://github.com/AnalogFeelings  === ***//
+//*** *** *** *** *** *** *** *** *** *** ***    ***//
+//*** ===       Licensed under the:          === ***//
+//*** ===           MIT License              === ***//
+//*** *** *** *** *** *** *** *** *** *** ***    ***//
+//*** ===    Derived from CC0 work by:       === ***//
+//*** ===           Mighty Duke              === ***//
+//*** *** *** *** *** *** *** *** *** *** ***    ***//
+
+/*****************************************************************************
+MIT License
+
+Copyright (c) 2022 Analog Feelings
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the \"Software\"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*****************************************************************************/
+
+shader_type spatial;
+render_mode unshaded, skip_vertex_transform, diffuse_lambert_wrap, blend_add, cull_disabled;
+
+uniform sampler2D albedo: source_color, filter_nearest;
+uniform sampler2D emission: hint_default_black, filter_nearest;
+
+// The \"jumpiness\" of vertices.
+uniform float jitter: hint_range(0.0, 1.0) = 0.5;
+
+// If disabled, jitter will not affect the Z coordinate
+// of the vertex.
+uniform bool jitter_z_coordinate = true;
+
+// If disabled, makes vertices further away from the camera
+// less jittery.
+uniform bool jitter_depth_independent = true;
+
+// Enables the PS1 texture warping.
+uniform bool affine_texture_mapping = true;
+
+// Any alpha value below this will not be rendered.
+uniform float alpha_scissor: hint_range(0.0, 1.0) = 1.0;
+
+// Color to overlay on top of the albedo texture.
+uniform vec4 albedo_color: source_color = vec4(1.0);
+
+// Emission color.
+uniform vec4 emission_color: source_color = vec4(1.0);
+
+// Texture tiling.
+uniform vec2 texture_size = vec2(1.0);
+
+void vertex() {
+	VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	
+	float z_orig = VERTEX.z;
+	float i = (1.0 - jitter) * min(VIEWPORT_SIZE.x, VIEWPORT_SIZE.y) / 2.0;
+	
+	if (jitter_depth_independent) {
+		float w = (PROJECTION_MATRIX * vec4(VERTEX, 1.0)).w;
+		VERTEX = round(VERTEX / w * i) / i * w;
+	} else {
+		VERTEX = round(VERTEX * i) / i;
+	}
+	
+	if (!jitter_z_coordinate) {
+		VERTEX.z = z_orig;
+	}
+
+	if (affine_texture_mapping) {
+		UV *= VERTEX.z;
+	}
+}
+
+void fragment() {
+	vec2 uv = UV;
+	
+	if (affine_texture_mapping) {
+		uv /= VERTEX.z;
+	}
+	
+	uv /= texture_size;
+	
+	// Overlay albedo color with the albedo texture.
+	ALBEDO = albedo_color.rgb * texture(albedo, uv).rgb;
+	
+	ALPHA = texture(albedo, uv).a;
+	ALPHA_SCISSOR_THRESHOLD = alpha_scissor;
+	
+	EMISSION = emission_color.rgb * texture(emission, uv).rgb;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnfmh"]
+render_priority = 0
+shader = SubResource("Shader_fxu5v")
+shader_parameter/jitter = 0.15
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 0.2
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_v8inh"]
+material = SubResource("ShaderMaterial_pnfmh")
+shape = 0
+size = 3.04
+section_length = 0.02
+section_segments = 1
+
+[sub_resource type="Animation" id="Animation_dqtbd"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-17.3718, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.6737, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:rotation:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-0.261799, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera3D:rotation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-1.5708, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera3D:rotation:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/NinePatchRect/ColorRect/RichTextLabel:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32.5, 110)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Control/NinePatchRect/ColorRect:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Control/NinePatchRect:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Control/RichTextLabel:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Control/ColorRect:color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.568627, 0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("CPUParticles3D:emitting")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_j11yc"]
+resource_name = "intro"
+length = 90.0
+step = 1.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-17.3718, -0.25, 0, 0.25, 0, -4.89303, -0.25, 0, 0.25, 0, -2.13198, -0.25, 0, 0.25, 0, 0.997202, -0.25, 0, 0.25, 0, 5.45613, -0.25, 0, 0.25, 0, -4.76837e-07, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 19, 31, 53, 70, 90)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1.6737, -0.25, 0, 0.25, 0, 1.6737, -0.25, 0, 0.25, 0, 1.6737, -0.25, 0, 0.25, 0, 1.6737, -0.25, 0, 0.25, 0, 1.6737, -0.25, 0, 0.25, 0, 11.9293, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 17, 29, 51, 72, 90)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-0.786884, -0.25, 0, 0.25, 0, -0.786884, -0.25, 0, 0.25, 0, -2.33307, -0.25, 0, 0.25, 0, -5.42544, -0.25, 0, 0.25, 0, 0.00960732, -0.25, 0, 0.25, 0, 10.9028, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 19, 32, 53, 68, 90)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:rotation:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-0.261799, -0.25, 0, 0.25, 0, -0.261799, -0.25, 0, 0.25, 0, -0.261799, -0.25, 0, 0.25, 0, -0.261799, -0.25, 0, 0.25, 0, -0.261799, -0.25, 0, 0.25, 0, -0.971171, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 19, 29, 51, 72, 90)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera3D:rotation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-1.5708, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.25, 0, -2.29411, -0.25, 0, 0.25, 0, -2.29411, -0.25, 0, 0.25, 0, -0.510352, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 15, 33, 56, 73, 90)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera3D:rotation:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 4.35586e-10, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 19, 29, 51, 68, 90)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/NinePatchRect/ColorRect/RichTextLabel:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(32.5, 110), Vector2(32.5, -549)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Control/NinePatchRect/ColorRect:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(78, 80),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Control/NinePatchRect:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(78, 80),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Control/RichTextLabel:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(81, 83, 87, 90),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ayjm7"]
+resource_name = "stage1"
+length = 30.0
+step = 1.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-4.76837e-07, -0.25, 0, 0.25, 0, -8.84618, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(11.9293, -0.25, 0, 0.25, 0, 2.69369, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(10.9028, -0.25, 0, 0.25, 0, 5.10672, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:rotation:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.971171, -0.25, 0, 0.25, 0, -0.466544, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera3D:rotation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera3D:rotation:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/ColorRect:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.568627, 0, 0), Color(0, 0.568627, 0, 0.705882), Color(0, 0.568627, 0, 0)]
+}
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimSounds")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_1pd52")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/7/use_blend = true
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CPUParticles3D:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Control/Monologue Display")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(2, 8, 14, 20),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["Otis", "The Pallas Athena Corporation has sent out an open call for mercenaries."],
+"method": &"show_monologue"
+}, {
+"args": ["Otis", "Sector 621 and the adjacent sectors are under attack by Terranoids."],
+"method": &"show_monologue"
+}, {
+"args": ["Otis", "There are six Terranoid Bugalistae in the sector. Locate and destroy them all."],
+"method": &"show_monologue"
+}, {
+"args": ["Angel", "Those bugs don't stand a chance against my rockets!"],
+"method": &"show_monologue"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n175m"]
+_data = {
+"RESET": SubResource("Animation_dqtbd"),
+"intro": SubResource("Animation_j11yc"),
+"stage1": SubResource("Animation_ayjm7")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pd4x"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("15_asqxg")
+texture_filter = 0
+billboard_mode = 3
+particles_anim_h_frames = 4
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_5gkuw"]
+material = SubResource("StandardMaterial3D_5pd4x")
+
+[node name="mission_select" type="Node" node_paths=PackedStringArray("anim_player", "selector", "selection_nodes")]
+script = ExtResource("1_2h484")
+anim_player = NodePath("AnimationPlayer")
+stage1 = "res://scenes/levels/test_world.tscn"
+selector = NodePath("Node3D/Selection")
+selection_nodes = [NodePath("Node3D/Level1"), NodePath("Node3D/Level2B"), NodePath("Node3D/Level2A"), NodePath("Node3D/Level3C"), NodePath("Node3D/Level3B"), NodePath("Node3D/Level3A"), NodePath("Node3D/Level4B"), NodePath("Node3D/Level4A"), NodePath("Node3D/Level5B"), NodePath("Node3D/Level5A"), NodePath("Node3D/Level6"), NodePath("Node3D/MeshInstance3D"), NodePath("Node3D/MeshInstance3D2")]
+
+[node name="ultracity-floor" parent="." instance=ExtResource("1_hnv2n")]
+
+[node name="ultracity-stuff" parent="." instance=ExtResource("2_f3e3d")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p83p3")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Selection" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.69061, 0.714222, 2.13286)
+mesh = SubResource("QuadMesh_hbrc3")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D/Selection"]
+autoplay = "spin"
+libraries = {
+"": SubResource("AnimationLibrary_mp1lo")
+}
+
+[node name="Level1" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8.69061, 0.0442569, 2.13286)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level2A" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5.66631, 0.0442569, 0.240639)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level2B" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5.66903, 0.0442569, 5.04419)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level3A" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -4.44128, 0.0442564, -5.00177)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level3B" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.712856, 0.0442569, 1.76554)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level3C" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.614576, 0.0442564, 6.00046)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level4A" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.751837, 0.0442564, -8.86303)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level4B" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3.77453, 0.0442564, 6.04231)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level5A" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3.63959, 0.0442564, 1.36265)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level5B" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3.68407, 0.0442564, -3.85526)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="Level6" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.8312, 0.0442564, -5.44479)
+mesh = SubResource("QuadMesh_xh4kd")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.851626, -0.524149, -2.29113e-08, 0, -4.37114e-08, 1, -0.524149, -0.851626, -3.72258e-08, -7.16305, 0.00846457, 1.21454)
+mesh = SubResource("RibbonTrailMesh_dd0cs")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.719776, 0.694206, 3.03447e-08, 0, -4.37114e-08, 1, 0.694206, -0.719776, -3.14624e-08, -7.18941, 0.00846457, 3.58026)
+mesh = SubResource("RibbonTrailMesh_v8inh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-3.61999e-06, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 9.36921e-07, -3.49664e-06, -17.3718, 1.6737, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "intro"
+libraries = {
+"": SubResource("AnimationLibrary_n175m")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_47i37")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -309.0
+offset_top = -119.0
+offset_right = 309.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("11_v07rp")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 5
+
+[node name="ColorRect" type="ColorRect" parent="Control/NinePatchRect"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 4.0
+offset_right = -5.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/NinePatchRect/ColorRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -271.5
+offset_top = 8.0
+offset_right = 271.5
+offset_bottom = 697.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_force_pass_scroll_events = false
+bbcode_enabled = true
+text = "[center]The Ultra City Complex: last city in North America... Centuries of war have left the globe a wasteland of near extinction. Corporations have wrested power from the old failing governments. Humanity clusters into overcrowded mega cities. 
+
+In the cities, crime is unstoppable. 
+Violence is inevitable. 
+In the Wastelands, what is left of nature has morphed into horrific abominations.
+
+The Pallas Athena Corporation's elite Insurgency Group, led by Angel Velasco, was sent to the Wasteland to rescue a downed vessel retrieving weapons technology from the Old World.  It was an ambush by the rival corporation Terrasu. Only Angel survived the attack, found half-dead by her handler Otis Pauliani. 
+
+Pallas Athena disbanded the Insurgency Group, setting Angel and Otis free of corporate control.
+
+Corporations still pay top dollar for dangerous work. With a stolen power suit from the Old World, Otis and Angel founded a new mercenary group: 
+
+Rocket Angel. "
+scroll_active = false
+scroll_following = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/NinePatchRect/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -5.0
+offset_top = -4.0
+offset_right = -5.0
+offset_bottom = 34.0
+grow_horizontal = 2
+texture = ExtResource("10_x4gtb")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="Control/NinePatchRect/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -22.0
+offset_right = -5.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("10_x4gtb")
+flip_v = true
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("12_ag5n8")
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[center]The Ultra City Complex"
+
+[node name="ColorRect" type="ColorRect" parent="Control/RichTextLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.34902)
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.568627, 0, 0)
+
+[node name="Monologue Display" type="Control" parent="Control" node_paths=PackedStringArray("nameText", "dialogueText", "messageTimer")]
+self_modulate = Color(1, 1, 1, 0.768627)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -325.0
+offset_top = -7.0
+offset_right = 325.0
+offset_bottom = 158.0
+grow_horizontal = 2
+script = ExtResource("14_pft1q")
+nameText = NodePath("Name")
+dialogueText = NodePath("Dialogue")
+messageTimer = NodePath("TimerMessage")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Monologue Display"]
+self_modulate = Color(1, 1, 1, 0.768627)
+layout_mode = 0
+offset_left = -1.0
+offset_right = 654.0
+offset_bottom = 143.0
+texture = ExtResource("15_hmlma")
+
+[node name="Name" type="RichTextLabel" parent="Control/Monologue Display"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -209.0
+offset_top = 27.0
+offset_right = 210.0
+offset_bottom = 67.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "Name"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Dialogue" type="RichTextLabel" parent="Control/Monologue Display"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -237.0
+offset_top = -94.0
+offset_right = 237.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+text = "Name"
+scroll_active = false
+visible_characters_behavior = 1
+
+[node name="TimerMessage" type="Timer" parent="Control/Monologue Display"]
+wait_time = 4.0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control/Monologue Display"]
+stream = ExtResource("16_nni1q")
+volume_db = -4.0
+pitch_scale = 0.7
+bus = &"Interface"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_rnh8f")
+bus = &"Music"
+
+[node name="Impact" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_0jg11")
+volume_db = -5.0
+bus = &"Effects"
+
+[node name="AnimSounds" type="AudioStreamPlayer" parent="."]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.78549, 0.514997, 2.24511)
+emitting = false
+amount = 3
+lifetime = 1.5
+fixed_fps = 16
+mesh = SubResource("QuadMesh_5gkuw")
+emission_shape = 2
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0

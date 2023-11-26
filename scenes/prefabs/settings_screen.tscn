@@ -221,3 +221,6 @@ step = 5.0
 layout_mode = 2
 focus_neighbor_top = NodePath("../HSlider2")
 focus_neighbor_bottom = NodePath("../../../HBoxContainer/VBoxContainer2/HSlider")
+text = "Aligned"
+flat = true
+icon_alignment = 1

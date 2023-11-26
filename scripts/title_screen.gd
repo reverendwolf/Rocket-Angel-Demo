@@ -5,6 +5,8 @@ extends Control
 
 var held_screen : Node
 
+@export_file var main_game_scene : String
+
 @export var settings_screen : PackedScene
 @export var manual_screen : PackedScene
 @export var exit_screen : PackedScene
@@ -26,7 +28,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		if current_state != MENUSTATE.MAIN:
 			update_menu_state(MENUSTATE.MAIN)
@@ -63,3 +65,8 @@ func update_menu_state(new_state : MENUSTATE):
 			
 	current_state = new_state
 	pass
+
+func main_game():
+	var main_scene = get_tree().get_first_node_in_group("MainScene") as MainScene
+	main_scene.load_new_scene(main_game_scene)
+	

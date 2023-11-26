@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://c24jjnqpcwv0g"]
+[gd_scene load_steps=15 format=3 uid="uid://c24jjnqpcwv0g"]
 
 [ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="1_ygx7k"]
-[ext_resource type="Texture2D" uid="uid://cm50i3ny1b1qb" path="res://assets/ui/noir ui/textbox.png" id="2_l2cel"]
-[ext_resource type="Texture2D" uid="uid://cnkpm14rvxic4" path="res://assets/ui/noir ui/frame.png" id="3_haj4j"]
+[ext_resource type="Script" path="res://scripts/manual_screen.gd" id="2_x7bn4"]
+[ext_resource type="Texture2D" uid="uid://dtf6vigi601hg" path="res://assets/kenney/spaceuipack/glassPanel.png" id="4_05ggm"]
+[ext_resource type="Texture2D" uid="uid://beth57nglanel" path="res://assets/blends/texture library/manual-01.png" id="4_nark4"]
+[ext_resource type="Texture2D" uid="uid://mqkqeuxv8lri" path="res://assets/blends/texture library/manual-00.png" id="5_4rd4c"]
+[ext_resource type="Texture2D" uid="uid://dsf5qfnmni5xw" path="res://assets/blends/texture library/manual-02.png" id="5_a6wi6"]
+[ext_resource type="Texture2D" uid="uid://3x08j6a27jgn" path="res://assets/blends/texture library/manual-03.png" id="6_7ivcw"]
+[ext_resource type="Texture2D" uid="uid://dydkpdjctwjfv" path="res://assets/blends/texture library/manual-04.png" id="7_80fwx"]
+[ext_resource type="Texture2D" uid="uid://7kjnfjy7ttof" path="res://assets/blends/texture library/manual-05.png" id="8_5v6qg"]
+[ext_resource type="Texture2D" uid="uid://d4cgacxrqjsjc" path="res://assets/blends/texture library/manual-06.png" id="9_1mka8"]
+[ext_resource type="Texture2D" uid="uid://dq5oucejl86hf" path="res://assets/blends/texture library/manual-07.png" id="10_aocuy"]
+[ext_resource type="Texture2D" uid="uid://doarjhpsfsahk" path="res://assets/blends/texture library/manual-08.png" id="11_ep41j"]
+[ext_resource type="Texture2D" uid="uid://b1wd4vkk4vlj5" path="res://assets/blends/texture library/manual-09.png" id="12_t8t0t"]
+[ext_resource type="Texture2D" uid="uid://cs1li0i2b6shh" path="res://assets/kenney/spaceuipack/metalPanel_red2.png" id="13_jw3ub"]
 
-[node name="ManualScreen" type="Control"]
+[node name="ManualScreen" type="Control" node_paths=PackedStringArray("display")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,54 +23,106 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ygx7k")
+script = ExtResource("2_x7bn4")
+pages = Array[Texture2D]([ExtResource("5_4rd4c"), ExtResource("4_nark4"), ExtResource("5_a6wi6"), ExtResource("6_7ivcw"), ExtResource("7_80fwx"), ExtResource("8_5v6qg"), ExtResource("9_1mka8"), ExtResource("10_aocuy"), ExtResource("11_ep41j"), ExtResource("12_t8t0t")])
+display = NodePath("NinePatchRect2/TextureRect")
 
-[node name="BG" type="TextureRect" parent="."]
-self_modulate = Color(0.496628, 0.313256, 0.313931, 1)
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.768627)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 123.0
+offset_top = 2.0
+offset_right = -123.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_l2cel")
-expand_mode = 1
+texture = ExtResource("13_jw3ub")
+patch_margin_left = 11
+patch_margin_top = 32
+patch_margin_right = 11
+patch_margin_bottom = 11
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
-[node name="Manual Frame" type="TextureRect" parent="."]
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -174.0
-offset_top = 72.0
-offset_right = 174.0
-offset_bottom = 362.0
-grow_horizontal = 2
-texture = ExtResource("3_haj4j")
-expand_mode = 1
-
-[node name="TextureRect" type="TextureRect" parent="Manual Frame"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 9.0
-offset_right = -10.0
-offset_bottom = -9.0
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -122.0
+offset_right = 162.0
+offset_bottom = 122.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("4_05ggm")
+draw_center = false
+region_rect = Rect2(0, 0, 100, 100)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_4rd4c")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -31.5
-offset_top = 32.0
-offset_right = 31.5
-offset_bottom = 72.0
+offset_left = -59.0
+offset_top = 8.0
+offset_right = 59.0
+offset_bottom = 48.0
 grow_horizontal = 2
 text = "Game Manual"
 fit_content = true
 autowrap_mode = 0
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")

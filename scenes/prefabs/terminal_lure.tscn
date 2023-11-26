@@ -103,5 +103,5 @@ libraries = {
 stream = ExtResource("4_5jxma")
 unit_size = 5.0
 
-[connection signal="interaction" from="." to="CollisionShape3D" method="set_disabled" binds= [true]]
+[connection signal="interaction" from="." to="." method="set_collision_layer_value" binds= [5, false]]
 [connection signal="interaction" from="." to="AnimationPlayer" method="play" binds= ["activate"]]

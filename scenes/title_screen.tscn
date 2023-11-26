@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cutjnw2qaiyvf" path="res://assets/ui/title-lower.png" id="1_3etq5"]
 [ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="1_4r50i"]
 [ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_5hoar"]
-[ext_resource type="AudioStream" uid="uid://m21juwpigsr8" path="res://assets/audio/music/Cyberspace.mp3" id="1_55qut"]
 [ext_resource type="Texture2D" uid="uid://ct8jcfnt870x3" path="res://assets/textures/moon-128.png" id="2_ativu"]
 [ext_resource type="Texture2D" uid="uid://sni5q0t3sbm4" path="res://assets/textures/fire1_64.png" id="3_ke54w"]
 [ext_resource type="PackedScene" uid="uid://dx6exafop2lpq" path="res://scenes/prefabs/settings_screen.tscn" id="3_xq53t"]
@@ -12,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b87fl8oirfoli" path="res://scenes/components/wasp_shot.tscn" id="5_3fvsf"]
 [ext_resource type="PackedScene" uid="uid://dopmt6l450mg" path="res://scenes/exit_screen.tscn" id="5_ijapi"]
 [ext_resource type="PackedScene" uid="uid://c26achhy75rl8" path="res://scenes/components/blood_death.tscn" id="6_onsuf"]
+[ext_resource type="AudioStream" uid="uid://b37opya5ry03y" path="res://assets/audio/music/JDB - Hunters.mp3" id="7_v3sbl"]
 [ext_resource type="Shader" path="res://shaders/ps1-lit.gdshader" id="7_yewai"]
 [ext_resource type="Shader" path="res://shaders/ps1-lit-ds.gdshader" id="8_fnt10"]
 [ext_resource type="Texture2D" uid="uid://jd6twuat0gex" path="res://assets/blends/texture library/hunter-wasp.png" id="9_pdu6h"]
@@ -214,6 +214,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_4r50i")
 script = ExtResource("1_5hoar")
+main_game_scene = "res://scenes/mission_select.tscn"
 settings_screen = ExtResource("3_xq53t")
 manual_screen = ExtResource("4_or4q7")
 exit_screen = ExtResource("5_ijapi")
@@ -281,7 +282,7 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_55qut")
+stream = ExtResource("7_v3sbl")
 volume_db = -80.0
 autoplay = true
 bus = &"Music"
@@ -568,6 +569,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1502, 0.768666)
 
 [node name="angel-fullbody" parent="." instance=ExtResource("19_hq8qw")]
 
+[connection signal="pressed" from="MainMenu/HBoxContainer/MainGame" to="MainMenu" method="main_game"]
 [connection signal="pressed" from="MainMenu/HBoxContainer/Settings" to="MainMenu" method="set_state_settings"]
 [connection signal="pressed" from="MainMenu/HBoxContainer/Manual" to="MainMenu" method="set_state_manual"]
 [connection signal="pressed" from="MainMenu/HBoxContainer/Exit" to="MainMenu" method="set_state_exit"]
