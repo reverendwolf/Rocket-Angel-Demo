@@ -8,6 +8,9 @@ var currentHealth : int
 
 var invulerable : bool
 
+signal health_depleted
+signal health_damaged
+
 func set_invulnerable(value : bool):
 	invulerable = value
 
@@ -17,9 +20,10 @@ func _ready():
 	_update_health()
 
 func damage(value : int):
-	if not invulerable:
+	if not invulerable and currentHealth > 0:
 		currentHealth = clamp(currentHealth - value, 0, 200)
-	_update_health()
+		health_damaged.emit()
+		_update_health()
 	
 func heal(value : int, overcharge : bool = false):
 	if overcharge:
@@ -35,6 +39,10 @@ func _update_health():
 		if currentHealth > 100 and timer.is_stopped():
 			print("timer")
 			timer.start()
+			
+	if currentHealth == 0:
+		await  get_tree().process_frame
+		health_depleted.emit()
 		
 func health_decay():
 	if currentHealth > 100:

@@ -1,0 +1,266 @@
+[gd_scene load_steps=14 format=3 uid="uid://brmj4mpsp8kuu"]
+
+[ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="1_kjmqm"]
+[ext_resource type="Script" path="res://scripts/coming_soon.gd" id="2_2so46"]
+[ext_resource type="Texture2D" uid="uid://cidepw4qyl3bb" path="res://assets/ui/wenrexia scifi/PanelWindow.png" id="2_afqub"]
+[ext_resource type="FontFile" uid="uid://hwoxga6h26ln" path="res://assets/fonts/Yulong-Regular.ttf" id="3_r22ve"]
+[ext_resource type="FontFile" uid="uid://dghov0qnl28pv" path="res://assets/ui/SyntheticText.ttf" id="4_wq7je"]
+[ext_resource type="Texture2D" uid="uid://tffcnbclkiyf" path="res://assets/ui/wenrexia scifi/Button14.png" id="5_3r3qc"]
+[ext_resource type="Texture2D" uid="uid://fpqs3hnofmtb" path="res://assets/ui/flynncatlogotrans.png" id="6_uo18g"]
+[ext_resource type="Texture2D" uid="uid://cfqpdeq14ll7p" path="res://assets/ui/cap2.PNG" id="6_xng1u"]
+[ext_resource type="Texture2D" uid="uid://gcqtbdndrqhy" path="res://assets/ui/cap4.PNG" id="7_3styg"]
+[ext_resource type="Texture2D" uid="uid://c2x06airqm5n1" path="res://assets/ui/cap1.PNG" id="8_6lnhg"]
+[ext_resource type="AudioStream" uid="uid://bf64hsycfb2ck" path="res://assets/audio/music/Generic Battle.mp3" id="10_cbpxn"]
+
+[sub_resource type="Animation" id="Animation_lyowj"]
+resource_name = "outtro"
+length = 66.0
+step = 1.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Music")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("10_cbpxn")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(64),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"return_title"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wek47"]
+_data = {
+"outtro": SubResource("Animation_lyowj")
+}
+
+[node name="ComingSoon" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kjmqm")
+script = ExtResource("2_2so46")
+title_screen = "res://scenes/title_screen.tscn"
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_afqub")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 6.0
+offset_right = 453.0
+offset_bottom = 168.0
+theme_override_fonts/normal_font = ExtResource("3_r22ve")
+theme_override_font_sizes/normal_font_size = 72
+bbcode_enabled = true
+text = "[right]Rocket
+Angel"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 151.0
+offset_right = 545.0
+offset_bottom = 177.0
+theme_override_fonts/normal_font = ExtResource("4_wq7je")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Explosive Shooting Action"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 439.0
+offset_right = 545.0
+offset_bottom = 465.0
+theme_override_fonts/normal_font = ExtResource("4_wq7je")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]Coming Soon!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 186.0
+offset_right = 612.0
+offset_bottom = 306.0
+theme_override_constants/separation = 56
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Frame" type="NinePatchRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(160, 120)
+layout_mode = 2
+texture = ExtResource("5_3r3qc")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_xng1u")
+expand_mode = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]11 Branching Stages![/center]
+
+Take control of your journey through the Ultra City Complex! Fight hidden bosses to reach new levels! Did you find the Terranoid Queen boss in Sector 621?"
+fit_content = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Frame" type="NinePatchRect" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(160, 120)
+layout_mode = 2
+texture = ExtResource("5_3r3qc")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_3styg")
+expand_mode = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Vagrant Sector Mode![/center]
+
+Explore lost sectors of Ultra City! Randomized challenges with unique enemies and bosses! Discover the mystery of the lost Nela-Yendor Corporation!"
+fit_content = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Frame" type="NinePatchRect" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(160, 120)
+layout_mode = 2
+texture = ExtResource("5_3r3qc")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_6lnhg")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Multiple Play Modes![/center]
+
+Fight across the Ultra City Complex in thrilling fast paced action! Speed down broken highways in the Dragon Hoverbike! Take to the skies in the Rapier Light Wing!"
+fit_content = true
+
+[node name="Only on Flynnstation" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 212.0
+offset_bottom = 143.0
+
+[node name="TextureRect" type="TextureRect" parent="Only on Flynnstation"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 3.0
+offset_right = 189.0
+offset_bottom = 111.0
+texture = ExtResource("6_uo18g")
+expand_mode = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Only on Flynnstation"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 39.0
+offset_right = 308.0
+offset_bottom = 135.0
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "Only
+  on
+Flynnstation"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_cbpxn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "outtro"
+libraries = {
+"": SubResource("AnimationLibrary_wek47")
+}

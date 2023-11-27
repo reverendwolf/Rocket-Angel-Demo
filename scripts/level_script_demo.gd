@@ -1,5 +1,9 @@
 extends Node
 
+@export_file var mission_complete : String
+@export_file var this_level : String
+@export_file var to_title : String
+
 @export var player : FPSPlayer
 @export var monologue : Monologue
 @export var objective_label : Control
@@ -96,6 +100,8 @@ func encounter_progress():
 		if luresActivated < 3:
 			player.set_invulnerable(true)
 			monologue.show_monologue("Otis","Objective achieved. Pack it up and return to base.")
+			await get_tree().create_timer(standard_delay, false).timeout
+			get_tree().get_first_node_in_group("MainScene").load_new_scene(mission_complete)
 		else:
 			activate_boss()
 
@@ -142,4 +148,12 @@ func boss_defeated():
 		await get_tree().create_timer(standard_delay, false).timeout
 		monologue.show_monologue("Otis","Pallas Athena can clear up the rest. Let's get you home.")
 		await get_tree().create_timer(standard_delay, false).timeout
+		get_tree().get_first_node_in_group("MainScene").load_new_scene(mission_complete)
+
+func reload_level():
+	get_tree().get_first_node_in_group("MainScene").load_new_scene(this_level)
+	pass
 	
+func quit_to_title():
+	get_tree().get_first_node_in_group("MainScene").load_new_scene(to_title)
+	pass

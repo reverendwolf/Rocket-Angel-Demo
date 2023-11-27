@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name FPSPlayer
 
+signal playerDead
+
 const SPEED = 4.5
 const SPRINT_SPEED = 6.0
 const JUMP_VELOCITY = 4.5
@@ -42,11 +44,14 @@ var glide_refuel_timer = 0.0
 @onready var jumpJetSound = $JumpJetSound
 
 @export var gun_holder : Node3D
+@onready var gun : PlayerGun = $Gun
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.81
 
 var paused : bool = false
+
+var dead : bool = false;
 
 func _ready():
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -54,13 +59,19 @@ func _ready():
 	glide_fuel = GLIDE_FUEL_MAX
 
 func _process(_delta):
+	if dead:
+		interactionMarker.visible = false
+		return
+		
 	interactionMarker.visible = interactionRaycast.is_colliding()
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
+	
+	if dead: return
+	
 	# Handle Jump and Glide
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jump(JUMP_VELOCITY)
@@ -193,3 +204,12 @@ func _handle_cooldowns(time):
 
 func set_invulnerable(value : bool):
 	health.set_invulnerable(value)
+	
+func player_dead():
+	dead = true
+	gun.set_process(false)
+	gun.set_physics_process(false)
+
+func death_finished():
+	playerDead.emit()
+	pass

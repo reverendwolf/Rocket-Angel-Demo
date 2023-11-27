@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b87fl8oirfoli" path="res://scenes/components/wasp_shot.tscn" id="5_3fvsf"]
 [ext_resource type="PackedScene" uid="uid://dopmt6l450mg" path="res://scenes/exit_screen.tscn" id="5_ijapi"]
 [ext_resource type="PackedScene" uid="uid://c26achhy75rl8" path="res://scenes/components/blood_death.tscn" id="6_onsuf"]
-[ext_resource type="AudioStream" uid="uid://b37opya5ry03y" path="res://assets/audio/music/JDB - Hunters.mp3" id="7_v3sbl"]
+[ext_resource type="AudioStream" uid="uid://bg5rih4l3n67r" path="res://assets/audio/music/JDB - Innocence.mp3" id="7_rp2ri"]
 [ext_resource type="Shader" path="res://shaders/ps1-lit.gdshader" id="7_yewai"]
 [ext_resource type="Shader" path="res://shaders/ps1-lit-ds.gdshader" id="8_fnt10"]
 [ext_resource type="Texture2D" uid="uid://jd6twuat0gex" path="res://assets/blends/texture library/hunter-wasp.png" id="9_pdu6h"]
@@ -282,7 +282,7 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_v3sbl")
+stream = ExtResource("7_rp2ri")
 volume_db = -80.0
 autoplay = true
 bus = &"Music"

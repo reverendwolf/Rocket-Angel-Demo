@@ -2,7 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="1_ygx7k"]
 [ext_resource type="Script" path="res://scripts/manual_screen.gd" id="2_x7bn4"]
-[ext_resource type="Texture2D" uid="uid://dtf6vigi601hg" path="res://assets/kenney/spaceuipack/glassPanel.png" id="4_05ggm"]
 [ext_resource type="Texture2D" uid="uid://beth57nglanel" path="res://assets/blends/texture library/manual-01.png" id="4_nark4"]
 [ext_resource type="Texture2D" uid="uid://mqkqeuxv8lri" path="res://assets/blends/texture library/manual-00.png" id="5_4rd4c"]
 [ext_resource type="Texture2D" uid="uid://dsf5qfnmni5xw" path="res://assets/blends/texture library/manual-02.png" id="5_a6wi6"]
@@ -13,7 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dq5oucejl86hf" path="res://assets/blends/texture library/manual-07.png" id="10_aocuy"]
 [ext_resource type="Texture2D" uid="uid://doarjhpsfsahk" path="res://assets/blends/texture library/manual-08.png" id="11_ep41j"]
 [ext_resource type="Texture2D" uid="uid://b1wd4vkk4vlj5" path="res://assets/blends/texture library/manual-09.png" id="12_t8t0t"]
-[ext_resource type="Texture2D" uid="uid://cs1li0i2b6shh" path="res://assets/kenney/spaceuipack/metalPanel_red2.png" id="13_jw3ub"]
+[ext_resource type="Texture2D" uid="uid://fsy0jn74706b" path="res://assets/ui/wenrexia scifi/MainPanel03.png" id="13_h8wel"]
+[ext_resource type="Texture2D" uid="uid://pq0801clgatu" path="res://assets/ui/wenrexia scifi/Btn01.png" id="14_3ck1h"]
 
 [node name="ManualScreen" type="Control" node_paths=PackedStringArray("display")]
 layout_mode = 3
@@ -34,7 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.768627)
+color = Color(0, 0, 0, 0.376471)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1
@@ -48,13 +48,11 @@ offset_right = -123.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("13_jw3ub")
-patch_margin_left = 11
-patch_margin_top = 32
-patch_margin_right = 11
-patch_margin_bottom = 11
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+texture = ExtResource("13_h8wel")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 4
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="."]
 texture_filter = 1
@@ -64,19 +62,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -162.0
-offset_top = -122.0
-offset_right = 162.0
-offset_bottom = 122.0
+offset_left = -163.0
+offset_top = -125.0
+offset_right = 163.0
+offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_05ggm")
-draw_center = false
-region_rect = Rect2(0, 0, 100, 100)
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+texture = ExtResource("14_3ck1h")
+patch_margin_left = 32
+patch_margin_top = 48
+patch_margin_right = 32
+patch_margin_bottom = 32
 
 [node name="TextureRect" type="TextureRect" parent="NinePatchRect2"]
 show_behind_parent = true

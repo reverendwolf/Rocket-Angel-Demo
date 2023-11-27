@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dopmt6l450mg"]
 
 [ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="1_4yrd1"]
-[ext_resource type="Texture2D" uid="uid://cm50i3ny1b1qb" path="res://assets/ui/noir ui/textbox.png" id="2_4m553"]
 [ext_resource type="Script" path="res://scripts/exit_screen.gd" id="2_v8k6n"]
+[ext_resource type="Texture2D" uid="uid://fsy0jn74706b" path="res://assets/ui/wenrexia scifi/MainPanel03.png" id="3_26kwy"]
 
 [node name="ExitConfirmation" type="Control"]
 layout_mode = 3
@@ -14,16 +14,32 @@ grow_vertical = 2
 theme = ExtResource("1_4yrd1")
 script = ExtResource("2_v8k6n")
 
-[node name="ColorRect" type="TextureRect" parent="."]
-self_modulate = Color(0.496628, 0.313256, 0.313931, 1)
+[node name="Panel" type="ColorRect" parent="."]
+self_modulate = Color(0.490196, 0.490196, 0.490196, 1)
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_4m553")
-expand_mode = 1
+color = Color(0, 0, 0, 0.376471)
+
+[node name="TextureRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_right = -92.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_26kwy")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
