@@ -46,7 +46,7 @@ func _process(delta):
 		else:
 			_reload()
 			
-	if Input.is_action_just_pressed("shoot_a") and (secondary > 0 || true):
+	if Input.is_action_just_pressed("shoot_a") and secondary > 0:
 		_shoot_secondary()
 		
 	if Input.is_action_just_pressed("reload") and magazine < MAX_MAGAZINE:

@@ -34,10 +34,8 @@ func heal(value : int, overcharge : bool = false):
 	
 func _update_health():
 	if health_display:
-		print("update")
 		health_display.text = str(currentHealth)
 		if currentHealth > 100 and timer.is_stopped():
-			print("timer")
 			timer.start()
 			
 	if currentHealth == 0:

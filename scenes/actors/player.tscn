@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dnxmcvv30c5xt"]
+[gd_scene load_steps=56 format=3 uid="uid://dnxmcvv30c5xt"]
 
 [ext_resource type="Script" path="res://scripts/player_control.gd" id="1_se3li"]
 [ext_resource type="Script" path="res://scripts/player_gun.gd" id="2_eqdhm"]
@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://dlhthmfyahh30" path="res://assets/audio/effects/GUNMech_Heavy Mech Cock 03_DDUMAIS_NONE.wav" id="8_6uvm6"]
 [ext_resource type="Shader" path="res://shaders/ps1-lit.gdshader" id="9_m75xm"]
 [ext_resource type="Script" path="res://scripts/pickup_handler.gd" id="10_v2e87"]
-[ext_resource type="AudioStream" uid="uid://dauh1tf6eyjk5" path="res://assets/sfx/heavy-footstep5.wav" id="10_yckb8"]
 [ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="11_fehsr"]
 [ext_resource type="Texture2D" uid="uid://l7ap3clrixyw" path="res://assets/ui/wenrexia scifi/Btn_V12.png" id="12_8k2ex"]
 [ext_resource type="FontFile" uid="uid://dgb4xb5nykhse" path="res://assets/fonts/Not Jam Laika 14.ttf" id="12_bj0hs"]
@@ -18,12 +17,17 @@
 [ext_resource type="Texture2D" uid="uid://bowq0qy4p42qi" path="res://assets/ui/wenrexia scifi/Btn_V10.png" id="14_2cpqx"]
 [ext_resource type="Texture2D" uid="uid://wvi5bq7slsny" path="res://assets/ui/super-rocket.png" id="14_sp5gc"]
 [ext_resource type="Texture2D" uid="uid://bxb8q84fwat" path="res://assets/kenney/game icons/tile_0342.png" id="16_cniv5"]
-[ext_resource type="AudioStream" uid="uid://d3qowsu4a0sbw" path="res://assets/audio/effects/Magic_Spells_Impact_Air24.wav" id="16_lev0o"]
 [ext_resource type="AudioStream" uid="uid://510340ny7x1j" path="res://assets/audio/effects/thrust-float.mp3" id="17_bulqf"]
 [ext_resource type="Texture2D" uid="uid://dxjjqlxs3fi5g" path="res://assets/ui/fuel-bar.png" id="18_18j6x"]
 [ext_resource type="AudioStream" uid="uid://vqx6pitmu6o2" path="res://assets/audio/effects/Voice_Female_V1_Jump_Mono_01.wav" id="18_e6dgx"]
 [ext_resource type="AudioStream" uid="uid://dmdwkhaylk0nc" path="res://assets/audio/effects/Voice_Female_V1_Pain_Mono_03.wav" id="19_blbnp"]
 [ext_resource type="Texture2D" uid="uid://pq0801clgatu" path="res://assets/ui/wenrexia scifi/Btn01.png" id="19_tbmm1"]
+[ext_resource type="AudioStream" uid="uid://vk60uov1men2" path="res://assets/audio/effects/angel-step.wav" id="20_fsn58"]
+[ext_resource type="AudioStream" uid="uid://cyg3hwdskbgue" path="res://assets/audio/effects/haloneedler_alt-48235.mp3" id="21_gt1qx"]
+[ext_resource type="AudioStream" uid="uid://bercwkw46ktkv" path="res://assets/audio/effects/angel-boostfail.wav" id="22_oew0b"]
+[ext_resource type="AudioStream" uid="uid://dont2h4hfo6mk" path="res://assets/audio/effects/Voice_Female_V1_Pain_Mono_04.wav" id="25_5b4j1"]
+[ext_resource type="AudioStream" uid="uid://bfsn57x6rgfbt" path="res://assets/audio/effects/angel-fall.wav" id="25_wnwtc"]
+[ext_resource type="AudioStream" uid="uid://0chxvd7q7ans" path="res://assets/audio/effects/Triple Click 01.wav" id="26_hbehw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xpfw6"]
 radius = 0.75
@@ -188,22 +192,6 @@ border_color = Color(1, 1, 1, 1)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_itt28"]
 height = 0.5
 
-[sub_resource type="Animation" id="Animation_p0wcj"]
-resource_name = "powerup"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Player Hud/ColorFlashRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_qs0eb"]
 length = 0.001
 tracks/0/type = "value"
@@ -366,6 +354,17 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0.588235, 0, 0, 1), Color(0, 0, 0, 0)]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatusAnimation/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_horv3"]
 resource_name = "death"
@@ -535,18 +534,65 @@ tracks/14/keys = {
 "method": &"death_finished"
 }]
 }
+tracks/15/type = "audio"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("StatusAnimation/AudioStreamPlayer")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("25_5b4j1")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/15/use_blend = true
+
+[sub_resource type="Animation" id="Animation_p0wcj"]
+resource_name = "pickup"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player Hud/ColorFlashRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatusAnimation/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("26_hbehw")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yufak"]
 _data = {
 "RESET": SubResource("Animation_qs0eb"),
 "damage": SubResource("Animation_dv6xp"),
 "death": SubResource("Animation_horv3"),
-"powerup": SubResource("Animation_p0wcj")
+"pickup": SubResource("Animation_p0wcj")
 }
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("gun_holder") groups=["PlayerOnly"]]
 collision_layer = 3
 floor_max_angle = 0.837758
+platform_on_leave = 2
 safe_margin = 0.005
 script = ExtResource("1_se3li")
 gun_holder = NodePath("Head/Camera3D/GunHolder")
@@ -894,13 +940,19 @@ target_position = Vector3(0, -0.25, 0)
 max_results = 1
 
 [node name="FootstepSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("10_yckb8")
-volume_db = -5.0
+stream = ExtResource("20_fsn58")
+volume_db = -8.0
 max_db = 2.0
 bus = &"Effects"
 
 [node name="JumpJetSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("16_lev0o")
+stream = ExtResource("21_gt1qx")
+volume_db = 5.0
+max_db = 5.0
+bus = &"Effects"
+
+[node name="JumpJetSoundFail" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("22_oew0b")
 volume_db = -5.0
 max_db = -1.0
 bus = &"Effects"
@@ -923,10 +975,18 @@ volume_db = -5.0
 max_db = 2.0
 bus = &"Effects"
 
+[node name="FallSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("25_wnwtc")
+volume_db = -5.0
+max_db = 2.0
+bus = &"Effects"
+
 [node name="StatusAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_yufak")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StatusAnimation"]
 
 [connection signal="health_depleted" from="PlayerHealth" to="." method="player_dead"]
 [connection signal="health_depleted" from="PlayerHealth" to="StatusAnimation" method="play" binds= ["death"]]

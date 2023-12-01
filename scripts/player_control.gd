@@ -30,11 +30,14 @@ var canStep = false
 var glide_fuel = 0.0
 var glide_refuel_timer = 0.0
 
+var ground_height = 0.0
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var fuel_bar = $"Player Hud/ProgressBar"
 @onready var footstep_cast = $FootstepShapeCast
 @onready var footstepSound = $FootstepSound
+@onready var fallSound = $FallSound
 @onready var interactionRaycast = $Head/Camera3D/InteractionRayCast
 @onready var interactionMarker = $"Player Hud/Interaction"
 @onready var health = $PlayerHealth
@@ -42,6 +45,7 @@ var glide_refuel_timer = 0.0
 @onready var floatJetSound = $FloatJetSound
 @onready var jumpSound = $JumpSound
 @onready var jumpJetSound = $JumpJetSound
+@onready var jumpJetFailSound = $JumpJetSoundFail
 
 @export var gun_holder : Node3D
 @onready var gun : PlayerGun = $Gun
@@ -101,12 +105,16 @@ func _physics_process(delta):
 			velocity.y = lerp(velocity.y, 0.0, 0.5)
 		glide_fuel -= delta
 		
-	if Input.is_action_just_pressed("boost") and glide_fuel >= (GLIDE_FUEL_MAX * 0.75):
-		jump(BOOST_VELOCITY)
-		glide_fuel -= (GLIDE_FUEL_MAX * 0.65)
-		glide_refuel_timer = (GLIDE_REFUEL_DELAY * 4)
-		variator(jumpJetSound)
-		jumpJetSound.play()
+	if Input.is_action_just_pressed("boost"):
+		if glide_fuel >= (GLIDE_FUEL_MAX * 0.75):
+			jump(BOOST_VELOCITY)
+			glide_fuel -= (GLIDE_FUEL_MAX * 0.65)
+			glide_refuel_timer = (GLIDE_REFUEL_DELAY * 4)
+			variator(jumpJetSound)
+			jumpJetSound.play()
+		else:
+			if not jumpJetFailSound.playing:
+				jumpJetFailSound.play()
 
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -129,6 +137,10 @@ func _physics_process(delta):
 	
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if is_on_floor():
+		if ground_height - position.y > 2:
+			fallSound.play(0.0)
+		ground_height = position.y
+		
 		if direction:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
@@ -149,18 +161,24 @@ func _physics_process(delta):
 	camera.transform.origin = _headbob(bob_time)
 	gun_holder.transform.origin = _gunbob(bob_time + 0.5)
 
+	if velocity.y > 0:
+		ground_height = position.y
+
 	move_and_slide()
 	_handle_cooldowns(delta)
 
 func jump(jump_velocity : float):
+	ground_height = position.y
 	velocity.y = jump_velocity
+	
 
 func _footstep():
 	#print("Step")
 	if velocity.length() < SPEED:
 		return
 	
-	footstepSound.pitch_scale = randf_range(0.9,1.1) * velocity.length() / SPEED
+	#footstepSound.pitch_scale = randf_range(0.9,1.1) * (velocity.length() / SPEED * 3)
+	footstepSound.pitch_scale = randf_range(0.9,1.1)
 	footstepSound.play(0)
 	
 	pass

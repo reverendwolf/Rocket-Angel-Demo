@@ -8,6 +8,8 @@ class_name  MainScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	var init_scene = load(starting_scene).instantiate()
 	scene_holder.add_child(init_scene)
 	call_deferred("show_screen")
