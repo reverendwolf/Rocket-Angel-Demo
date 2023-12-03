@@ -988,6 +988,7 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StatusAnimation"]
 
+[connection signal="health_damaged" from="PlayerHealth" to="StatusAnimation" method="play" binds= ["damaged"]]
 [connection signal="health_depleted" from="PlayerHealth" to="." method="player_dead"]
 [connection signal="health_depleted" from="PlayerHealth" to="StatusAnimation" method="play" binds= ["death"]]
 [connection signal="timeout" from="PlayerHealth/Timer" to="PlayerHealth" method="health_decay"]
