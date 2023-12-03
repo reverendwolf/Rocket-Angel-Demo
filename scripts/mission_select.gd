@@ -1,7 +1,7 @@
 extends Node
 
 @export var anim_player : AnimationPlayer
-@onready var music : AudioStreamPlayer = $Music
+@export var music : AudioStream
 @onready var impact : AudioStreamPlayer = $Impact
 
 @onready var monologue : Monologue = $"Control/Monologue Display" as Monologue
@@ -27,7 +27,7 @@ func _ready():
 
 func play_music():
 	await get_tree().create_timer(1).timeout
-	music.play()
+	MusicMaster.play_now(music)
 
 func play_intro():
 	await anim_player.animation_finished

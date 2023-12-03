@@ -7,6 +7,8 @@ var held_screen : Node
 
 @export_file var main_game_scene : String
 
+@export var music : AudioStream
+
 @export var settings_screen : PackedScene
 @export var manual_screen : PackedScene
 @export var exit_screen : PackedScene
@@ -23,6 +25,7 @@ var current_state : MENUSTATE
 
 func _ready():
 	MainScene.initialize_preferences()
+	MusicMaster.play_now(music)
 	current_state = MENUSTATE.MAIN
 	first_control.grab_focus()
 

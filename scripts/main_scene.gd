@@ -22,6 +22,7 @@ static func initialize_preferences():
 
 func cover_screen():
 	screen_fader.play("transition")
+	MusicMaster.fade_out(1.0)
 	await screen_fader.animation_finished
 	
 func show_screen():

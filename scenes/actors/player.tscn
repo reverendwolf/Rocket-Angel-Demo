@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://bowq0qy4p42qi" path="res://assets/ui/wenrexia scifi/Btn_V10.png" id="14_2cpqx"]
 [ext_resource type="Texture2D" uid="uid://wvi5bq7slsny" path="res://assets/ui/super-rocket.png" id="14_sp5gc"]
 [ext_resource type="Texture2D" uid="uid://bxb8q84fwat" path="res://assets/kenney/game icons/tile_0342.png" id="16_cniv5"]
-[ext_resource type="AudioStream" uid="uid://510340ny7x1j" path="res://assets/audio/effects/thrust-float.mp3" id="17_bulqf"]
 [ext_resource type="Texture2D" uid="uid://dxjjqlxs3fi5g" path="res://assets/ui/fuel-bar.png" id="18_18j6x"]
 [ext_resource type="AudioStream" uid="uid://vqx6pitmu6o2" path="res://assets/audio/effects/Voice_Female_V1_Jump_Mono_01.wav" id="18_e6dgx"]
 [ext_resource type="AudioStream" uid="uid://dmdwkhaylk0nc" path="res://assets/audio/effects/Voice_Female_V1_Pain_Mono_03.wav" id="19_blbnp"]
@@ -25,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://vk60uov1men2" path="res://assets/audio/effects/angel-step.wav" id="20_fsn58"]
 [ext_resource type="AudioStream" uid="uid://cyg3hwdskbgue" path="res://assets/audio/effects/haloneedler_alt-48235.mp3" id="21_gt1qx"]
 [ext_resource type="AudioStream" uid="uid://bercwkw46ktkv" path="res://assets/audio/effects/angel-boostfail.wav" id="22_oew0b"]
+[ext_resource type="AudioStream" uid="uid://dtgopjap1rj0e" path="res://assets/audio/effects/LASRBeam_Plasma Loop_01.wav" id="23_m0yjx"]
 [ext_resource type="AudioStream" uid="uid://dont2h4hfo6mk" path="res://assets/audio/effects/Voice_Female_V1_Pain_Mono_04.wav" id="25_5b4j1"]
 [ext_resource type="AudioStream" uid="uid://bfsn57x6rgfbt" path="res://assets/audio/effects/angel-fall.wav" id="25_wnwtc"]
 [ext_resource type="AudioStream" uid="uid://0chxvd7q7ans" path="res://assets/audio/effects/Triple Click 01.wav" id="26_hbehw"]
@@ -958,7 +958,7 @@ max_db = -1.0
 bus = &"Effects"
 
 [node name="FloatJetSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("17_bulqf")
+stream = ExtResource("23_m0yjx")
 volume_db = -5.0
 max_db = 2.0
 bus = &"Effects"

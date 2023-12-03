@@ -661,6 +661,7 @@ material = SubResource("StandardMaterial3D_5pd4x")
 [node name="mission_select" type="Node" node_paths=PackedStringArray("anim_player", "selector", "selection_nodes")]
 script = ExtResource("1_2h484")
 anim_player = NodePath("AnimationPlayer")
+music = ExtResource("9_rnh8f")
 stage1 = "res://scenes/levels/test_world.tscn"
 selector = NodePath("Node3D/Selection")
 selection_nodes = [NodePath("Node3D/Level1"), NodePath("Node3D/Level2B"), NodePath("Node3D/Level2A"), NodePath("Node3D/Level3C"), NodePath("Node3D/Level3B"), NodePath("Node3D/Level3A"), NodePath("Node3D/Level4B"), NodePath("Node3D/Level4A"), NodePath("Node3D/Level5B"), NodePath("Node3D/Level5A"), NodePath("Node3D/Level6"), NodePath("Node3D/MeshInstance3D"), NodePath("Node3D/MeshInstance3D2")]

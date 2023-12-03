@@ -12,6 +12,7 @@ var timer : Timer
 
 var startPosition : Vector3
 
+var first_frame_wait : bool = true
 
 func _ready():
 	super._ready()
@@ -39,7 +40,11 @@ func exit_state():
 	timer.stop()
 
 func _physics_process(delta):
-	if navAgent.is_navigation_finished():
+	if first_frame_wait:
+		first_frame_wait = false
+		return
+	
+	if navAgent.is_node_ready() and navAgent.is_navigation_finished():
 		animTree.set("parameters/Loco/blend_position", 0)
 		return
 	

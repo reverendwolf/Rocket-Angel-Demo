@@ -26,22 +26,10 @@ length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/path = NodePath("MainMenu/TextureRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-80.0, -5.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MainMenu/TextureRect:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 3, 5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -215,6 +203,7 @@ grow_vertical = 2
 theme = ExtResource("1_4r50i")
 script = ExtResource("1_5hoar")
 main_game_scene = "res://scenes/mission_select.tscn"
+music = ExtResource("7_rp2ri")
 settings_screen = ExtResource("3_xq53t")
 manual_screen = ExtResource("4_or4q7")
 exit_screen = ExtResource("5_ijapi")
@@ -280,12 +269,6 @@ autoplay = "title"
 libraries = {
 "": SubResource("AnimationLibrary_pmy28")
 }
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_rp2ri")
-volume_db = -80.0
-autoplay = true
-bus = &"Music"
 
 [node name="Node" type="Node" parent="."]
 editor_description = "Angel standing on a cutout of the moon. total darkness. surrounded by a distant ring of flames. between her and the flames, terranoids can be seen moving about."

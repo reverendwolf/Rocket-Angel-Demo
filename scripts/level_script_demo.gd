@@ -4,6 +4,8 @@ extends Node
 @export_file var this_level : String
 @export_file var to_title : String
 
+@export var stage_music : AudioStream
+
 @export var player : FPSPlayer
 @export var monologue : Monologue
 @export var objective_label : Control
@@ -36,6 +38,7 @@ var quips : Array = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	objective_label.visible = false
+	MusicMaster.play_now(stage_music)
 	pass
 
 func _process(_delta):
@@ -100,8 +103,9 @@ func encounter_progress():
 		if luresActivated < 3:
 			player.set_invulnerable(true)
 			monologue.show_monologue("Otis","Objective achieved. Pack it up and return to base.")
-			await get_tree().create_timer(standard_delay, false).timeout
+			await get_tree().create_timer(standard_delay * 1.5, false).timeout
 			get_tree().get_first_node_in_group("MainScene").load_new_scene(mission_complete)
+			MusicMaster.fade_out(1.0)
 		else:
 			activate_boss()
 

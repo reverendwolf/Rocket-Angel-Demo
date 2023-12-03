@@ -16,7 +16,7 @@ func set_invulnerable(value : bool):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	currentHealth = 150
+	currentHealth = 100
 	_update_health()
 
 func damage(value : int):
