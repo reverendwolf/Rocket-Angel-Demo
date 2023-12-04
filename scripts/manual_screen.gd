@@ -25,9 +25,16 @@ func _update_page():
 	pass
 
 func _next_page():
+	var old_page = page
 	page = clamp(page + 1, 0, len(pages) - 1)
+	if page != old_page: UISounds.play_paper()
 	_update_page()
 	
 func _prev_page():
+	var old_page = page
 	page = clamp(page - 1, 0, len(pages) - 1)
+	if page != old_page: UISounds.play_paper()
 	_update_page()
+	
+func _exit_tree():
+	UISounds.play_cancel()

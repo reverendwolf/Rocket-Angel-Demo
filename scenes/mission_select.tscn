@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bu74tbki7lnci"]
+[gd_scene load_steps=41 format=3 uid="uid://bu74tbki7lnci"]
 
 [ext_resource type="Script" path="res://scripts/mission_select.gd" id="1_2h484"]
 [ext_resource type="PackedScene" uid="uid://cqfxgnl67xhdk" path="res://assets/blends/ultracity-floor.glb" id="1_hnv2n"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://j8wdhvqwu123" path="res://assets/textures/exp2_0.png" id="15_asqxg"]
 [ext_resource type="Texture2D" uid="uid://c4tbmmqwpya0" path="res://assets/ui/gradient-top.png" id="15_hmlma"]
 [ext_resource type="AudioStream" uid="uid://cq4k6cshif0r1" path="res://assets/audio/effects/type-tick.wav" id="16_nni1q"]
+[ext_resource type="Texture2D" uid="uid://bbf20qok1x4io" path="res://assets/ui/otis-face.png" id="19_dayts"]
+[ext_resource type="Texture2D" uid="uid://60dl1332ap5g" path="res://assets/ui/angel-face.png" id="20_equna"]
 
 [sub_resource type="Environment" id="Environment_p83p3"]
 background_mode = 1
@@ -620,16 +622,16 @@ tracks/9/path = NodePath("Control/Monologue Display")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(2, 8, 14, 20),
+"times": PackedFloat32Array(1, 8, 15, 22),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
-"args": ["Otis", "The Pallas Athena Corporation has sent out an open call for mercenaries."],
+"args": ["Otis", "The Pallas Athena corporation has put out an open call for mercenaries..."],
 "method": &"show_monologue"
 }, {
-"args": ["Otis", "Sector 621 and the adjacent sectors are under attack by Terranoids."],
+"args": ["Otis", "Sector 621 is under attack from Terranoids and they've spread to the surrounding sectors."],
 "method": &"show_monologue"
 }, {
-"args": ["Otis", "There are six Terranoid Bugalistae in the sector. Locate and destroy them all."],
+"args": ["Otis", "Pallas Athena wants us to focus on eliminating the six Bugallistae infesting the sector. Private military will clean up the rest."],
 "method": &"show_monologue"
 }, {
 "args": ["Angel", "Those bugs don't stand a chance against my rockets!"],
@@ -681,10 +683,10 @@ mesh = SubResource("QuadMesh_hbrc3")
 skeleton = NodePath("../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D/Selection"]
-autoplay = "spin"
 libraries = {
 "": SubResource("AnimationLibrary_mp1lo")
 }
+autoplay = "spin"
 
 [node name="Level1" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8.69061, 0.0442569, 2.13286)
@@ -753,10 +755,10 @@ mesh = SubResource("RibbonTrailMesh_v8inh")
 transform = Transform3D(-3.61999e-06, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 9.36921e-07, -3.49664e-06, -17.3718, 1.6737, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "intro"
 libraries = {
 "": SubResource("AnimationLibrary_n175m")
 }
+autoplay = "intro"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -927,9 +929,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -209.0
+offset_left = -189.0
 offset_top = 27.0
-offset_right = 210.0
+offset_right = 190.0
 offset_bottom = 67.0
 grow_horizontal = 2
 bbcode_enabled = true
@@ -944,14 +946,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -237.0
+offset_left = -204.0
 offset_top = -94.0
-offset_right = 237.0
-offset_bottom = -12.0
+offset_right = 204.0
+offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 0
 bbcode_enabled = true
-text = "Name"
+text = "Lorem ipsum dolar sit amet Lorem ipsum dolar sit amet Lorem ipsum dolar sit amet Lorem ipsum dolar sit amet Lorem ipsum dolar sit amet Lorem ipsum dolar sit amet Lorem ipsum dolar sit amet Lorem ipsum dolar sit amet Lorem ipsum dolar sit amet "
 scroll_active = false
 visible_characters_behavior = 1
 
@@ -961,13 +963,33 @@ one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control/Monologue Display"]
 stream = ExtResource("16_nni1q")
-volume_db = -4.0
+volume_db = -12.0
 pitch_scale = 0.7
 bus = &"Interface"
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_rnh8f")
-bus = &"Music"
+[node name="OtisFace" type="TextureRect" parent="Control/Monologue Display"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 115.0
+offset_bottom = 161.0
+texture = ExtResource("19_dayts")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AngelFace" type="TextureRect" parent="Control/Monologue Display"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -111.0
+offset_top = 16.0
+offset_right = -8.0
+offset_bottom = 161.0
+grow_horizontal = 0
+texture = ExtResource("20_equna")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Impact" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_0jg11")

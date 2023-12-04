@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cl763k5d0ycw4"]
+[gd_scene load_steps=12 format=3 uid="uid://cl763k5d0ycw4"]
 
 [ext_resource type="Texture2D" uid="uid://j8wdhvqwu123" path="res://assets/textures/exp2_0.png" id="1_fdjct"]
 [ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="2_g2hq4"]
 [ext_resource type="AudioStream" uid="uid://dnrpwr2tix425" path="res://assets/audio/effects/Bluezone_BC0277_explosion_mortar_002_01.wav" id="3_845hm"]
-[ext_resource type="AudioStream" uid="uid://bankcr4m3qp4a" path="res://assets/audio/effects/MagicPack2_WaterExplosions_Explosion2-004.wav" id="4_ar18i"]
 
 [sub_resource type="Animation" id="Animation_2qokb"]
 length = 2.0
@@ -105,7 +104,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.473684), -1.37193, 0.0, 0, 
 point_count = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3q5h2"]
-radius = 3.0
+radius = 8.0
 
 [node name="SuperExplosion" type="Node3D"]
 
@@ -122,12 +121,13 @@ hframes = 4
 vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "explosion_sprite_super"
 libraries = {
 "": SubResource("AnimationLibrary_7swce")
 }
+autoplay = "explosion_sprite_super"
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 12
 lifetime = 1.5
 explosiveness = 1.0
 fixed_fps = 16
@@ -138,7 +138,7 @@ direction = Vector3(0, 0, 0)
 spread = 180.0
 flatness = 1.0
 gravity = Vector3(0, -2.452, 0)
-initial_velocity_min = 8.0
+initial_velocity_min = 12.0
 initial_velocity_max = 16.0
 damping_min = 15.0
 damping_max = 15.0
@@ -164,12 +164,7 @@ shape = SubResource("SphereShape3D_3q5h2")
 stream = ExtResource("3_845hm")
 unit_size = 25.0
 autoplay = true
-bus = &"Effects"
-
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_ar18i")
-pitch_scale = 0.8
-autoplay = true
+max_distance = 72.0
 bus = &"Effects"
 
 [connection signal="body_entered" from="SplashArea" to="DamageDealer" method="deal_damage"]

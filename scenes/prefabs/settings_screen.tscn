@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dx6exafop2lpq"]
+[gd_scene load_steps=7 format=3 uid="uid://dx6exafop2lpq"]
 
 [ext_resource type="Script" path="res://scripts/settings_screen.gd" id="1_6o8pe"]
 [ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="1_dgfb1"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="2_02u28"]
 [ext_resource type="Texture2D" uid="uid://fsy0jn74706b" path="res://assets/ui/wenrexia scifi/MainPanel03.png" id="3_0otiu"]
+[ext_resource type="Script" path="res://scripts/ui_control.gd" id="5_2khjt"]
+[ext_resource type="Script" path="res://scripts/ui_toggle.gd" id="6_2daym"]
 
-[node name="SettingsScreen" type="Control" node_paths=PackedStringArray("first_control")]
+[node name="SettingsScreen" type="Control" node_paths=PackedStringArray("first_control", "horiz_slider", "vert_slider", "invert", "crosshair")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +17,10 @@ grow_vertical = 2
 theme = ExtResource("1_dgfb1")
 script = ExtResource("1_6o8pe")
 first_control = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HSlider")
+horiz_slider = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/HSlider")
+vert_slider = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/HSlider2")
+invert = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/CheckBox")
+crosshair = NodePath("VBoxContainer/HBoxContainer2/VBoxContainer2/CheckBox2")
 
 [node name="Panel" type="ColorRect" parent="."]
 self_modulate = Color(0.490196, 0.490196, 0.490196, 1)
@@ -128,7 +134,7 @@ layout_mode = 2
 [node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-focus_neighbor_top = NodePath("../../../HBoxContainer2/VBoxContainer2/CheckBox")
+focus_neighbor_top = NodePath(".")
 focus_neighbor_bottom = NodePath("../HSlider2")
 max_value = 1.0
 step = 0.05
@@ -202,6 +208,14 @@ text = "[right]Invert Look"
 fit_content = true
 autowrap_mode = 0
 
+[node name="RichTextLabel4" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+text = "[right]Crosshair"
+fit_content = true
+autowrap_mode = 0
+
 [node name="BoxContainer2" type="BoxContainer" parent="VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(38, 0)
 layout_mode = 2
@@ -214,19 +228,35 @@ custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 focus_neighbor_top = NodePath("../../../HBoxContainer/VBoxContainer2/HSlider4")
 focus_neighbor_bottom = NodePath("../HSlider2")
-step = 5.0
+min_value = 1.5
+max_value = 2.75
+step = 0.05
+value = 1.65
+script = ExtResource("5_2khjt")
 
 [node name="HSlider2" type="HSlider" parent="VBoxContainer/HBoxContainer2/VBoxContainer2"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 focus_neighbor_top = NodePath("../HSlider")
 focus_neighbor_bottom = NodePath("../CheckBox")
-step = 5.0
+min_value = 1.5
+max_value = 2.75
+step = 0.05
+value = 1.65
+script = ExtResource("5_2khjt")
 
 [node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../HSlider2")
-focus_neighbor_bottom = NodePath("../../../HBoxContainer/VBoxContainer2/HSlider")
-text = "Aligned"
+focus_neighbor_bottom = NodePath("../CheckBox2")
 flat = true
 icon_alignment = 1
+script = ExtResource("6_2daym")
+
+[node name="CheckBox2" type="CheckBox" parent="VBoxContainer/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../CheckBox")
+focus_neighbor_bottom = NodePath(".")
+flat = true
+icon_alignment = 1
+script = ExtResource("6_2daym")

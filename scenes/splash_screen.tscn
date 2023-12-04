@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/simple_scene_loader.gd" id="1_ebu2s"]
 [ext_resource type="AudioStream" uid="uid://d24jnpwj1s825" path="res://assets/audio/Ps1 startup sound.mp3" id="1_l52q2"]
 [ext_resource type="Texture2D" uid="uid://0bai768mr5oo" path="res://assets/ui/splash-button-light.png" id="3_73a6t"]
-[ext_resource type="Texture2D" uid="uid://cvynkkt6q73sq" path="res://assets/ui/splash-flynncat.png" id="4_wjd1e"]
+[ext_resource type="Texture2D" uid="uid://filgtk3ccls1" path="res://assets/ui/splash-flynncat.png" id="4_wjd1e"]
 [ext_resource type="Texture2D" uid="uid://607cvgn8p3qu" path="res://assets/ui/splash-controller.png" id="5_vdv6c"]
 
 [sub_resource type="Animation" id="Animation_30l5q"]

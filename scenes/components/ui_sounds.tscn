@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://detklqwq22ydy"]
+
+[ext_resource type="Script" path="res://scripts/ui_sounds.gd" id="1_y3qrv"]
+[ext_resource type="AudioStream" uid="uid://de0hjm5ogda63" path="res://assets/audio/ui/confirm_style_3_echo_001.wav" id="2_srs4o"]
+[ext_resource type="AudioStream" uid="uid://o60xu5j7np0k" path="res://assets/audio/ui/back_style_2_001.wav" id="3_q8fht"]
+[ext_resource type="AudioStream" uid="uid://ckwt0q5d8ch64" path="res://assets/audio/ui/confirm_style_2_001.wav" id="3_x2hpo"]
+[ext_resource type="AudioStream" uid="uid://d2fssy64g3v42" path="res://assets/audio/ui/confirm_style_2_004.wav" id="4_5c8f7"]
+[ext_resource type="AudioStream" uid="uid://ch0yo6wolgoxw" path="res://assets/audio/ui/pageturn-102978.mp3" id="6_hdaxd"]
+
+[node name="UISounds" type="Node"]
+script = ExtResource("1_y3qrv")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_srs4o")
+volume_db = -10.0
+max_polyphony = 2
+bus = &"Interface"
+
+[node name="Toggle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_x2hpo")
+volume_db = -10.0
+max_polyphony = 2
+bus = &"Interface"
+
+[node name="Choose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_q8fht")
+volume_db = -10.0
+max_polyphony = 2
+bus = &"Interface"
+
+[node name="Cancel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5c8f7")
+volume_db = -10.0
+max_polyphony = 2
+bus = &"Interface"
+
+[node name="Paper" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_hdaxd")
+volume_db = 5.0
+max_polyphony = 2
+bus = &"Interface"

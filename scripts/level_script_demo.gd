@@ -5,6 +5,7 @@ extends Node
 @export_file var to_title : String
 
 @export var stage_music : AudioStream
+@export var boss_music : AudioStream
 
 @export var player : FPSPlayer
 @export var monologue : Monologue
@@ -110,10 +111,14 @@ func encounter_progress():
 			activate_boss()
 
 func activate_boss():
+	MusicMaster.fade_out(3.0)
 	monologue.show_monologue("Otis","Objective achieved. Pack it up and... Wait...")
 	await get_tree().create_timer(standard_delay, false).timeout
-	armor_queen.start_following()
+	monologue.show_monologue("Angel","Otis? What's going on?")
+	await get_tree().create_timer(standard_delay, false).timeout
 	monologue.show_monologue("Otis","Angel! That massive enemy is closing in! It's a Terranoid Queen!")
+	armor_queen.start_following()
+	MusicMaster.play_now(boss_music)
 	
 func activate_formic_lure():
 	if encountersResolved < 6:
@@ -146,6 +151,7 @@ func boss_defeated():
 		player.set_invulnerable(true)
 		monologue.show_monologue("Angel","Otis? The Queen is down.")
 		await get_tree().create_timer(standard_delay, false).timeout
+		MusicMaster.fade_out(3.0)
 		monologue.show_monologue("Otis","Angel! Are you alright?")
 		await get_tree().create_timer(standard_delay, false).timeout
 		monologue.show_monologue("Angel","I'm fine, but the Queen. It wasn't normal. It was... mechanized somehow.")

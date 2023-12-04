@@ -4,6 +4,8 @@ extends Area3D
 @onready var player_health : PlayerHealth = $"../PlayerHealth" as PlayerHealth
 
 signal pickup_event
+signal pickup_power
+signal pickup_ammo
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +33,10 @@ func _on_area_entered(area):
 		
 		if used:
 			pickup_event.emit()
+			if area.pickup_type == area.PickupType.AMMO:
+				pickup_ammo.emit()
+			else:
+				pickup_power.emit()
 			area.queue_free()
 		
 	pass # Replace with function body.

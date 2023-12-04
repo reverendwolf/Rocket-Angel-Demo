@@ -30,7 +30,12 @@ var canStep = false
 var glide_fuel = 0.0
 var glide_refuel_timer = 0.0
 
+var look_h : float = LOOK_SPEED
+var look_v : float = LOOK_SPEED
+
 var ground_height = 0.0
+
+var invert_look : bool = false
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
@@ -47,6 +52,8 @@ var ground_height = 0.0
 @onready var jumpJetSound = $JumpJetSound
 @onready var jumpJetFailSound = $JumpJetSoundFail
 
+@onready var crosshair = $"Player Hud/Crosshair"
+
 @export var gun_holder : Node3D
 @onready var gun : PlayerGun = $Gun
 
@@ -61,6 +68,8 @@ func _ready():
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	fuel_bar.max_value = GLIDE_FUEL_MAX
 	glide_fuel = GLIDE_FUEL_MAX
+	update_settings()
+	GlobalSettings.updated.connect(update_settings)
 
 func _process(_delta):
 	if dead:
@@ -120,7 +129,9 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("lsleft", "lsright", "lsup", "lsdown")
-	var look_dir = Input.get_vector("rsleft","rsright","rsup","rsdown")
+	var look_dir = Input.get_vector("rsleft","rsright","rsup","rsdown") 
+	
+	if invert_look: look_dir.y *= -1
 	
 	# sprinting speed
 	if Input.is_action_just_pressed("sprint"):
@@ -153,8 +164,8 @@ func _physics_process(delta):
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * AIR_CONTROL)
 		
 	if look_dir:
-		head.rotate_y(-look_dir.x * delta * LOOK_SPEED)
-		camera.rotate_x(-look_dir.y * delta * LOOK_SPEED)
+		head.rotate_y(-look_dir.x * delta * look_h)
+		camera.rotate_x(-look_dir.y * delta * look_v)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 
 	bob_time += delta * velocity.length() * float(is_on_floor())
@@ -230,4 +241,11 @@ func player_dead():
 
 func death_finished():
 	playerDead.emit()
+	pass
+
+func update_settings():
+	crosshair.visible = GlobalSettings.get_crosshair()
+	invert_look = GlobalSettings.get_inverted()
+	look_h = GlobalSettings.get_horizontal_look()
+	look_v = GlobalSettings.get_vertical_look()
 	pass

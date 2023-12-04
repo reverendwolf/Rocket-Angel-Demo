@@ -4,7 +4,13 @@ class_name  MainScene
 @export var scene_holder : Node
 @export var screen_fader : AnimationPlayer
 
+@onready var empty_button : BaseButton = %EmptyButton
+@onready var debug_label : Label = %"Debug Label"
+
+
 @export_file var starting_scene : String
+
+var transitioning : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,18 +39,27 @@ func load_new_scene(path : String):
 	scene_transition(path)
 
 func scene_transition(path : String):
+	if transitioning: return
+	
+	transitioning = true
+	empty_button.grab_focus()
+	
 	await cover_screen()
 	
 	for child in scene_holder.get_children():
+		debug_label.text = str(scene_holder.get_child_count())
 		child.queue_free()
+		await get_tree().process_frame
+		
 	
-	
+	await get_tree().process_frame
 	
 	var new_scene = load(path).instantiate()
 	
 	scene_holder.add_child(new_scene)
 	await get_tree().create_timer(1.5).timeout
 	await show_screen()
+	transitioning = false
 
 func _unhandled_input(event):
 	if(event is InputEventKey):

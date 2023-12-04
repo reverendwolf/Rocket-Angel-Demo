@@ -24,7 +24,13 @@ func show_monologue(speaker : String, monologue: String):
 		messageTimer.stop()
 		await get_tree().process_frame
 	
-	s_name = "[center]" + speaker + "[/center]"
+	if speaker == "Otis":
+		s_name = "[left]" + speaker + "[/left]"
+	elif speaker == "Angel":
+		s_name = "[right]" + speaker + "[/right]"
+	else:
+		s_name = "[center]" + speaker + "[/center]"
+	
 	s_text = monologue
 	display_text()
 
