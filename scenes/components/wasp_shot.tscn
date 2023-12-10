@@ -19,7 +19,7 @@ shape = SubResource("CapsuleShape3D_mu81w")
 
 [node name="DamageDealer" type="Node" parent="."]
 script = ExtResource("2_lox1t")
-damage = 10
+damage = 4
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

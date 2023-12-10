@@ -24,11 +24,12 @@ enum MENUSTATE
 var current_state : MENUSTATE
 
 func _ready():
+	UISounds.supress(true)
 	MainScene.initialize_preferences()
 	MusicMaster.play_now(music)
 	current_state = MENUSTATE.MAIN
 	first_control.grab_focus()
-
+	UISounds.supress(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

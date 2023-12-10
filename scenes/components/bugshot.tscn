@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5suebfbxwvn"]
+[gd_scene load_steps=8 format=3 uid="uid://c5suebfbxwvn"]
 
 [ext_resource type="PackedScene" uid="uid://cl0ayngvmerpa" path="res://assets/blends/bug-shot.glb" id="1_erx0u"]
 [ext_resource type="Script" path="res://scripts/bugshot.gd" id="1_py8ka"]
 [ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="2_2mle7"]
 [ext_resource type="PackedScene" uid="uid://brplm784cg4hj" path="res://scenes/prefabs/simple_explosion.tscn" id="2_dmph4"]
+[ext_resource type="AudioStream" uid="uid://cg3d605oglf1s" path="res://assets/audio/effects/MR - Insect Creature Attack VO 02.wav" id="5_i28aq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cmpww"]
 rough = true
@@ -29,11 +30,16 @@ shape = SubResource("BoxShape3D_1scbv")
 
 [node name="DamageDealer" type="Node" parent="."]
 script = ExtResource("2_2mle7")
-damage = 6
+damage = 12
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.5
 autostart = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_i28aq")
+autoplay = true
+max_distance = 48.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="damageDealt" from="DamageDealer" to="." method="explode"]

@@ -8,6 +8,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	UISounds.supress(true)
 	first_control.grab_focus()
 	tree_exiting.connect(closing)
 	
@@ -22,15 +23,13 @@ func _ready():
 	
 	crosshair.button_pressed = GlobalSettings.get_crosshair()
 	crosshair.pressed.connect(GlobalSettings.set_crosshair.bind(!crosshair.button_pressed))
+	UISounds.supress(false)
 	pass # Replace with function body.
 
 func _exit_tree():
 	UISounds.play_cancel()
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 	
 func closing():
 	horiz_slider.value_changed.disconnect(GlobalSettings.set_horizontal_look)

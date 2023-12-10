@@ -14,6 +14,8 @@ var startPosition : Vector3
 
 var first_frame_wait : bool = true
 
+@export var barker : AudioStreamPlayer3D
+
 func _ready():
 	super._ready()
 	startPosition = character_body.global_position
@@ -22,7 +24,10 @@ func _ready():
 
 func enter_state():
 	super.enter_state()
-	
+	if randf() < 0.65:
+		barker.pitch_scale = randf_range(0.8, 1.2)
+		barker.play(0.0)
+		
 	animTree.set("parameters/Loco/blend_position", 0.5)
 	
 	var randomDir : Vector2 = Vector2.RIGHT.rotated(randf_range(0, TAU)) * randf_range(0, wander_distance)

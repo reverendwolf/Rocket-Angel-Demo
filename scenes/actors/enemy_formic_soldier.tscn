@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bgts36gx0iuad"]
+[gd_scene load_steps=43 format=3 uid="uid://bgts36gx0iuad"]
 
 [ext_resource type="Script" path="res://scripts/state machine/enemy_formic_soldier.gd" id="1_g2rv5"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_87gic"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/state machine/enemystate_wander.gd" id="3_sbtt0"]
 [ext_resource type="Script" path="res://scripts/damage_taker.gd" id="3_t1y7p"]
 [ext_resource type="Script" path="res://scripts/state machine/enemystate_chase.gd" id="4_67rl0"]
+[ext_resource type="AudioStream" uid="uid://dmium4dmnir0s" path="res://assets/audio/effects/EFX SD Flesh Pry Gristle 05.wav" id="5_12fae"]
 [ext_resource type="Script" path="res://scripts/state machine/enemystate_pain.gd" id="5_sup6o"]
 [ext_resource type="PackedScene" uid="uid://cmpasqmvx8do" path="res://scenes/components/soldier_melee.tscn" id="6_wb56k"]
 [ext_resource type="Script" path="res://scripts/state machine/enemystate_death.gd" id="6_xx62h"]
@@ -877,6 +878,14 @@ activeState = NodePath("FSM/EnemyChaseState")
 painState = NodePath("FSM/EnemyPainState")
 deathState = NodePath("FSM/EnemyDeathState")
 
+[node name="Bark" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32363, 0)
+stream = ExtResource("5_12fae")
+unit_size = 25.0
+max_db = 0.0
+max_distance = 35.0
+bus = &"Effects"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_h2j05")
@@ -895,22 +904,22 @@ bones/1/name = "Body"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, 0, 0, 0, -0.196116, 0.980581, 0, -0.980581, -0.196116, 0, 0.8, 0.4)
 bones/1/enabled = true
-bones/1/position = Vector3(-1.17671e-17, 0.798527, 0.398854)
-bones/1/rotation = Quaternion(-0.772365, -0.023516, -0.0193169, 0.63445)
+bones/1/position = Vector3(-1.17671e-17, 0.751662, 0.362404)
+bones/1/rotation = Quaternion(-0.753937, -0.0229549, -0.0199804, 0.656242)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Head"
 bones/2/parent = 1
 bones/2/rest = Transform3D(1, 0, -3.25842e-07, 6.39027e-08, -0.980581, 0.196116, -3.19514e-07, -0.196116, -0.980581, 0, 1.3411e-07, 1.49012e-08)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 1.3411e-07, 1.49012e-08)
-bones/2/rotation = Quaternion(0.994639, 0.0403287, 0.00405763, -0.09513)
+bones/2/rotation = Quaternion(0.99907, 0.0411466, 0.00619029, 0.0113226)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Arm.L"
 bones/3/parent = 2
 bones/3/rest = Transform3D(0.416761, 0.89645, -0.15062, -0.899568, 0.430556, 0.0734764, 0.130718, 0.104871, 0.985857, 0.368408, 0.54303, 0.4)
 bones/3/enabled = true
-bones/3/position = Vector3(0.368407, 0.543198, 0.399812)
-bones/3/rotation = Quaternion(-0.00422096, -0.0813983, -0.329106, 0.940769)
+bones/3/position = Vector3(0.368395, 0.544743, 0.398084)
+bones/3/rotation = Quaternion(0.176109, -0.0125482, -0.336439, 0.925006)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Claw.L"
 bones/4/parent = 3
@@ -923,8 +932,8 @@ bones/5/name = "Arm.R"
 bones/5/parent = 2
 bones/5/rest = Transform3D(0.416761, -0.89645, 0.150621, 0.899568, 0.430556, 0.0734763, -0.130719, 0.104872, 0.985857, -0.368408, 0.54303, 0.4)
 bones/5/enabled = true
-bones/5/position = Vector3(-0.368407, 0.542862, 0.400188)
-bones/5/rotation = Quaternion(0.025475, 0.0776742, 0.645378, 0.759477)
+bones/5/position = Vector3(-0.368395, 0.541317, 0.401916)
+bones/5/rotation = Quaternion(0.173927, -0.0450576, 0.649879, 0.738496)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "Claw.R"
 bones/6/parent = 5
@@ -972,20 +981,23 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u487k")
+}
 tree_root = SubResource("AnimationNodeStateMachine_yy4lw")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Loco/blend_position = 0.0
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_pl7hg")
 current_state = NodePath("EnemyWanderState")
 
-[node name="EnemyWanderState" type="Node" parent="FSM" node_paths=PackedStringArray("character_body", "navAgent", "animTree")]
+[node name="EnemyWanderState" type="Node" parent="FSM" node_paths=PackedStringArray("character_body", "navAgent", "animTree", "barker")]
 script = ExtResource("3_sbtt0")
 character_body = NodePath("../..")
 navAgent = NodePath("../../NavigationAgent3D")
 animTree = NodePath("../../AnimationTree")
+barker = NodePath("../../Bark")
 
 [node name="EnemyChaseState" type="Node" parent="FSM" node_paths=PackedStringArray("player_sensor", "nav_agent", "character_body", "animTree", "melee_point", "shoot_point")]
 script = ExtResource("4_67rl0")

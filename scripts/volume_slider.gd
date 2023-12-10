@@ -9,5 +9,5 @@ func _ready():
 	value_changed.connect(_on_value_changed)
 	focus_entered.connect(UISounds.play_choose)
 	
-func _on_value_changed(value : float):
-	GlobalSettings.set_audiobus_value(bus_index, value)
+func _on_value_changed(new_value : float):
+	GlobalSettings.set_audiobus_value(bus_index, new_value)

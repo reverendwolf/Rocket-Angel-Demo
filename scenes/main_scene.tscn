@@ -113,6 +113,7 @@ script = ExtResource("2_dl32g")
 
 [node name="Debug Label" type="Label" parent="Control/CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 

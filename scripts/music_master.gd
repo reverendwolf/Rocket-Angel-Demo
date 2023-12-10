@@ -11,13 +11,9 @@ func _ready():
 	
 	music_bus = AudioServer.get_bus_index("Music")
 	music.bus = "Music"
-	music.volume_db = -5
+	music.volume_db = -4
 	
 	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func play_now(audio : AudioStream):
 	if music.playing: music.stop()

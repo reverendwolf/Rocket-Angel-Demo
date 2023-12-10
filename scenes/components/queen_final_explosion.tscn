@@ -113,21 +113,12 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 
 [node name="SimpleExplosion" parent="." instance=ExtResource("1_p3nke")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.27169, -0.146389, 4.16339)
-
-[node name="SimpleExplosion2" parent="." instance=ExtResource("1_p3nke")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4.85119, -0.70936, 5.38787)
-
-[node name="SimpleExplosion3" parent="." instance=ExtResource("1_p3nke")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 6.2202, -1.41297, -7.99697)
-
-[node name="SimpleExplosion4" parent="." instance=ExtResource("1_p3nke")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -6.28916, 0.257531, -6.48802)
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 
 [node name="CPUParticles3D2" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.611328, -0.25692, 6.58453)
 emitting = false
-amount = 64
+amount = 24
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
@@ -156,7 +147,7 @@ scale_amount_curve = SubResource("Curve_002xs")
 [node name="CPUParticles3D5" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.611328, -0.25692, -2.17404)
 emitting = false
-amount = 64
+amount = 24
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
@@ -185,7 +176,7 @@ scale_amount_curve = SubResource("Curve_002xs")
 [node name="CPUParticles3D3" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.36907, -3.6491)
 emitting = false
-amount = 64
+amount = 24
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
@@ -214,7 +205,7 @@ scale_amount_curve = SubResource("Curve_002xs")
 [node name="CPUParticles3D4" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.79782, -1.18852)
 emitting = false
-amount = 64
+amount = 24
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
@@ -243,7 +234,7 @@ scale_amount_curve = SubResource("Curve_002xs")
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.8791)
 emitting = false
-amount = 64
+amount = 12
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
@@ -251,22 +242,22 @@ lifetime_randomness = 0.5
 fixed_fps = 16
 mesh = SubResource("QuadMesh_eowmd")
 emission_shape = 1
-emission_sphere_radius = 12.0
+emission_sphere_radius = 24.0
 direction = Vector3(0, 1, 0)
 initial_velocity_min = 2.0
 initial_velocity_max = 4.0
 angle_min = -180.0
 angle_max = 180.0
-scale_amount_min = 24.0
-scale_amount_max = 32.0
+scale_amount_min = 32.0
+scale_amount_max = 64.0
 anim_speed_min = 0.75
 anim_speed_max = 1.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "asplode"
 libraries = {
 "": SubResource("AnimationLibrary_uwmrr")
 }
+autoplay = "asplode"
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_qbj3l")

@@ -327,6 +327,7 @@ anim_offset_max = 1.0
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.993134, 0.116983, 0, -0.116983, 0.993134, -0.380538, 1.25104, 2.74581)
+current = true
 fov = 40.0
 
 [node name="Enemy-HunterWasp" type="CharacterBody3D" parent="." node_paths=PackedStringArray("shootPoint")]
@@ -350,35 +351,35 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 2.13163e-14, 2.38419e-07, 2.08351e-07, 0.486129, -0.873887, -1.15902e-07, 0.873887, 0.486129, -1.1111e-16, 0.193484, -0.4766)
 bones/0/enabled = true
 bones/0/position = Vector3(-1.1111e-16, 0.193484, -0.4766)
-bones/0/rotation = Quaternion(0.489038, 1.03156e-07, 6.06736e-08, 0.872262)
+bones/0/rotation = Quaternion(0.506888, 1.0276e-07, 6.04258e-08, 0.862012)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Face"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, -2.38245e-07, 2.29323e-07, 2.38245e-07, 0.0381509, -0.999272, 2.29323e-07, 0.999272, 0.0381509, -3.66382e-15, 1, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(-3.66382e-15, 1, 0)
-bones/1/rotation = Quaternion(0.719537, 3.36376e-08, 1.36605e-07, 0.694454)
+bones/1/rotation = Quaternion(0.693487, -1.18347e-13, 1.6534e-07, 0.720469)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Wing.L"
 bones/2/parent = 0
 bones/2/rest = Transform3D(0.506066, 0.784888, -0.357559, 0.268933, 0.250298, 0.930068, 0.819495, -0.566835, -0.0844152, 0.311261, 0.380252, -0.102689)
 bones/2/enabled = true
 bones/2/position = Vector3(0.311261, 0.380252, -0.102689)
-bones/2/rotation = Quaternion(-0.520501, -0.520851, -0.275095, 0.618155)
+bones/2/rotation = Quaternion(-0.578831, -0.45515, -0.199513, 0.646519)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Wing.R"
 bones/3/parent = 0
 bones/3/rest = Transform3D(0.506066, -0.784888, 0.357559, -0.268933, 0.250298, 0.930068, -0.819495, -0.566835, -0.084415, -0.311261, 0.380252, -0.10269)
 bones/3/enabled = true
 bones/3/position = Vector3(-0.311261, 0.380252, -0.10269)
-bones/3/rotation = Quaternion(-0.519048, 0.522299, 0.276816, 0.617386)
+bones/3/rotation = Quaternion(-0.578831, 0.45515, 0.199513, 0.646519)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Butt"
 bones/4/parent = -1
 bones/4/rest = Transform3D(1, -3.01981e-14, -1.43051e-06, 4.15973e-08, -0.999577, 0.0290786, -1.42991e-06, -0.0290786, -0.999577, -1.1111e-16, 0.193484, -0.4766)
 bones/4/enabled = true
 bones/4/position = Vector3(-1.1111e-16, 0.193484, -0.4766)
-bones/4/rotation = Quaternion(0.999245, -2.77833e-08, -7.14716e-07, 0.0388438)
+bones/4/rotation = Quaternion(0.999894, 1.04004e-08, -7.15182e-07, -0.0145408)
 bones/4/scale = Vector3(1, 1, 1)
 
 [node name="Sphere" type="MeshInstance3D" parent="Enemy-HunterWasp/WaspArm/Skeleton3D"]
@@ -426,35 +427,35 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 2.13163e-14, 2.38419e-07, 2.08351e-07, 0.486129, -0.873887, -1.15902e-07, 0.873887, 0.486129, -1.1111e-16, 0.193484, -0.4766)
 bones/0/enabled = true
 bones/0/position = Vector3(-1.1111e-16, 0.193484, -0.4766)
-bones/0/rotation = Quaternion(0.489038, 1.03156e-07, 6.06736e-08, 0.872262)
+bones/0/rotation = Quaternion(0.506888, 1.0276e-07, 6.04258e-08, 0.862012)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Face"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, -2.38245e-07, 2.29323e-07, 2.38245e-07, 0.0381509, -0.999272, 2.29323e-07, 0.999272, 0.0381509, -3.66382e-15, 1, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(-3.66382e-15, 1, 0)
-bones/1/rotation = Quaternion(0.719537, 3.36376e-08, 1.36605e-07, 0.694454)
+bones/1/rotation = Quaternion(0.693487, -1.18347e-13, 1.6534e-07, 0.720469)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Wing.L"
 bones/2/parent = 0
 bones/2/rest = Transform3D(0.506066, 0.784888, -0.357559, 0.268933, 0.250298, 0.930068, 0.819495, -0.566835, -0.0844152, 0.311261, 0.380252, -0.102689)
 bones/2/enabled = true
 bones/2/position = Vector3(0.311261, 0.380252, -0.102689)
-bones/2/rotation = Quaternion(-0.520501, -0.520851, -0.275095, 0.618155)
+bones/2/rotation = Quaternion(-0.578831, -0.45515, -0.199513, 0.646519)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Wing.R"
 bones/3/parent = 0
 bones/3/rest = Transform3D(0.506066, -0.784888, 0.357559, -0.268933, 0.250298, 0.930068, -0.819495, -0.566835, -0.084415, -0.311261, 0.380252, -0.10269)
 bones/3/enabled = true
 bones/3/position = Vector3(-0.311261, 0.380252, -0.10269)
-bones/3/rotation = Quaternion(-0.519048, 0.522299, 0.276816, 0.617386)
+bones/3/rotation = Quaternion(-0.578831, 0.45515, 0.199513, 0.646519)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Butt"
 bones/4/parent = -1
 bones/4/rest = Transform3D(1, -3.01981e-14, -1.43051e-06, 4.15973e-08, -0.999577, 0.0290786, -1.42991e-06, -0.0290786, -0.999577, -1.1111e-16, 0.193484, -0.4766)
 bones/4/enabled = true
 bones/4/position = Vector3(-1.1111e-16, 0.193484, -0.4766)
-bones/4/rotation = Quaternion(0.999245, -2.77833e-08, -7.14716e-07, 0.0388438)
+bones/4/rotation = Quaternion(0.999894, 1.04004e-08, -7.15182e-07, -0.0145408)
 bones/4/scale = Vector3(1, 1, 1)
 
 [node name="Sphere" type="MeshInstance3D" parent="Enemy-HunterWasp2/WaspArm/Skeleton3D"]
@@ -502,35 +503,35 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 2.13163e-14, 2.38419e-07, 2.08351e-07, 0.486129, -0.873887, -1.15902e-07, 0.873887, 0.486129, -1.1111e-16, 0.193484, -0.4766)
 bones/0/enabled = true
 bones/0/position = Vector3(-1.1111e-16, 0.193484, -0.4766)
-bones/0/rotation = Quaternion(0.489038, 1.03156e-07, 6.06736e-08, 0.872262)
+bones/0/rotation = Quaternion(0.506888, 1.0276e-07, 6.04258e-08, 0.862012)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Face"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, -2.38245e-07, 2.29323e-07, 2.38245e-07, 0.0381509, -0.999272, 2.29323e-07, 0.999272, 0.0381509, -3.66382e-15, 1, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(-3.66382e-15, 1, 0)
-bones/1/rotation = Quaternion(0.719537, 3.36376e-08, 1.36605e-07, 0.694454)
+bones/1/rotation = Quaternion(0.693487, -1.18347e-13, 1.6534e-07, 0.720469)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Wing.L"
 bones/2/parent = 0
 bones/2/rest = Transform3D(0.506066, 0.784888, -0.357559, 0.268933, 0.250298, 0.930068, 0.819495, -0.566835, -0.0844152, 0.311261, 0.380252, -0.102689)
 bones/2/enabled = true
 bones/2/position = Vector3(0.311261, 0.380252, -0.102689)
-bones/2/rotation = Quaternion(-0.520501, -0.520851, -0.275095, 0.618155)
+bones/2/rotation = Quaternion(-0.578831, -0.45515, -0.199513, 0.646519)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Wing.R"
 bones/3/parent = 0
 bones/3/rest = Transform3D(0.506066, -0.784888, 0.357559, -0.268933, 0.250298, 0.930068, -0.819495, -0.566835, -0.084415, -0.311261, 0.380252, -0.10269)
 bones/3/enabled = true
 bones/3/position = Vector3(-0.311261, 0.380252, -0.10269)
-bones/3/rotation = Quaternion(-0.519048, 0.522299, 0.276816, 0.617386)
+bones/3/rotation = Quaternion(-0.578831, 0.45515, 0.199513, 0.646519)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Butt"
 bones/4/parent = -1
 bones/4/rest = Transform3D(1, -3.01981e-14, -1.43051e-06, 4.15973e-08, -0.999577, 0.0290786, -1.42991e-06, -0.0290786, -0.999577, -1.1111e-16, 0.193484, -0.4766)
 bones/4/enabled = true
 bones/4/position = Vector3(-1.1111e-16, 0.193484, -0.4766)
-bones/4/rotation = Quaternion(0.999245, -2.77833e-08, -7.14716e-07, 0.0388438)
+bones/4/rotation = Quaternion(0.999894, 1.04004e-08, -7.15182e-07, -0.0145408)
 bones/4/scale = Vector3(1, 1, 1)
 
 [node name="Sphere" type="MeshInstance3D" parent="Enemy-HunterWasp3/WaspArm/Skeleton3D"]
@@ -558,6 +559,7 @@ ignore_groups = Array[String](["Enemy"])
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1502, 0.768666)
 
 [node name="angel-fullbody" parent="." instance=ExtResource("19_hq8qw")]
+transform = Transform3D(0.918281, 0, -0.39593, 0, 1, 0, 0.39593, 0, 0.918281, 0.388653, 0, -0.632334)
 
 [connection signal="pressed" from="MainMenu/HBoxContainer/MainGame" to="MainMenu" method="main_game"]
 [connection signal="pressed" from="MainMenu/HBoxContainer/Settings" to="MainMenu" method="set_state_settings"]

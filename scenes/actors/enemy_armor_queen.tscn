@@ -92,6 +92,7 @@ bind/8/pose = Transform3D(1, -2.18429e-07, 9.55627e-08, -7.10543e-15, -0.400819,
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_gkagv")
+texture_filter = 0
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -440,8 +441,8 @@ external_skeleton = NodePath("..")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="QueenArm/Skeleton3D/BoneAttachment3D"]
 transform = Transform3D(1, 0, -2.21601e-13, 0, 1, 0, 7.10543e-15, 0, 1, 9.56298, -14.2241, -1.37024)
-amount = 12
-lifetime = 1.5
+amount = 6
+lifetime = 3.0
 randomness = 0.5
 fixed_fps = 16
 mesh = SubResource("QuadMesh_2ojrf")
@@ -452,14 +453,14 @@ initial_velocity_min = 4.0
 initial_velocity_max = 8.0
 angle_min = -35.0
 angle_max = 35.0
-scale_amount_min = 12.0
-scale_amount_max = 12.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
 color_ramp = SubResource("Gradient_ykiyk")
 
 [node name="CPUParticles3D2" type="CPUParticles3D" parent="QueenArm/Skeleton3D/BoneAttachment3D"]
 transform = Transform3D(1, 0, -2.78444e-13, 0, 1, 0, 7.10543e-15, 0, 1, -10.6813, -14.2241, -1.37024)
-amount = 12
-lifetime = 1.5
+amount = 6
+lifetime = 3.0
 randomness = 0.5
 fixed_fps = 16
 mesh = SubResource("QuadMesh_2ojrf")
@@ -470,15 +471,15 @@ initial_velocity_min = 4.0
 initial_velocity_max = 8.0
 angle_min = -35.0
 angle_max = 35.0
-scale_amount_min = 12.0
-scale_amount_max = 16.0
+scale_amount_min = 4.0
+scale_amount_max = 6.0
 color_ramp = SubResource("Gradient_ykiyk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "ArmatureAction"
 libraries = {
 "": SubResource("AnimationLibrary_0671a")
 }
+autoplay = "ArmatureAction"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_bgr0b")
@@ -574,10 +575,10 @@ visible_characters = 0
 visible_ratio = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
-autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_12eqw")
 }
+autoplay = "RESET"
 
 [node name="Explosions" type="Node3D" parent="."]
 

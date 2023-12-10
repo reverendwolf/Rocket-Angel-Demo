@@ -11,6 +11,9 @@ extends Node
 @export var monologue : Monologue
 @export var objective_label : Control
 @export var objective_label_timer : Timer
+@export var objective_grid : Control
+@export var objective_sound : AudioStreamPlayer
+var scanning : bool
 @export var boss_remote_transform : RemoteTransform3D
 @export var armor_queen : ArmorQueen
 @export var boss_path : Path3D
@@ -43,7 +46,7 @@ func _ready():
 	pass
 
 func _process(_delta):
-	if Input.is_action_just_pressed("context"):
+	if Input.is_action_just_pressed("context") and not scanning:
 		show_nearest_objective()
 
 	if not closest_node and show_closest:
@@ -76,11 +79,21 @@ func choose_nearest_objective():
 			closest_node = obj
 
 func show_nearest_objective():
+	scanning = true
 	choose_nearest_objective()
+	if objective_sound.playing: objective_sound.stop()
+	objective_sound.play(0.0)
 	show_closest = true
+	var tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(objective_grid, "scale", Vector2.ONE, 0.25)
 	objective_label_timer.start()
 	await objective_label_timer.timeout
 	show_closest = false
+	tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(objective_grid, "scale", Vector2.ZERO, 0.25)
+	scanning = false
 	pass
 	
 func mission_encounter_resolved():
@@ -159,6 +172,10 @@ func boss_defeated():
 		monologue.show_monologue("Otis","Pallas Athena can clear up the rest. Let's get you home.")
 		await get_tree().create_timer(standard_delay, false).timeout
 		get_tree().get_first_node_in_group("MainScene").load_new_scene(mission_complete)
+
+func reminder():
+	monologue.show_monologue("Otis","Angel, don't forget about the actuators on your left hand. They'll activate the booster and floater jets on your suit!")
+	await get_tree().create_timer(standard_delay, false).timeout
 
 func reload_level():
 	get_tree().get_first_node_in_group("MainScene").load_new_scene(this_level)

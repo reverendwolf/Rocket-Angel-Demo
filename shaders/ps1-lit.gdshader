@@ -44,7 +44,7 @@ uniform sampler2D specular: hint_default_black, filter_nearest;
 uniform sampler2D emission: hint_default_black, filter_nearest;
 
 // The "jumpiness" of vertices.
-uniform float jitter: hint_range(0.0, 1.0) = 0.15;
+uniform float jitter: hint_range(0.0, 1.0) = 0.01;
 
 // If disabled, jitter will not affect the Z coordinate
 // of the vertex.
