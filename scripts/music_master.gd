@@ -32,6 +32,7 @@ func fade_out(time : float):
 	var tween = get_tree().create_tween()
 	tween.tween_method(set_bus_value, 1.0, 0.0, time)
 	await tween.finished
+	music.stop()
 
 func fade_in(time : float):
 	var tween = get_tree().create_tween()

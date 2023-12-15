@@ -7,6 +7,9 @@ extends Control
 @export var characterTime : float = 0.01
 @export var punctuationtime : float = 0.05
 
+@export var otisFace : TextureRect
+@export var angelFace : TextureRect
+
 @onready var audio_click : AudioStreamPlayer = $AudioStreamPlayer
 
 var s_name : String
@@ -26,10 +29,19 @@ func show_monologue(speaker : String, monologue: String):
 	
 	if speaker == "Otis":
 		s_name = "[left]" + speaker + "[/left]"
+		if angelFace:
+			angelFace.modulate = Color(0.25, 0.25, 0.25)
+		if otisFace:
+			otisFace.modulate = Color(1.0, 1.0, 1.0)
 	elif speaker == "Angel":
 		s_name = "[right]" + speaker + "[/right]"
+		if otisFace:
+			otisFace.modulate = Color(0.25, 0.25, 0.25)
+		if angelFace:
+			angelFace.modulate = Color(1.0, 1.0, 1.0)
 	else:
 		s_name = "[center]" + speaker + "[/center]"
+
 	
 	s_text = monologue
 	display_text()

@@ -7,15 +7,17 @@ class_name  MainScene
 @onready var empty_button : BaseButton = %EmptyButton
 @onready var debug_label : Label = %"Debug Label"
 
+@export var screen_blur : BlurManager
 
 @export_file var starting_scene : String
 
 var transitioning : bool = false
-
+var pulsing : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	screen_blur.rect.visible = false
 	var init_scene = load(starting_scene).instantiate()
 	scene_holder.add_child(init_scene)
 	call_deferred("show_screen")
@@ -65,3 +67,12 @@ func _unhandled_input(event):
 	if(event is InputEventKey):
 		if(event.keycode == KEY_ESCAPE):
 			get_tree().quit()
+
+func pulse_blur(amount : float):
+	if pulsing: return
+	screen_blur.rect.visible = true
+	var tween = get_tree().create_tween()
+	tween.tween_method(screen_blur.set_blend, amount, 0.0, 1.0)
+	await tween.finished
+	screen_blur.rect.visible = false
+	pass

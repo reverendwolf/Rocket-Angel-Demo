@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhk11it5pwxfg"]
+[gd_scene load_steps=15 format=3 uid="uid://bhk11it5pwxfg"]
 
 [ext_resource type="PackedScene" uid="uid://brplm784cg4hj" path="res://scenes/prefabs/simple_explosion.tscn" id="1_p3nke"]
+[ext_resource type="Script" path="res://scripts/fire_blur.gd" id="1_qbtqj"]
 [ext_resource type="ArrayMesh" uid="uid://g33noe2xvlbj" path="res://assets/objects/BugParticle09.obj" id="2_go1kw"]
 [ext_resource type="ArrayMesh" uid="uid://xx230jet5olg" path="res://assets/objects/BugParticle05.obj" id="3_dgusr"]
 [ext_resource type="ArrayMesh" uid="uid://ct2lfuhskb16b" path="res://assets/objects/BugParticle10.obj" id="4_lsf0q"]
@@ -111,6 +112,8 @@ _data = {
 
 [node name="QueenFinalExplosion" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+script = ExtResource("1_qbtqj")
+blur_strength = 0.95
 
 [node name="SimpleExplosion" parent="." instance=ExtResource("1_p3nke")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)

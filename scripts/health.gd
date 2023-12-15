@@ -6,6 +6,7 @@ class_name Health
 @export var curHealth = 1
 
 var died = false;
+var cooldown := 0.0
 
 signal healthDepleted
 signal healthLowered
@@ -15,11 +16,19 @@ signal healthRaised
 func _ready():
 	curHealth = maxHealth
 	
+func _process(delta):
+	if cooldown >= 0.0:
+		cooldown -= delta
+	
 func damage(dmg : int):
+	if cooldown > 0.0: return
+	
 	curHealth -= dmg
 	health_check(false)
 	
 func restore(dmg : int):
+	if cooldown > 0.0: return
+	
 	curHealth += dmg
 	health_check(true)
 	
@@ -34,6 +43,8 @@ func health_check(health_raised):
 		healthRaised.emit()
 	else:
 		healthLowered.emit()
+		
+	cooldown = 0.25
 
 func get_health_pct() -> float:
 	print(str(float(curHealth) / float(maxHealth)))

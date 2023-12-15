@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/basic_interactable.gd" id="1_361iw"]
 [ext_resource type="PackedScene" uid="uid://clbcxhtiltbeo" path="res://assets/blends/terminal.glb" id="2_8vw0l"]
 [ext_resource type="AudioStream" uid="uid://crovkwf88ihgx" path="res://assets/audio/effects/keyboard.wav" id="3_qop32"]
-[ext_resource type="AudioStream" uid="uid://cb6n3rmhis22n" path="res://assets/audio/effects/designed-circuits-hum-06-118164.mp3" id="4_5jxma"]
+[ext_resource type="AudioStream" uid="uid://cjwq47opiugp5" path="res://assets/audio/effects/designed-atmospheres-sci-fi-ambience-harmonic-015-117379.mp3" id="4_b1ebt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ghwc5"]
 size = Vector3(1, 2, 1)
@@ -100,7 +100,7 @@ libraries = {
 [node name="typing" type="AudioStreamPlayer3D" parent="."]
 
 [node name="humming" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_5jxma")
+stream = ExtResource("4_b1ebt")
 unit_size = 5.0
 
 [connection signal="interaction" from="." to="." method="set_collision_layer_value" binds= [5, false]]

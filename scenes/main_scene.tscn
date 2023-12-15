@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bm4d3lnh0ml8a"]
+[gd_scene load_steps=12 format=3 uid="uid://bm4d3lnh0ml8a"]
 
 [ext_resource type="Material" uid="uid://ohu8idcbtbu8" path="res://materials/ps1-pp.tres" id="1_7duge"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_xvp7a"]
 [ext_resource type="Script" path="res://scripts/fps-meter.gd" id="2_dl32g"]
 [ext_resource type="Theme" uid="uid://c7ahd832sa5qy" path="res://assets/ui/font_theme.tres" id="2_tw6dd"]
+[ext_resource type="Script" path="res://scripts/blur_manager.gd" id="3_ucjje"]
+[ext_resource type="Shader" path="res://shaders/additive_blur.gdshader" id="5_u56ss"]
 
 [sub_resource type="Animation" id="Animation_f7w1g"]
 length = 0.001
@@ -47,11 +49,16 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 0.631373)
 
-[node name="MainScene" type="Node" node_paths=PackedStringArray("scene_holder", "screen_fader") groups=["MainScene"]]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2yjw"]
+shader = ExtResource("5_u56ss")
+shader_parameter/blend_strength = null
+
+[node name="MainScene" type="Node" node_paths=PackedStringArray("scene_holder", "screen_fader", "screen_blur") groups=["MainScene"]]
 process_mode = 3
 script = ExtResource("1_xvp7a")
 scene_holder = NodePath("CurrentScene")
 screen_fader = NodePath("Control/CanvasLayer/ScreenFade/AnimationPlayer")
+screen_blur = NodePath("Control/CanvasLayer")
 starting_scene = "res://scenes/splash_screen.tscn"
 
 [node name="CurrentScene" type="Node" parent="."]
@@ -66,6 +73,7 @@ grow_vertical = 2
 theme = ExtResource("2_tw6dd")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+script = ExtResource("3_ucjje")
 
 [node name="PS1 PP" type="ColorRect" parent="Control/CanvasLayer"]
 material = ExtResource("1_7duge")
@@ -116,6 +124,15 @@ unique_name_in_owner = true
 visible = false
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="AdditiveBlur" type="ColorRect" parent="Control/CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_j2yjw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="EmptyButton" type="TextureButton" parent="Control"]
 unique_name_in_owner = true

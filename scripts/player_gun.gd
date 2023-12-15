@@ -30,6 +30,7 @@ var reloading : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	anim_state = anim_tree["parameters/playback"]
+	_update_ammo_label()
 	pass # Replace with function body.
 
 

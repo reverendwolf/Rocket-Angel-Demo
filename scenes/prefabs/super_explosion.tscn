@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cl763k5d0ycw4"]
+[gd_scene load_steps=13 format=3 uid="uid://cl763k5d0ycw4"]
 
 [ext_resource type="Texture2D" uid="uid://j8wdhvqwu123" path="res://assets/textures/exp2_0.png" id="1_fdjct"]
+[ext_resource type="Script" path="res://scripts/fire_blur.gd" id="1_fdw0x"]
 [ext_resource type="Script" path="res://scripts/damage_dealer.gd" id="2_g2hq4"]
 [ext_resource type="AudioStream" uid="uid://dnrpwr2tix425" path="res://assets/audio/effects/Bluezone_BC0277_explosion_mortar_002_01.wav" id="3_845hm"]
 
@@ -107,6 +108,8 @@ point_count = 2
 radius = 8.0
 
 [node name="SuperExplosion" type="Node3D"]
+script = ExtResource("1_fdw0x")
+blur_strength = 0.85
 
 [node name="Fire" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.415686, 0)

@@ -23,6 +23,7 @@ func damage(value : int):
 	if not invulerable and currentHealth > 0:
 		currentHealth = clamp(currentHealth - value, 0, 200)
 		health_damaged.emit()
+		get_tree().get_first_node_in_group("MainScene").pulse_blur(0.5)
 		_update_health()
 	
 func heal(value : int, overcharge : bool = false):
