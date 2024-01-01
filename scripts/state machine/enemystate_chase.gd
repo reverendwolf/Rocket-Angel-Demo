@@ -6,7 +6,7 @@ extends FSMState
 @export var character_body : CharacterBody3D
 @export var animTree : AnimationTree
 
-@export var attack_range : float = 2.0
+@export var attack_range : float = 5.0
 @export var chase_speed : float = 1.5
 @export var rotation_speed : float = 120.0
 @export var chase_max_time : float = 1.5
@@ -47,6 +47,7 @@ func _physics_process(delta):
 
 func enter_state():
 	super.enter_state()
+	await get_tree().process_frame
 	attacking = false
 	anim_state = animTree["parameters/playback"]
 	animTree.set("parameters/Loco/blend_position", 1)
@@ -55,7 +56,7 @@ func enter_state():
 	
 	if player_sensor.get_player_distance() < attack_range:
 		attacking = true
-		anim_state.travel("Melee")
+		anim_state.travel("Ranged")
 		await animTree.animation_finished
 		stateComplete.emit()
 	else:

@@ -25,12 +25,12 @@ func _ready():
 static func initialize_preferences():
 	var prefs : UserPrefs = UserPrefs.load()
 	for i in len(prefs.audioSettings):
-		print( str(i) + ": " + str(prefs.audioSettings[i]))
+		#print( str(i) + ": " + str(prefs.audioSettings[i]))
 		AudioServer.set_bus_volume_db(i, linear_to_db(prefs.audioSettings[i]))
 
 func cover_screen():
 	screen_fader.play("transition")
-	MusicMaster.fade_out(1.0)
+	MusicMaster.fade_out(0.5)
 	await screen_fader.animation_finished
 	
 func show_screen():
@@ -43,6 +43,9 @@ func load_new_scene(path : String):
 func scene_transition(path : String):
 	if transitioning: return
 	
+	if get_tree().paused:
+		get_tree().paused = false
+	
 	transitioning = true
 	empty_button.grab_focus()
 	
@@ -52,7 +55,6 @@ func scene_transition(path : String):
 		debug_label.text = str(scene_holder.get_child_count())
 		child.queue_free()
 		await get_tree().process_frame
-		
 	
 	await get_tree().process_frame
 	

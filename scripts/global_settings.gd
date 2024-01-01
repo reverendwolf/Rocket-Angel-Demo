@@ -21,6 +21,9 @@ func set_audiobus_value(index : int, value : float):
 	
 func get_audiobus_value(index : int) -> float:
 	return db_to_linear(AudioServer.get_bus_volume_db(index))
+	
+func get_audiobus_setting(index : int) -> float:
+	return prefs.audioSettings[index]
 #endregion
 
 

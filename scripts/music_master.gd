@@ -40,4 +40,4 @@ func fade_in(time : float):
 	await tween.finished
 	
 func set_bus_value(value : float):
-	AudioServer.set_bus_volume_db(music_bus, linear_to_db(value))
+	AudioServer.set_bus_volume_db(music_bus, linear_to_db(value * GlobalSettings.get_audiobus_setting(music_bus)))
