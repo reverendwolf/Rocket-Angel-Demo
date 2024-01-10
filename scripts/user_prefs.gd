@@ -2,7 +2,7 @@ class_name UserPrefs extends Resource
 
 @export var audioSettings : Array[float] = [0.6,0.6,0.6,0.6]
 @export var invertLook : bool
-@export var lookSettings : Array[float] = [0.0, 0.0]
+@export var lookSettings : Array[float] = [2.25, 2.25]
 @export var crosshair : bool
 
 func save():
